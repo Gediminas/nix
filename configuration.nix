@@ -46,10 +46,13 @@
   };
 
   
-  # Enable automatic login for the user  
-  services.getty.autologinUser = "gds";
+  services = {
+    # Enable automatic login for the user  
+    getty.autologinUser = "gds";
+  };
   
   programs.sway.enable = true;
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -57,6 +60,35 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    git
+    vim
+    neovim
+    vifm
+    mc
+    tree
+    wget
+    curl
+    tmux
+    gcc
+    clang
+    cmake
+    gnumake
+    sway
+    waybar
+    wofi
+    dmenu
+    brave
+    alacritty
+    pkg-config
+    libevdev
+    networkmanagerapplet
+  ];
+
+  fonts.fonts = with pkgs; [
+    #hack
+    #ttf-ubuntumono-nerd
+    #ttf-nerd-fonts-symbols-common
+    #ttf-dejavu
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
