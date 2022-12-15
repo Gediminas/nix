@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -10,56 +10,53 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  security.polkit.enable = true;
+  security.sudo.wheelNeedsPassword = false;
+
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
+  # or
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.userControlled.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Vilnius";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  services = {
+    # Configure keymap in X11
+    xserver = {
+      layout = "us";
+      xkbVariant = "";
+    };
+    getty.autologinUser = "gds";
+    mbpfan.enable = true;
+    mbpfan.settings.general.min_fan1_speed = 1250;
   };
+  
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [];
+    shell = pkgs.zsh;
   };
 
-  
-  services = {
-    # Enable automatic login for the user  
-    getty.autologinUser = "gds";
-  };
-  
   programs.sway.enable = true;
   programs.zsh.enable = true;
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    hack-font
+    #hackgen-font
+    #hackgen-nf-font
     git
     vim
     neovim
@@ -74,21 +71,30 @@
     cmake
     gnumake
     sway
+    swaylock
+    swayidle
     waybar
     wofi
+    wl-clipboard  # wl-copy and wl-paste for copy/paste from stdin / stdout
+    grim          # screenshot functionality
+    slurp         # screenshot functionality
     dmenu
+    #bemenu        # wayland clone of dmenu
+    mako          # notification system developed by swaywm maintainer
     brave
-    alacritty
+    alacritty     # gpu accelerated terminal
     pkg-config
     libevdev
     networkmanagerapplet
+    fzf
+    ripgrep
+    silver-searcher
+    neofetch
   ];
 
   fonts.fonts = with pkgs; [
-    #hack
-    #ttf-ubuntumono-nerd
-    #ttf-nerd-fonts-symbols-common
-    #ttf-dejavu
+    (nerdfonts.override { fonts = [ "UbuntuMono" ]; })
+    hack-font
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -102,7 +108,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # services.openssh.enable = true; //xz - https://nixos.wiki/wiki/Polkit
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
