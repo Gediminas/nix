@@ -44,6 +44,9 @@
     extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
+
+
+
   };
 
   programs.sway.enable = true;
@@ -90,6 +93,8 @@
     ripgrep
     silver-searcher
     neofetch
+    sshfs-fuse
+    openvpn
   ];
 
   fonts.fonts = with pkgs; [
