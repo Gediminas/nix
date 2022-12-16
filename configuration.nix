@@ -1,13 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -16,6 +13,8 @@
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
+
+  nix.settings.experimental-features = "nix-command flakes";
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -35,6 +34,7 @@
     getty.autologinUser = "gds";
     mbpfan.enable = true;
     mbpfan.settings.general.min_fan1_speed = 1250;
+    #flatpak.enable = true;
   };
   
 
@@ -42,59 +42,40 @@
     isNormalUser = true;
     description = "gds";
     extraGroups = [ "wheel" "networkmanager" ];
+    initialPassword = "password";
     packages = with pkgs; [];
     shell = pkgs.zsh;
-
-
-
   };
 
   programs.sway.enable = true;
   programs.zsh.enable = true;
+  programs.git.enable = true;
+
 
   nixpkgs.config.allowUnfree = true;
+
+  environment.variables.EDITOR = "hx";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    home-manager
     hack-font
-    #hackgen-font
-    #hackgen-nf-font
-    git
-    vim
-    neovim
-    vifm
-    mc
-    tree
-    wget
-    curl
-    tmux
-    gcc
-    clang
-    cmake
-    gnumake
-    sway
-    swaylock
-    swayidle
-    waybar
-    wofi
-    wl-clipboard  # wl-copy and wl-paste for copy/paste from stdin / stdout
-    grim          # screenshot functionality
-    slurp         # screenshot functionality
-    dmenu
-    #bemenu        # wayland clone of dmenu
-    mako          # notification system developed by swaywm maintainer
-    brave
-    alacritty     # gpu accelerated terminal
-    pkg-config
-    libevdev
-    networkmanagerapplet
-    fzf
-    ripgrep
-    silver-searcher
+    git curl wget
+    tmux vim neovim helix
+    tree vifm mc sshfs-fuse
+    fzf ripgrep silver-searcher
+    htop powertop powerstat
+    inotify-tools
     neofetch
-    sshfs-fuse
-    openvpn
+
+    #=== sway ===
+    sway
+    swaylock swayidle
+    waybar wofi dmenu wl-clipboard
+    grim slurp
+    alacritty
+    networkmanagerapplet
   ];
 
   fonts.fonts = with pkgs; [
@@ -110,8 +91,6 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true; //xz - https://nixos.wiki/wiki/Polkit
 
@@ -121,12 +100,8 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "22.11";
+
+
 
 }
