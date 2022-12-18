@@ -69,6 +69,7 @@
     htop powertop powerstat
     inotify-tools
     neofetch
+    ranger
 
     #=== sway ===
     sway

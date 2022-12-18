@@ -15,10 +15,10 @@
       #gcc
       #clang
       #cmake
-      #gnumake
+      gnumake
       #pkg-config
       #libevdev
-      #nixfmt
+      nixfmt
 
       # GUI Apps
       brave
