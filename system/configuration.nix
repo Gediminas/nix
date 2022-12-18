@@ -4,7 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
+      #<home-manager/nixos>
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -62,6 +62,7 @@
     home-manager
     hack-font
     git curl wget
+    git-crypt gnupg
     tmux vim neovim helix
     tree vifm mc sshfs-fuse
     fzf ripgrep silver-searcher
