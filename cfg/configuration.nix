@@ -19,6 +19,12 @@
   time.timeZone = "Europe/Vilnius";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # Flatpak desktop extensions
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   services = {
     # Configure keymap in X11
     xserver = {
@@ -28,7 +34,7 @@
     getty.autologinUser = "gds";
     mbpfan.enable = true;
     mbpfan.settings.general.min_fan1_speed = 1250;
-    #flatpak.enable = true;
+    flatpak.enable = true;
   };
   
 

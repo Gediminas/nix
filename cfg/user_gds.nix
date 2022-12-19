@@ -1,8 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  home.stateVersion = "22.11";
+
   home.username = "gds";
   home.homeDirectory = "/home/gds";
+
+  programs.home-manager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     htop
@@ -22,12 +27,8 @@
 
       # GUI Apps
       brave
+      slack
   ];
-
-  home.stateVersion = "22.11";
-
-  programs.home-manager.enable = true;
-
 
   #home.file = {
     #".config/alacritty/alacritty.yaml" = ''
