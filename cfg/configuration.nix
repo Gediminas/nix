@@ -59,17 +59,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    home-manager
+    #home-manager
     hack-font
     git curl wget
     git-crypt gnupg
     tmux vim neovim helix
     tree vifm mc sshfs-fuse
     fzf ripgrep silver-searcher
-    htop powertop powerstat
+    neofetch htop powertop powerstat
     inotify-tools
-    neofetch
-    ranger
 
     #=== sway ===
     sway

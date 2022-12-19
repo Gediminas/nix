@@ -13,19 +13,26 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
     let
+
+      user_gds_cfg_path = ./cfg/user_gds.nix;
+      system_cfg_path = ./cfg/configuration.nix;
+
       system = "x86_64-linux";
+
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
+
       lib = nixpkgs.lib;
+
     in {
       homeManagerConfigurations = {
         gds = home-manager.lib.homeManagerConfiguration {
           #pkgs = nixpkgs.legacyPackages.${system};
           pkgs = pkgs;
           modules = [
-            ./users/gds/home.nix
+            user_gds_cfg_path 
             #./some-extra-module.nix
             {
               home = {
@@ -40,7 +47,7 @@
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./system/configuration.nix ];
+          modules = [ system_cfg_path ];
         };
       };
     };

@@ -17,7 +17,7 @@
       #cmake
       gnumake
       #pkg-config
-      #libevdev
+      libevdev
       nixfmt
 
       # GUI Apps
