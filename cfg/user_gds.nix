@@ -28,6 +28,7 @@
       # GUI Apps
       brave
       slack
+      bitwarden
   ];
 
   #home.file = {
