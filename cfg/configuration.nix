@@ -19,6 +19,15 @@
   time.timeZone = "Europe/Vilnius";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  #sound.enable = true;
+  #hardware = {
+    #bluetooth.enable = true;
+    #bluetooth.settings = {
+      #General = { Enable = "Source,Sink,Media,Socket"; };
+    #};
+    #pulseaudio.enable = false;
+  #};
+
   # Flatpak desktop extensions
   xdg.portal = {
     enable = true;
@@ -31,6 +40,12 @@
       layout = "us";
       xkbVariant = "";
     };
+    #pipewire = {
+      #enable = true;
+      #alsa.enable = true;
+      #alsa.support32Bit = true;
+      #pulse.enable = true;
+    #};
     getty.autologinUser = "gds";
     mbpfan.enable = true;
     mbpfan.settings.general.min_fan1_speed = 1250;
@@ -68,6 +83,8 @@
     fzf ripgrep silver-searcher
     neofetch htop powertop powerstat
     inotify-tools
+
+    #blueman
 
     #=== sway ===
     sway
