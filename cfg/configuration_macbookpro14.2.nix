@@ -47,8 +47,8 @@
       #pulse.enable = true;
     #};
     getty.autologinUser = "gds";
-    #mbpfan.enable = true;
-    #mbpfan.settings.general.min_fan1_speed = 1250;
+    mbpfan.enable = true;
+    mbpfan.settings.general.min_fan1_speed = 1250;
     flatpak.enable = true;
   };
   
