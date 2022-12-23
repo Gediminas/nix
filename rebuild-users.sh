@@ -2,7 +2,7 @@
 
 DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 nix build "${DIR}/.#homeManagerConfigurations.gds.activationPackage"
-sudo "${DIR}/result/activate"
+"${DIR}/result/activate"
 
 #pushd ~/.nix
 ##home-manager switch -f ./users/gds/home.nix

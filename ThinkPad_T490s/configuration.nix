@@ -58,10 +58,20 @@
     blueman.enable = true;
   };
 
+  virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
+
+  #Virtualbox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "gds" ];
+  #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
+  environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
+
+
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "vboxusers" "libvirtd" "qemu-libvirtd"];
     initialPassword = "password";
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
@@ -102,6 +112,8 @@
     powertop
     powerstat
     inotify-tools
+
+    vagrant
 
     pavucontrol
 
