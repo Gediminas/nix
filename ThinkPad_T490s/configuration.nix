@@ -22,13 +22,13 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   #sound.enable = true;
-  #hardware = {
-    #bluetooth.enable = true;
-    #bluetooth.settings = {
-      #General = { Enable = "Source,Sink,Media,Socket"; };
-    #};
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.settings = {
+      General = { Enable = "Source,Sink,Media,Socket"; };
+    };
     #pulseaudio.enable = false;
-  #};
+  };
 
   # Flatpak desktop extensions
   xdg.portal = {
@@ -52,6 +52,7 @@
     mbpfan.enable = false;
     #mbpfan.settings.general.min_fan1_speed = 1250;
     flatpak.enable = true;
+    blueman.enable = true;
   };
   
 

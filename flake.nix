@@ -25,14 +25,13 @@
         config.allowUnfree = true;
       };
     in {
+
+      # User gds
       homeManagerConfigurations.gds = home-manager.lib.homeManagerConfiguration {
         #pkgs = nixpkgs.legacyPackages.${system};
         pkgs = pkgs_imp;
         modules = [
-
-          # Home-manager user config
           ./cfg/user_gds.nix 
-
           {
             home = {
               username = "gds";
@@ -43,22 +42,33 @@
         ];
       };
 
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      # MacBookPro 14.2 with TouchBar 2017
+      nixosConfigurations.mbp14 = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-
-          # System config
-          ./cfg/configuration.nix
-
-          # Scanned Hardware
-          ./cfg/hardware-configuration.nix
-
-          # Hardware quirks
-          # https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-          # nixos-hardware.nixosModules.lenovo-thinkpad-t490
-          # nixos-hardware.nixosModules.lenovo-thinkpad-x1
-          # nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+          ./MacBookPro_14.2_TouchBar/configuration.nix
+          ./MacBookPro_14.2_TouchBar/hardware-configuration.nix
           nixos-hardware.nixosModules.apple-macbook-pro-14-1
+        ];
+      };
+
+      # ThinkPad T490s
+      nixosConfigurations.t490s = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./ThinkPad_T490s/configuration.nix
+          ./ThinkPad_T490s/hardware-configuration.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-t490
+        ];
+      };
+
+      # ThinkPad Carbon X1
+      nixosConfigurations.x1 = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./ThinkPad_X1/configuration.nix
+          ./ThinkPad_X1/hardware-configuration.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
         ];
       };
     };
