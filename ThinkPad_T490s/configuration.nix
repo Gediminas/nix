@@ -7,12 +7,13 @@
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
+  security.rtkit.enable = true;
 
   nix.settings.experimental-features = "nix-command flakes";
 
   #nix.nixPath = [ "nixpkgs=$(nixpkgs)" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "T2215"; # Define your hostname.
   networking.networkmanager.enable = true;
   # or
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -85,11 +86,13 @@
     hack-font
     git curl wget cryptsetup
     git-crypt gnupg
-    tmux vim neovim helix
+    tmux vim neovim unstable.helix
     tree vifm mc sshfs-fuse
     fzf ripgrep silver-searcher
     neofetch htop powertop powerstat
     inotify-tools
+
+    pavucontrol
 
     #=== sway ===
     sway

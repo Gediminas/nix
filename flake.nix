@@ -12,11 +12,11 @@
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    hardware-quirks.url = "github:NixOS/nixos-hardware/master";
     #flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hardware-quirks, ... }:
     let
       system = "x86_64-linux";
       lib    = nixpkgs.lib;
@@ -48,7 +48,7 @@
         modules = [
           ./MacBookPro_14.2_TouchBar/configuration.nix
           ./MacBookPro_14.2_TouchBar/hardware-configuration.nix
-          nixos-hardware.nixosModules.apple-macbook-pro-14-1
+          hardware-quirks.nixosModules.apple-macbook-pro-14-1
         ];
       };
 
@@ -56,9 +56,15 @@
       nixosConfigurations.t490s = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          ({ config, pkgs, ... }:
+             let
+             overlay-unstable = final: prev: {
+               unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
+             };
+             in { nixpkgs.overlays = [ overlay-unstable ]; })
           ./ThinkPad_T490s/configuration.nix
           ./ThinkPad_T490s/hardware-configuration.nix
-          nixos-hardware.nixosModules.lenovo-thinkpad-t490
+          hardware-quirks.nixosModules.lenovo-thinkpad-t490
         ];
       };
 
@@ -68,7 +74,7 @@
         modules = [
           ./ThinkPad_X1/configuration.nix
           ./ThinkPad_X1/hardware-configuration.nix
-          nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+          hardware-quirks.nixosModules.lenovo-thinkpad-x1-10th-gen
         ];
       };
     };
