@@ -21,11 +21,11 @@
 
   #sound.enable = true;
   #hardware = {
-    #bluetooth.enable = true;
-    #bluetooth.settings = {
-      #General = { Enable = "Source,Sink,Media,Socket"; };
-    #};
-    #pulseaudio.enable = false;
+  #bluetooth.enable = true;
+  #bluetooth.settings = {
+  #General = { Enable = "Source,Sink,Media,Socket"; };
+  #};
+  #pulseaudio.enable = false;
   #};
 
   # Flatpak desktop extensions
@@ -41,31 +41,29 @@
       xkbVariant = "";
     };
     #pipewire = {
-      #enable = true;
-      #alsa.enable = true;
-      #alsa.support32Bit = true;
-      #pulse.enable = true;
+    #enable = true;
+    #alsa.enable = true;
+    #alsa.support32Bit = true;
+    #pulse.enable = true;
     #};
     getty.autologinUser = "gds";
     mbpfan.enable = true;
     mbpfan.settings.general.min_fan1_speed = 1250;
     flatpak.enable = true;
   };
-  
 
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
     extraGroups = [ "wheel" "networkmanager" ];
     initialPassword = "password";
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
 
   programs.sway.enable = true;
   programs.zsh.enable = true;
   programs.git.enable = true;
-
 
   nixpkgs.config.allowUnfree = true;
 
@@ -76,21 +74,40 @@
   environment.systemPackages = with pkgs; [
     #home-manager
     hack-font
-    git curl wget
-    git-crypt gnupg
-    tmux vim neovim helix
-    tree vifm mc sshfs-fuse
-    fzf ripgrep silver-searcher
-    neofetch htop powertop powerstat
+    git
+    curl
+    wget
+    git-crypt
+    gnupg
+    tmux
+    vim
+    neovim
+    helix
+    tree
+    vifm
+    mc
+    sshfs-fuse
+    fzf
+    ripgrep
+    silver-searcher
+    neofetch
+    htop
+    powertop
+    powerstat
     inotify-tools
 
     #blueman
 
     #=== sway ===
     sway
-    swaylock swayidle
-    waybar wofi dmenu wl-clipboard
-    grim slurp
+    swaylock
+    swayidle
+    waybar
+    wofi
+    dmenu
+    wl-clipboard
+    grim
+    slurp
     alacritty
     networkmanagerapplet
   ];
@@ -118,7 +135,5 @@
   # networking.firewall.enable = false;
 
   system.stateVersion = "22.11";
-
-
 
 }

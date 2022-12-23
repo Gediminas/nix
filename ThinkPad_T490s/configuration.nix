@@ -30,9 +30,7 @@
         ControllerMode = "bredr";
         #Enable = "Source,Sink,Media,Socket";
       };
-      Policy = {
-        AutoEnable = "true";
-      };
+      Policy = { AutoEnable = "true"; };
     };
     pulseaudio.enable = false;
   };
@@ -59,21 +57,19 @@
     flatpak.enable = true;
     blueman.enable = true;
   };
-  
 
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
     extraGroups = [ "wheel" "networkmanager" ];
     initialPassword = "password";
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
 
   programs.sway.enable = true;
   programs.zsh.enable = true;
   programs.git.enable = true;
-
 
   nixpkgs.config.allowUnfree = true;
 
@@ -84,21 +80,41 @@
   environment.systemPackages = with pkgs; [
     #home-manager
     hack-font
-    git curl wget cryptsetup
-    git-crypt gnupg
-    tmux vim neovim unstable.helix
-    tree vifm mc sshfs-fuse
-    fzf ripgrep silver-searcher
-    neofetch htop powertop powerstat
+    git
+    curl
+    wget
+    cryptsetup
+    git-crypt
+    gnupg
+    tmux
+    vim
+    neovim
+    unstable.helix
+    tree
+    vifm
+    mc
+    sshfs-fuse
+    fzf
+    ripgrep
+    silver-searcher
+    neofetch
+    htop
+    powertop
+    powerstat
     inotify-tools
 
     pavucontrol
 
     #=== sway ===
     sway
-    swaylock swayidle
-    waybar wofi dmenu wl-clipboard
-    grim slurp
+    swaylock
+    swayidle
+    waybar
+    wofi
+    dmenu
+    wl-clipboard
+    grim
+    slurp
     alacritty
     networkmanagerapplet
   ];
@@ -126,7 +142,5 @@
   # networking.firewall.enable = false;
 
   system.stateVersion = "22.11";
-
-
 
 }
