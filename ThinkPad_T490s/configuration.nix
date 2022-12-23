@@ -10,6 +10,8 @@
 
   nix.settings.experimental-features = "nix-command flakes";
 
+  #nix.nixPath = [ "nixpkgs=$(nixpkgs)" ];
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   # or
@@ -47,7 +49,7 @@
       #pulse.enable = true;
     #};
     getty.autologinUser = "gds";
-    #mbpfan.enable = true;
+    mbpfan.enable = false;
     #mbpfan.settings.general.min_fan1_speed = 1250;
     flatpak.enable = true;
   };
@@ -76,7 +78,7 @@
   environment.systemPackages = with pkgs; [
     #home-manager
     hack-font
-    git curl wget
+    git curl wget cryptsetup
     git-crypt gnupg
     tmux vim neovim helix
     tree vifm mc sshfs-fuse

@@ -20,14 +20,14 @@
     let
       system = "x86_64-linux";
       lib    = nixpkgs.lib;
-      pkgs   = import nixpkgs {
+      pkgs_imp = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
     in {
       homeManagerConfigurations.gds = home-manager.lib.homeManagerConfiguration {
         #pkgs = nixpkgs.legacyPackages.${system};
-        pkgs = pkgs;
+        pkgs = pkgs_imp;
         modules = [
 
           # Home-manager user config

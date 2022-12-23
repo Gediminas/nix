@@ -1,1 +1,4 @@
 /result
+/cfg/configuration.nix
+/cfg/hardware-configuration.nix
+

@@ -17,7 +17,7 @@
       # DEV
       gitui
       lazygit
-      #gcc
+      gcc
       #clang
       #cmake
       gnumake
