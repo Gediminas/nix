@@ -71,7 +71,7 @@
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
-    extraGroups = [ "wheel" "networkmanager" "docker" "vboxusers" "libvirtd" "qemu-libvirtd"];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "disk" "docker" "vboxusers" "libvirtd" "qemu-libvirtd"];
     initialPassword = "password";
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
