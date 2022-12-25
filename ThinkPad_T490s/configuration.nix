@@ -67,11 +67,20 @@
   #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
   environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
 
-
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "disk" "docker" "vboxusers" "libvirtd" "qemu-libvirtd"];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "audio"
+      "video"
+      "disk"
+      "docker"
+      "vboxusers"
+      "libvirtd"
+      "qemu-libvirtd"
+    ];
     initialPassword = "password";
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
@@ -88,7 +97,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #home-manager
+    home-manager
     hack-font
     git
     curl

@@ -17,13 +17,15 @@
     # DEV
     gitui
     lazygit
-    gcc
+    # gcc
     #clang
     #cmake
-    gnumake
-    #pkg-config
-    libevdev
+    # gnumake
+    # pkg-config
+    # libevdev
     nixfmt
+    # hascii
+    # ranger
 
     # GUI Apps
     brave

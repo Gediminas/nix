@@ -28,21 +28,20 @@
     in {
 
       # User gds
-      homeManagerConfigurations.gds =
-        home-manager.lib.homeManagerConfiguration {
-          #pkgs = nixpkgs.legacyPackages.${system};
-          pkgs = pkgs_imp;
-          modules = [
-            ./cfg/user_gds.nix
-            {
-              home = {
-                username = "gds";
-                homeDirectory = "/home/gds";
-                stateVersion = "22.11";
-              };
-            }
-          ];
-        };
+      homeConfigurations.gds = home-manager.lib.homeManagerConfiguration {
+        #pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = pkgs_imp;
+        modules = [
+          ./Users/user_gds.nix
+          {
+            home = {
+              username = "gds";
+              homeDirectory = "/home/gds";
+              stateVersion = "22.11";
+            };
+          }
+        ];
+      };
 
       # MacBookPro 14.2 with TouchBar 2017
       nixosConfigurations.mbp14 = nixpkgs.lib.nixosSystem {

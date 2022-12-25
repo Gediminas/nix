@@ -1,8 +1,15 @@
 #!/bin/sh
 
+set +x
+
+ACTION=$1
+
 DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
-nix build "${DIR}/.#homeManagerConfigurations.gds.activationPackage"
-"${DIR}/result/activate"
+home-manager --flake ".#gds" ${ACTION}
+
+# DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+# nix build "${DIR}/.#homeManagerConfigurations.gds.activationPackage"
+# "${DIR}/result/activate"
 
 #pushd ~/.nix
 ##home-manager switch -f ./users/gds/home.nix
