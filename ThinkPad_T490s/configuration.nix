@@ -4,17 +4,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  # Setup keyfile
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
   security.rtkit.enable = true;
 
   nix.settings.experimental-features = "nix-command flakes";
-
-  #nix.nixPath = [ "nixpkgs=$(nixpkgs)" ];
 
   networking.hostName = "T2215"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -92,6 +89,7 @@
   programs.sway.enable = true;
   programs.zsh.enable = true;
   programs.git.enable = true;
+  programs.nm-applet.indicator = true;
 
   nixpkgs.config.allowUnfree = true;
 
