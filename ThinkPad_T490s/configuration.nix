@@ -38,7 +38,7 @@
   # Flatpak desktop extensions
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
   };
 
   services = {
@@ -114,7 +114,10 @@
     vifm
     mc
     sshfs-fuse
+    file
     fzf
+    jq
+    fd
     ripgrep
     silver-searcher
     neofetch
@@ -125,6 +128,9 @@
 
     vagrant
 
+    pulseaudio
+    brightnessctl
+    playerctl
     pavucontrol
 
     #=== sway ===

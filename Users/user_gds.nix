@@ -22,6 +22,8 @@
     brave
     slack
     bitwarden
+    spotify
+    wireshark
   ];
 
   #home.file = {
