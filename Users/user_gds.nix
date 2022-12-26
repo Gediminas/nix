@@ -10,22 +10,13 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    htop
-    # VPN
     openvpn
+    nixfmt
 
-    # DEV
+    # TUI Apps
+    htop
     gitui
     lazygit
-    # gcc
-    #clang
-    #cmake
-    # gnumake
-    # pkg-config
-    # libevdev
-    nixfmt
-    # hascii
-    # ranger
 
     # GUI Apps
     brave
