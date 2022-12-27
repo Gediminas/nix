@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     openvpn
     nixfmt
+    teleport
 
     # TUI Apps
     htop
@@ -23,6 +24,9 @@
     slack
     bitwarden
     spotify
+    caprine-bin
+    skypeforlinux
+    gimp
     wireshark
   ];
 
