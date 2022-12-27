@@ -124,14 +124,17 @@
     htop
     powertop
     powerstat
+    killall
     inotify-tools
 
     vagrant
+    # bash
 
+    #=== controls ===
+    pavucontrol
     pulseaudio
     brightnessctl
     playerctl
-    pavucontrol
 
     #=== sway ===
     sway
@@ -151,6 +154,18 @@
     (nerdfonts.override { fonts = [ "UbuntuMono" ]; })
     hack-font
   ];
+
+  systemd.services.spacefn = {
+      enable = true;
+      description = "SpaceFn";
+      unitConfig = {
+        Type = "simple";
+      };
+      serviceConfig = {
+        ExecStart = "/bin/sh /home/gds/sub/spacefn-evdev/space";
+      };
+      wantedBy = [ "multi-user.target" ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
