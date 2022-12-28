@@ -156,15 +156,13 @@
   ];
 
   systemd.services.spacefn = {
-      enable = true;
-      description = "SpaceFn";
-      unitConfig = {
-        Type = "simple";
-      };
-      serviceConfig = {
-        ExecStart = "/bin/sh /home/gds/sub/spacefn-evdev/space";
-      };
-      wantedBy = [ "multi-user.target" ];
+    enable = true;
+    description = "SpaceFn";
+    unitConfig = { Type = "simple"; };
+    serviceConfig = {
+      ExecStart = "/bin/sh /home/gds/sub/spacefn-evdev/space";
+    };
+    wantedBy = [ "multi-user.target" ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
