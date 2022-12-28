@@ -1,0 +1,146 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 16,
+    "modules-left": ["sway/workspaces"],
+    /*"modules-center": ["sway/window"],*/
+    "modules-center": ["tray"],
+    "modules-right": ["network", "pulseaudio", "backlight",  "temperature", "cpu", "memory", "battery", "clock"],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-cl16k": false,
+    },
+    "tray": {
+      "icon-size": 12,
+      "spacing": 10,
+    },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon} {percent}%",
+      "format-icons": ["", ""],
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d (w%W-%w) %H:%M.%S}",
+        "interval": 1,
+    },
+    "cpu": {
+      /**/
+      "interval": 1,
+      "format": " {icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{usage:>3d}% ({load:>1.1f})",
+      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+       // "states": {
+       //   "good": 10,
+       //   "warning": 80,
+       //   "critical": 90
+       // },
+      "tooltip": true,
+      "min-length": 19,
+      "max-length": 19,
+    },
+    "memory": {
+       //{icon} { ({used:0.1f}G)
+      "format": " {}%",
+      // "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+      "tooltip": true,
+      "interval": 10
+    },
+    "temperature": {
+        "critical-threshold": 75,
+        "format": "{temperatureC}°C"
+    },
+    "battery": {
+        "bat": "BAT0",
+        "full-at": 95,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+
+        "format": "{icon} {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-charging": "⚡ {icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "interval": 30
+    },
+    "network": {
+      "interface": "wlp0s20f3",
+      "format":              "",
+      "format-wifi":         "{icon} {essid} {bandwidthDownBits:>5}↓ {bandwidthUpBits:>5}↑  {frequency}MHz {signalStrength}x {signaldBm}dBm {ipaddr}/{cidr}",
+      "format-ethernet":     "{icon} [{ifname}] ^{bandwidthUpBits:3} {bandwidthDownBits:3}  {ipaddr}/{cidr}",
+      "format-linked":       "{icon} [{ifname}] (No IP)",
+      "format-disconnected": "{icon} ⚠ Disconnected",
+      "format-alt": "{icon}",
+      "format-alt-click": "click-right",
+      "format-icons": {
+        "wifi": ["X", "直" ,""],
+        "ethernet": [""],
+        "disconnected": [""]
+      },
+      "tooltip": true,
+      "min-length": 80,
+      "max-length": 80,
+      "align": 0,
+      "interval": 1
+      /*"on-click": "alacritty -e nmtui",*/
+    },
+    /*
+    "network": {
+      "format": "",
+      "format-wifi": " {essid} {bandwidthUpBits} {bandwidthDownBits}",
+      "format-ethernet": "{bandwidthUpBits} {bandwidthDownBits}",
+      "format-disconnected": "⚠ Disconnected",
+      "tooltip": true,
+      "on-click": "nmtui",
+      "on-click-right": "nm-applet",
+      "interval": 5
+    },
+    */
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} ",
+      "format-muted": "",
+      "format-icons": {
+        "headphones": "P",
+        "handsfree": "F",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+      },
+      "on-click": "pavucontrol",
+      "on-click-right": "pavucontrol"
+    },
+
+      /*
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "pavucontrol"
+    },
+    */
+
+    /*
+    "custom/germany": {
+        "format": "{}",
+        "exec": "TZ=Europe/Berlin date \"+%H:%M %Z\"",
+        "interval": 30,
+    },
+    "bluetooth": {
+      "format": "{icon}",
+      //"format-alt": "bluetooth: {status}",
+      "format-icons": {
+        "enabled": "",
+        "disabled": ""
+      },
+      "tooltip-format": "{}",
+      "on-click-right": "blueman-manager"
+    },
+    */
+}

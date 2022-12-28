@@ -1,0 +1,91 @@
+# theme = "dracula"
+theme = "a_transp_dracula"
+
+
+[editor]
+line-number = "relative"
+cursorline = true
+true-color = true
+color-modes = true
+auto-pairs = false
+auto-completion = true
+auto-format = false
+auto-info = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+nbsp = "all"
+newline = "none"
+
+# [editor.file-picker]
+# hidden = true
+# git-ignore = false
+
+[editor.lsp]
+display-messages = true
+
+# At most one section each of 'keys.normal', 'keys.insert' and 'keys.select'
+[keys.normal]
+C-s = ":w" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
+# C-o = ":open ~/.config/helix/config.toml" # Maps the Control-o to opening of the helix config file
+# a = "move_char_left" # Maps the 'a' key to the move_char_left command
+# w = "move_line_up" # Maps the 'w' key move_line_up
+# "C-S-esc" = "extend_line" # Maps Control-Shift-Escape to extend_line
+# g = { a = "code_action" } # Maps `ga` to show possible code actions
+#"ret" = ["open_below", "normal_mode"] # Maps the enter key to open_below then re-enter normal mode
+# 'C-m' = "save_selection"
+'C-e' = "goto_last_accessed_file"
+# 'ret' = ":theme a_transp_bogster"
+# 'S-ret' = ":theme my_light"
+
+"D" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
+"G" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
+# "C" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
+
+
+F1  = ":theme a_transp_zenburn"
+F2  = ":theme a_transp_dracula"
+F3  = ":theme a_transp_bogster"
+F4  = ":theme a_transp_solarized_dark"
+
+F5  = ":theme zenburn"
+F6  = ":theme dracula"
+F7  = ":theme bogster"
+F8  = ":theme solarized_dark"
+
+F9  = ":theme default"
+F10 = ":theme spacebones_light"
+F11 = ":theme bogster_light"
+F12 = ":theme solarized_light"
+
+
+'C-F5'  = ":config-reload"
+'C-q' = ":sh tmux split-window -h vifm -c ':only'"
+# 'C-n' = ":sh ~/.config/helix/scripts/side_vifm"
+'C-n' = ":sh ~/scripts/hxt"
+
+'C-c' = ":clipboard-yank"
+'C-v' = ":clipboard-paste-before"
+
+'space' = { c = "toggle_comments", m = "save_selection" }
+
+# '*' = 
+# 'm' = { n = ["select_textobject_inner", "word", "search_next"] }
+# 'space' = { n = ["select_textobject_inner", "w"] }
+
+# [keys.insert]
+# "A-x" = "normal_mode" # Maps Alt-X to enter normal mode
+#j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+
+[keys.select]
+#'C-c' = ":clipboard-yank"
+#'C-v' = [ "delete_selection_noyank", ":clipboard-paste-replace" ]
+#'C-v' = "replace_with_yanked"
+#'p' = "replace_with_yanked"
+#'P' = "replace_with_yanked"

@@ -1,4 +1,7 @@
 /result
+/User_gds/tmux/plugins/
+/User_gds/nvim/plugin/
+/User_gds/vim/plugged/
 #/cfg/configuration.nix
 #/cfg/hardware-configuration.nix
 

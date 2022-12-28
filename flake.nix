@@ -32,7 +32,7 @@
         #pkgs = nixpkgs.legacyPackages.${system};
         pkgs = pkgs_imp;
         modules = [
-          ./Users/user_gds.nix
+          ./User_gds/home.nix
           {
             home = {
               username = "gds";
