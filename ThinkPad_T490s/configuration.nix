@@ -83,13 +83,21 @@
     ];
     initialPassword = "password";
     packages = with pkgs; [ ];
-    shell = pkgs.zsh;
+    # shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
-  programs.sway.enable = true;
-  programs.zsh.enable = true;
-  programs.git.enable = true;
-  programs.nm-applet.indicator = true;
+  programs = {
+    sway.enable = true;
+    # zsh.enable = true;
+    fish.enable = true;
+    # starship.enable = true;
+    nm-applet.indicator = true;
+    git = {
+      enable = true;
+      package = pkgs.gitFull;
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
 

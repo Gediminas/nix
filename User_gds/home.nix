@@ -10,6 +10,9 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    fish
+    fishPlugins.tide
+
     openvpn
     nixfmt
     teleport
