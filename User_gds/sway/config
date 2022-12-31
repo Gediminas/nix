@@ -199,8 +199,8 @@ input "type:keyboard" {
     bindsym $mod+s workspace S
     bindsym $mod+a workspace A
     bindsym $mod+e workspace E
-    #bindsym $mod+r workspace R
-    bindsym $mod+r border toggle
+    bindsym $mod+r workspace R
+    bindsym $mod+Alt+Ctrl+t border toggle
 
     # Move focused container to workspace
     bindsym $mod+Shift+0 move container to workspace 0
@@ -303,7 +303,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Alt+r mode "resize"
+bindsym $mod+Alt+Ctrl+r mode "resize"
 
 ###########################################################################
 ### 
