@@ -24,11 +24,13 @@
 
     # GUI Apps
     brave
-    slack
     bitwarden
-    spotify
+    simplenote
+    standardnotes
+    slack
     caprine-bin
     skypeforlinux
+    spotify
     gimp
     wireshark
   ];
