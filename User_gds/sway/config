@@ -37,22 +37,6 @@ focus_follows_mouse yes
 focus output $mon_home
 workspace * output $mon_home
 
-
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was r
-
-#swaymsg -t get_tree | grep app_id
-#swaymsg -t get_tree | grep class
-# for_window [class="jetbrains-studio"] floating enable
-# for_window [title="^Emulator$"] floating enable
-
-for_window [class="Nvpy"] {
-    move scratchpad
-    resize set 640 360
-    scratchpad show
-}
-
 # bindsym $mod+m exec swaymsg [class="Spotify"] scratchpad show || exec spotify
 
 ###########################################################################
@@ -254,17 +238,43 @@ input "type:keyboard" {
 ###########################################################################
 ### Scratchpad
 
-    #set $notes $term --title Notes --working-directory ~/notes --command tmux -u new -A -s Notes
-    set $notes ~/apps/resophnotes.sh 
 
-    #for_window [title="^Notes$"] {
-    for_window [class="resophnotes.exe"] {
+    # Your preferred application launcher
+    # Note: pass the final command to swaymsg so that the resulting window can be opened
+    # on the original workspace that the command was r
+
+    #swaymsg -t get_tree | grep app_id
+    #swaymsg -t get_tree | grep class
+
+    ###########################################
+    ## Notes
+
+    for_window [class="Simplenote"] {
         move scratchpad
         #resize set 1024 768
         border pixel 4
         border toggle
         scratchpad show
     }
+    bindsym $mod+minus exec swaymsg [class="Simplenote"] scratchpad show || exec Simplenote
+
+    ###########################################
+    ## Notes tmux+nvim/hx - Disabled
+    #
+    # set $notes $term --title Notes --working-directory ~/notes --command tmux -u new -A -s Notes
+    # for_window [title="^Notes$"] {
+    # bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
+
+    ###########################################
+    ## Notes wine+Resophnotes - Disabled
+    #
+    # set $notes ~/apps/resophnotes.sh 
+    # for_window [class="resophnotes.exe"] {
+    # bindsym $mod+minus exec swaymsg [class="resophnotes.exe"] scratchpad show || exec $notes
+
+    ###########################################
+    ## Spotify
+
     for_window [class="Spotify"] {
         move scratchpad
         resize set 1024 768
@@ -272,10 +282,9 @@ input "type:keyboard" {
         border toggle
         scratchpad show
     }
-    #bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
-    bindsym $mod+minus exec swaymsg [class="resophnotes.exe"] scratchpad show || exec $notes
     bindsym $mod+equal exec swaymsg [class="Spotify"] scratchpad show
     bindsym $mod+Ctrl+equal exec swaymsg [class="Spotify"] scratchpad show || exec spotify
+
 
     #bindsym $mod+Shift+minus move scratchpad
     #bindsym $mod+minus scratchpad show

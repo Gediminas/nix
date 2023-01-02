@@ -1,5 +1,27 @@
-{ config, pkgs, lib, ... }:
+# INSTALL
+#
+# ## MacBookPro Retina WORKAROUND
+# stty rows 50 cols 160
+#
+# ## NETWORK
+# nmcli dev wifi rescan
+# nmcli dev wifi list
+# sudo nmcli dev wifi connect <ssid> --ask
+#
+# ## SpaceFN Build
+# git clone https://github.com/Gediminas/spacefn-evdev
+# $ nix-shell -p gcc pkgconfig libevdev
+# make
+#
+# ## Fix after copy
+# sudo chown -R gds:users ~/
+# sudo find ~/.ssh/ -type d -exec chmod 700 {} \;
+# sudo find ~/.ssh/ -type f -exec chmod 600 {} \;
+#
+# ## Install vagrant plugins
+# vagrant plugin install vagrant-reload
 
+{ config, pkgs, lib, ... }:
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
