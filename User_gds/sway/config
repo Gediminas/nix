@@ -50,9 +50,9 @@ output $mon_work2  bg $mon_img  fill
 output $mon_home   bg $mon_img  fill
 output $mon_laptop bg $lapt_img fill
 
+output $mon_work1  pos     0     0 res 1920x1080 scale 1
 output $mon_home   pos     0     0 res 1920x1080 scale 1
 output $mon_laptop pos     0  1080 res 1920x1080 scale 1
-# output $mon_work1  pos     0     0 res 1920x1080
 # output $mon_work2  pos     0     0 res 1920x1080
 # output $mon_asus   pos     0  1080 res 1920x1080
 
@@ -259,14 +259,14 @@ input "type:keyboard" {
     bindsym $mod+minus exec swaymsg [class="Simplenote"] scratchpad show || exec Simplenote
 
     ###########################################
-    ## Notes tmux+nvim/hx - Disabled
+    # ## Notes tmux+nvim/hx - Disabled
     #
     # set $notes $term --title Notes --working-directory ~/notes --command tmux -u new -A -s Notes
     # for_window [title="^Notes$"] {
     # bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
 
     ###########################################
-    ## Notes wine+Resophnotes - Disabled
+    # ## Notes wine+Resophnotes - Disabled
     #
     # set $notes ~/apps/resophnotes.sh 
     # for_window [class="resophnotes.exe"] {
