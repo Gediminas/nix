@@ -350,13 +350,13 @@ bindsym $mod+b mode "prefix"
 bindsym Shift+Print exec grim - | wl-copy
 
 # capture the specified screen area to clipboard
-bindsym $mod+p exec grim -g "$(slurp -b 00400040 -d)" - | wl-copy
-bindsym $mod+Shift+p exec grim -g "$(slurp -b 00004040 -d)" ~/sync/_Inbox_sync_/screenshots/scr_$(date +'%Y-%m-%d_%H-%M-%S').png
-bindsym $mod+Alt+p exec wf-recorder -g "$(slurp -b 40000040 -d)" --file=~/sync/_Inbox_sync_/screenshots/rec_$(date +'%Y-%m-%d_%H-%M-%S').mp4
+bindsym $mod+p exec grim -g "$(slurp)" - | swappy -f -
 
+#bindsym $mod+p exec grim -g "$(slurp -b 00400040 -d)" - | wl-copy
+#bindsym $mod+Shift+p exec grim -g "$(slurp -b 00004040 -d)" ~/sync/_Inbox_sync_/screenshots/scr_$(date +'%Y-%m-%d_%H-%M-%S').png
+#bindsym $mod+Alt+p exec wf-recorder -g "$(slurp -b 40000040 -d)" --file=~/sync/_Inbox_sync_/screenshots/rec_$(date +'%Y-%m-%d_%H-%M-%S').mp4
 # capture the focused monitor to clipboard
-bindsym Shift+Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
-
+#bindsym Shift+Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
 
 bindsym $mod+Backslash exec playerctl play-pause
 

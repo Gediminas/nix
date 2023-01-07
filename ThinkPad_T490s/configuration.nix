@@ -60,7 +60,9 @@
   # Flatpak desktop extensions
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
   };
 
   services = {
@@ -102,6 +104,7 @@
       "vboxusers"
       "libvirtd"
       "qemu-libvirtd"
+      "wireshark"
     ];
     initialPassword = "password";
     packages = with pkgs; [ ];
@@ -119,6 +122,7 @@
       enable = true;
       package = pkgs.gitFull;
     };
+    wireshark.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;

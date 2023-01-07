@@ -15,13 +15,21 @@
 
     openvpn
     nixfmt
+
+    # Tools
     teleport
+    inetutils  #telnet
+    iperf
+    wireguard-tools
 
     # TUI Apps
     htop
     gitui
     lazygit
 
+    # Sway
+    swappy
+    
     # GUI Apps
     brave
     bitwarden
@@ -51,23 +59,4 @@
     ".config/waybar".source = ./waybar;
     ".config/wofi".source = ./wofi;
   };
-
-  xdg.configFile."".source = ./shell;
-
-  # home.file = {
-  #   ".config/alacritty/alacritty.yaml" = ''
-  #     env:
-  #       TERM: xterm-256color
-  #     font:
-  #       normal:
-  #         family: monospace
-  #     colors:
-  #       primary:
-  #         background: '#151530'
-  #       normal:
-  #         green:   '#00bb00'
-  #     selection:
-  #       save_to_clipboard: true
-  #   '';
-  # }
 }
