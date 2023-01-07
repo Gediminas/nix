@@ -44,13 +44,14 @@
   ];
 
   home.file = {
+    ".tmux.conf".source = ./tmux/tmux.conf;
     ".tmux/themes".source = ./tmux/themes;
-    ".tmux/tmux.conf".source = ./tmux/tmux.conf;
     ".vim/autoload".source = ./vim/autoload;
     ".vim/colors".source = ./vim/colors;
     ".vim/vimrc".source = ./vim/vimrc;
     ".config/alacritty".source = ./alacritty;
     ".config/helix".source = ./helix;
+    ".config/fish/config.fish".source = ./fish/config.fish;
     ".config/kitty".source = ./kitty;
     ".config/mc/ini".source = ./mc/ini;
     ".config/nvim/init.lua".source = ./nvim/init.lua;
