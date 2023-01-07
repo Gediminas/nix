@@ -21,6 +21,14 @@
     inetutils  #telnet
     iperf
     wireguard-tools
+    lsof
+
+    # Development
+    gdb
+    lldb
+    valgrind
+    vagrant
+    cloc
 
     # TUI Apps
     htop

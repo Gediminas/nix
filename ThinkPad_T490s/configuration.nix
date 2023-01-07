@@ -161,7 +161,6 @@
     killall
     inotify-tools
 
-    vagrant
     # bash
 
     #=== controls ===
