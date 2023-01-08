@@ -26,20 +26,28 @@
     "cpu": {
       /**/
       "interval": 1,
-      "format": " {icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{usage:>3d}% ({load:>1.1f})",
-      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-       // "states": {
-       //   "good": 10,
-       //   "warning": 80,
-       //   "critical": 90
-       // },
+      "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{usage:>3d}% ({load:>1.1f})",
+      "format-icons": [
+          "<span color='#00FFFF'>▁</span>",
+          "<span color='#00FFFF'>▂</span>",
+          "<span color='#00FFFF'>▃</span>",
+          "<span color='#FFFF00'>▄</span>",
+          "<span color='#FFFF00'>▅</span>",
+          "<span color='#FF9944'>▆</span>",
+          "<span color='#FF9944'>▇</span>",
+          "<span color='#FF0000'>█</span>"],
+       "states": {
+          "warning": 70,
+          "critical": 95
+       },
       "tooltip": true,
       "min-length": 19,
       "max-length": 19,
     },
     "memory": {
        //{icon} { ({used:0.1f}G)
-      "format": " {}%",
+      "format": "<span font='20' rise='-4000'></span> {}%",
+
       // "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
       "tooltip": true,
       "interval": 10
@@ -53,22 +61,24 @@
         "bat": "BAT0",
         "full-at": 95,
         "states": {
+            "full": 100,
             "good": 95,
             "warning": 30,
             "critical": 15
         },
 
-        "format": "{icon} {capacity}%",
+        "format": "<span font='8' >{time}</span><span font='24' rise='-5000'>{icon}</span> {capacity}%",
+        "format-charging": "<span font='8' >{time}</span> ⚡<span font='24' rise='-5000'>{icon}</span> {capacity}%",
+        /* "format": "{icon} {capacity}%", */
         "format-alt": "{time} {icon}",
-        "format-charging": "⚡ {icon} {capacity}%",
         "format-icons": ["", "", "", "", ""],
-        "interval": 30
+        "interval": 1
     },
     "network": {
       "interface": "wlp0s20f3",
       "format":              "",
-      "format-wifi":         "{icon} {essid} {bandwidthDownBits:>5}↓ {bandwidthUpBits:>5}↑  {frequency}MHz {signalStrength}x {signaldBm}dBm {ipaddr}/{cidr}",
-      "format-ethernet":     "{icon} [{ifname}] ^{bandwidthUpBits:3} {bandwidthDownBits:3}  {ipaddr}/{cidr}",
+      "format-wifi": "<span font='20' rise='-4000'>{icon}</span> {essid} {bandwidthDownBytes:>5}↓ {bandwidthUpBytes:>5}↑  <span font='8' >{frequency}MHz {signalStrength}x {signaldBm}dBm  {ipaddr}/{cidr}</span>",
+      "format-ethernet":     "{icon} [{ifname}] ^{bandwidthUpBytes:3} {bandwidthDownBytes:3}  {ipaddr}/{cidr}",
       "format-linked":       "{icon} [{ifname}] (No IP)",
       "format-disconnected": "{icon} ⚠ Disconnected",
       "format-alt": "{icon}",
@@ -79,8 +89,8 @@
         "disconnected": [""]
       },
       "tooltip": true,
-      "min-length": 80,
-      "max-length": 80,
+      "min-length": 60,
+      "max-length": 60,
       "align": 0,
       "interval": 1
       /*"on-click": "alacritty -e nmtui",*/
@@ -98,7 +108,7 @@
     },
     */
     "pulseaudio": {
-      "format": "{icon} {volume}%",
+      "format": "<span font='20' rise='-4000'>{icon}</span> {volume}%",
       "format-bluetooth": "{icon}  {volume}%",
       "format-muted": "",
       "format-icons": {

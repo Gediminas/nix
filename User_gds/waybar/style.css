@@ -5,6 +5,8 @@
   font-family: "Hack";
   font-size: 14px;
   min-height: 0;
+  margin-top: -4;
+  margin-bottom: -4;
 }
 
 window#waybar {
@@ -51,31 +53,43 @@ window#waybar {
 }
 
 #cpu {
-  color: white;
+  color: cyan;
 }
 
+#cpu.warning {
+  color: orange;
+}
+
+#cpu.critical {
+  color: red;
+}
+
+
 #battery {
-  color: yellow;
+    color: yellow;
 }
-/* @keyframes blink { */
-/*   to { */
-/*     background-color: #ffffff; */
-/*     color: black; */
-/*   } */
-/* } */
-#battery icon {
-  color: yellow;
+#battery.full.charging {
+    color: #00AA00; /*green*/
 }
-#battery.charging {
-  color: #00AA00; /*green*/
+#battery.warning {
+    background-color: #FFFF00;
+    color: black;
+    font-weight: bold;
 }
-#battery.warning:not(.charging) {
+#battery.critical:not(.charging) {
   /* color: orange; */
   animation-name: blink;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+@keyframes blink {
+  to {
+    background-color: #FFFF00;
+    color: black;
+    font-weight: bold;
+  }
 }
 
 
