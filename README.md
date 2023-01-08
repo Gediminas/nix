@@ -1,3 +1,7 @@
+## Screenshot
+
+![screenshot](./asset/screenshot.png)
+
 ## Install
 
 Install LSP servers for Neovim:
