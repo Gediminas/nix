@@ -22,6 +22,7 @@
     iperf
     wireguard-tools
     lsof
+    sysstat
 
     # Development
     gdb
