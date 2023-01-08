@@ -67,48 +67,41 @@
             "critical": 15
         },
 
-        "format": "<span font='8' >{time}</span><span font='24' rise='-5000'>{icon}</span> {capacity}%",
+        "format": "<span font='8' >{time} </span><span font='24' rise='-5000'>{icon}</span> {capacity}%",
         "format-charging": "<span font='8' >{time}</span> ⚡<span font='24' rise='-5000'>{icon}</span> {capacity}%",
         /* "format": "{icon} {capacity}%", */
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
-        "interval": 1
+        "format-time": "{H}:{m}",
+        "interval": 15
     },
     "network": {
       "interface": "wlp0s20f3",
       "format":              "",
-      "format-wifi": "<span font='20' rise='-4000'>{icon}</span> {essid} {bandwidthDownBytes:>5}↓ {bandwidthUpBytes:>5}↑  <span font='8' >{frequency}MHz {signalStrength}x {signaldBm}dBm  {ipaddr}/{cidr}</span>",
+      "format-wifi": " <span font='28' rise='-8000'>{icon}</span> {essid} <span color='#00AAFF'>{bandwidthDownBytes:>5}<span font='16'>↓</span></span> <span color='#0077FF'>{bandwidthUpBytes:>5}<span font='16'>↑</span></span>  <span font='8' >{frequency}MHz {signalStrength}x {signaldBm}dBm  {ipaddr}/{cidr}</span>",
       "format-ethernet":     "{icon} [{ifname}] ^{bandwidthUpBytes:3} {bandwidthDownBytes:3}  {ipaddr}/{cidr}",
       "format-linked":       "{icon} [{ifname}] (No IP)",
       "format-disconnected": "{icon} ⚠ Disconnected",
       "format-alt": "{icon}",
       "format-alt-click": "click-right",
       "format-icons": {
-        "wifi": ["X", "直" ,""],
+        "wifi": [
+          "<span color='#FF0000'>睊</span>",
+          "<span color='#AAAA00'>直</span>",
+          "<span color='#00AA00'></span>"
+        ],
         "ethernet": [""],
         "disconnected": [""]
       },
       "tooltip": true,
-      "min-length": 60,
-      "max-length": 60,
+      "min-length": 65,
+      "max-length": 65,
       "align": 0,
       "interval": 1
       /*"on-click": "alacritty -e nmtui",*/
     },
-    /*
-    "network": {
-      "format": "",
-      "format-wifi": " {essid} {bandwidthUpBits} {bandwidthDownBits}",
-      "format-ethernet": "{bandwidthUpBits} {bandwidthDownBits}",
-      "format-disconnected": "⚠ Disconnected",
-      "tooltip": true,
-      "on-click": "nmtui",
-      "on-click-right": "nm-applet",
-      "interval": 5
-    },
-    */
     "pulseaudio": {
-      "format": "<span font='20' rise='-4000'>{icon}</span> {volume}%",
+      "format": "<span font='28' rise='-8000'>{icon}</span> {volume}%",
       "format-bluetooth": "{icon}  {volume}%",
       "format-muted": "",
       "format-icons": {
