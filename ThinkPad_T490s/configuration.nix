@@ -126,12 +126,14 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
+  documentation.dev.enable = true;
   environment.variables.EDITOR = "hx";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    man-pages
+    man-pages-posix
     home-manager
     hack-font
     git
