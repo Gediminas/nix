@@ -43,8 +43,6 @@ focus_follows_mouse yes
 focus output $mon_home
 workspace * output $mon_home
 
-# bindsym $mod+m exec swaymsg [class="Spotify"] scratchpad show || exec spotify
-
 ###########################################################################
 ### Output configuration
 
@@ -270,15 +268,16 @@ input "type:keyboard" {
     ###########################################
     ## Spotify
 
-    for_window [class="Spotify"] {
-        move scratchpad
-        resize set 1024 768
-        border pixel 4
-        border toggle
-        scratchpad show
-    }
-    bindsym $mod+equal exec swaymsg [class="Spotify"] scratchpad show
-    bindsym $mod+Ctrl+equal exec swaymsg [class="Spotify"] scratchpad show || exec spotify
+    #for_window [class="Spotify"] {
+    #    move scratchpad
+    #    resize set 1024 768
+    #    border pixel 4
+    #    border toggle
+    #    scratchpad show
+    #}
+    #bindsym $mod+equal exec swaymsg [class="Spotify"] scratchpad show
+    #bindsym $mod+Ctrl+equal exec swaymsg [class="Spotify"] scratchpad show || exec spotify
+
 
 
     #bindsym $mod+Shift+minus move scratchpad

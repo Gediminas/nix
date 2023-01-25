@@ -12,24 +12,31 @@
   home.packages = with pkgs; [
     fish
     fishPlugins.tide
-
-    openvpn
     nixfmt
+    xdg-utils
 
     # Tools
-    teleport
+    atool
+    ethtool
     inetutils  #telnet
     iperf
-    wireguard-tools
     lsof
+    mtr
+    openssl
+    openvpn
     sysstat
+    teleport
+    unzip
+    wireguard-tools
 
     # Development
     gdb
     lldb
     valgrind
     vagrant
-    cloc
+    cloc         # Code line counter
+    marksman     # LSP markdown
+    nil          # LSP nix
 
     # TUI Apps
     htop
@@ -42,13 +49,14 @@
     # GUI Apps
     brave
     bitwarden
+    caprine-bin
+    gimp
     simplenote
     standardnotes
+    #skypeforlinux
     slack
-    caprine-bin
-    skypeforlinux
     spotify
-    gimp
+    viber
     wireshark
   ];
 
@@ -66,7 +74,7 @@
     ".config/nvim/init.lua".source = ./nvim/init.lua;
     ".config/sway".source = ./sway;
     ".config/vifm".source = ./vifm;
-    ".config/waybar".source = ./waybar;
+    # ".config/waybar".source = ./waybar;
     ".config/wofi".source = ./wofi;
   };
 }
