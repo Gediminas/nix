@@ -74,7 +74,7 @@
     ".config/nvim/init.lua".source = ./nvim/init.lua;
     ".config/sway".source = ./sway;
     ".config/vifm".source = ./vifm;
-    # ".config/waybar".source = ./waybar;
+    ".config/waybar".source = ./waybar;
     ".config/wofi".source = ./wofi;
   };
 }

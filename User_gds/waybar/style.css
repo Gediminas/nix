@@ -5,8 +5,8 @@
   font-family: "Hack";
   font-size: 14px;
   min-height: 0;
-  margin-top: -4;
-  margin-bottom: -4;
+  margin-top: -3;
+  margin-bottom: -3;
 }
 
 window#waybar {
@@ -26,6 +26,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
+  color: white;
   background: #BB7700;
 }
 
@@ -43,30 +44,42 @@ window#waybar {
 #network,
 #pulseaudio {
   color: grey;
-  padding: 0 5px;
+  padding: 0 7px 0 7px;
   margin-right: 0px;
   margin-top: 0px;
-}
-
-#temperature.critical {
-  color: red;
 }
 
 #cpu {
   color: cyan;
 }
-
 #cpu.warning {
   color: orange;
 }
-
 #cpu.critical {
+  color: red;
+}
+
+
+#memory.warning {
+  color: orange;
+}
+#temperature.critical {
+  color: red;
+}
+
+
+#memory.warning {
+  color: orange;
+}
+#memory.critical {
   color: red;
 }
 
 
 #battery {
     color: yellow;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 #battery.full.charging {
     color: #00AA00; /*green*/
@@ -97,6 +110,11 @@ window#waybar {
   color: #00AA00; /*green*/
 }
 #network.disconnected {
-  background: #f53c3c;
+  color: #FF0000;
+  /*_background: #f53c3c;*/
 }
 
+#pulseaudio.warning:not(.bluetooth):not(.muted) {
+    background-color: yellow;
+    color: black;
+}

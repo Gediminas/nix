@@ -1,17 +1,17 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 16,
+    "height": 14,
     "modules-left": ["sway/workspaces"],
     /*"modules-center": ["sway/window"],*/
     "modules-center": ["tray"],
-    "modules-right": ["network", "pulseaudio", "backlight",  "temperature", "cpu", "memory", "battery", "clock"],
+    "modules-right": ["network", "pulseaudio", "backlight", "cpu",  "temperature", "memory", "battery", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "disable-cl16k": false,
     },
     "tray": {
-      "icon-size": 12,
+      "icon-size": 16,
       "spacing": 10,
     },
     "backlight": {
@@ -20,7 +20,7 @@
       "format-icons": ["", ""],
     },
     "clock": {
-        "format": "{:%Y-%m-%d (w%W-%w) %H:%M.%S}",
+        "format": "{:%Y-%m-%d (w%W-%w) <span color='white' font-weight='5'>%H:%M</span>.%S}",
         "interval": 1,
     },
     "cpu": {
@@ -41,16 +41,17 @@
           "critical": 95
        },
       "tooltip": true,
-      "min-length": 19,
-      "max-length": 19,
+      "min-length": 17,
+      "max-length": 17,
     },
     "memory": {
-       //{icon} { ({used:0.1f}G)
-      "format": "<span font='20' rise='-4000'></span> {}%",
-
-      // "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+      "format": "<span font='20' rise='-4000'></span><span font='4'> </span>{percentage}%<span font='4'> </span>({avail:0.1f}G)",
       "tooltip": true,
-      "interval": 10
+      "interval": 10,
+      "states": {
+          "warning": 90,
+          "critical": 95
+       },
     },
     "temperature": {
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -67,8 +68,8 @@
             "critical": 15
         },
 
-        "format": "<span font='8' >{time} </span><span font='24' rise='-5000'>{icon}</span> {capacity}%",
-        "format-charging": "<span font='8' >{time}</span> ⚡<span font='24' rise='-5000'>{icon}</span> {capacity}%",
+        "format": "<span font='8' >{time} </span><span font='32' rise='-9000'>{icon}</span> {capacity}%",
+        "format-charging": "<span font='8' >{time}</span> ⚡<span font='26' rise='-5000'>{icon}</span> {capacity}%",
         /* "format": "{icon} {capacity}%", */
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
@@ -76,13 +77,15 @@
         "interval": 15
     },
     "network": {
+	  //⚠
       "interface": "wlp0s20f3",
       "format":              "",
-      "format-wifi": " <span font='28' rise='-8000'>{icon}</span> {essid} <span color='#00AAFF'>{bandwidthDownBytes:>5}<span font='16'>↓</span></span> <span color='#0077FF'>{bandwidthUpBytes:>5}<span font='16'>↑</span></span>  <span font='8' >{frequency}MHz {signalStrength}x {signaldBm}dBm  {ipaddr}/{cidr}</span>",
-      "format-ethernet":     "{icon} [{ifname}] ^{bandwidthUpBytes:3} {bandwidthDownBytes:3}  {ipaddr}/{cidr}",
-      "format-linked":       "{icon} [{ifname}] (No IP)",
-      "format-disconnected": "{icon} ⚠ Disconnected",
-      "format-alt": "{icon}",
+      "format-wifi":     " <span font='26' rise='-9500'>{icon}</span> {essid} <span color='#00AAFF'>{bandwidthDownBytes:>5}<span font='16'>↓</span> {bandwidthDownBits:>5}<span font='16'>↓</span></span> <span color='#0077FF'>{bandwidthUpBytes:>5}<span font='16'>↑</span> {bandwidthUpBits:>5}<span font='16'>↑</span></span>  <span font='8' >{frequency}MHz {signalStrength}x {signaldBm}dBm  {ipaddr}/{cidr}</span>",
+      "format-ethernet": " <span font='26' rise='-9500'>{icon}</span> {ifname} <span color='#00AAFF'>{bandwidthDownBytes:>5}<span font='16'>↓</span></span> <span color='#0077FF'>{bandwidthUpBytes:>5}<span font='16'>↑</span></span>  <span font='8' >{ipaddr}/{cidr}</span>",
+      "format-linked":       " {icon} [{ifname}] (No IP)",
+      "format-disconnected": " {icon} Disconnected",
+      "format-disabled": " {icon} DISABLED",
+      "format-alt": " <span font='26' rise='-8000'>{icon}</span>",
       "format-alt-click": "click-right",
       "format-icons": {
         "wifi": [
@@ -90,20 +93,21 @@
           "<span color='#AAAA00'>直</span>",
           "<span color='#00AA00'></span>"
         ],
-        "ethernet": [""],
-        "disconnected": [""]
+        "ethernet": ["<span font='26' rise='-9500'></span>"],
+        "disconnected": ["<span color='red' font='26' rise='-9500'></span>"]
       },
       "tooltip": true,
-      "min-length": 65,
-      "max-length": 65,
+	  "tooltip-format": "gw: {gwaddr}",
+      "min-length": 90,
+      "max-length": 90,
       "align": 0,
       "interval": 1
       /*"on-click": "alacritty -e nmtui",*/
     },
     "pulseaudio": {
-      "format": "<span font='28' rise='-8000'>{icon}</span> {volume}%",
-      "format-bluetooth": "{icon}  {volume}%",
-      "format-muted": "",
+      "format":           "<span font='20' rise='-4000'>{icon}</span> {volume}%",
+      "format-bluetooth": "<span font='20' rise='-4000'>{icon}</span> {volume}%",
+      "format-muted":     "<span font='20' rise='-4000'></span>X",
       "format-icons": {
         "headphones": "P",
         "handsfree": "F",
@@ -111,24 +115,19 @@
         "phone": "",
         "portable": "",
         "car": "",
-        "default": ["", ""]
+        "default": ["", "", ""],
+        // "default": [
+        //   "<span color='yellow'></span>",
+        //   "<span color='yellow'></span>",
+        //   "<span color='yellow'></span>"
+        // ]
+      },
+      "states": {
+        "warning": 5,
       },
       "on-click": "pavucontrol",
       "on-click-right": "pavucontrol"
     },
-
-      /*
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "",
-        "format-icons": {
-            "headphones": "",
-            "default": ["", ""]
-        },
-        "on-click": "pavucontrol",
-        "on-click-right": "pavucontrol"
-    },
-    */
 
     /*
     "custom/germany": {
