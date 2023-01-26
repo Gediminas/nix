@@ -5,4 +5,4 @@
 #/cfg/configuration.nix
 #/cfg/hardware-configuration.nix
 
-flake.lock
+#flake.lock

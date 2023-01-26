@@ -1,79 +1,203 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# INSTALL
+#
+# ## MacBookPro Retina WORKAROUND
+# stty rows 50 cols 160
+#
+# ## NETWORK
+# nmcli dev wifi rescan
+# nmcli dev wifi list
+# sudo nmcli dev wifi connect <ssid> --ask
+#
+# ## SpaceFN Build
+# git clone https://github.com/Gediminas/spacefn-evdev
+# $ nix-shell -p gcc pkgconfig libevdev
+# make
+#
+# ## Fix after copy
+# sudo chown -R gds:users ~/
+# sudo find ~/.ssh/ -type d -exec chmod 700 {} \;
+# sudo find ~/.ssh/ -type f -exec chmod 600 {} \;
+#
+# ## Install vagrant plugins
+# vagrant plugin install vagrant-reload
 
-{ config, pkgs, ... }:
-
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  # Bootloader.
+{ config, pkgs, lib, ... }: {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-boot.kernelPackages = pkgs.linuxPackages_latest;
+  security.polkit.enable = true;
+  security.sudo.wheelNeedsPassword = false;
+  security.rtkit.enable = true;
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
+  nix.settings.experimental-features = "nix-command flakes";
 
-#boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".keyFile = "/crypto_keyfile.bin";
-
-#boot.kernelParams = [ "i915.force_probe=46a6" ];
-
-security.sudo.wheelNeedsPassword = false;
-
-nix.settings.experimental-features = "nix-command flakes";
-
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  networking.hostName = "T2215"; # Define your hostname.
   networking.networkmanager.enable = true;
+  # or
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.userControlled.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Vilnius";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  sound.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.settings = {
+      General = {
+        ControllerMode = "bredr";
+        #Enable = "Source,Sink,Media,Socket";
+      };
+      Policy = { AutoEnable = "true"; };
+    };
+    pulseaudio.enable = false;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Flatpak desktop extensions
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+  };
+
+  services = {
+    # Configure keymap in X11
+    xserver = {
+      layout = "us";
+      xkbVariant = "";
+    };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    getty.autologinUser = "gds";
+    flatpak.enable = true;
+    blueman.enable = true;
+  };
+
+  virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
+
+  #Virtualbox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "gds" ];
+  #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
+  environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
+
   users.users.gds = {
     isNormalUser = true;
     description = "gds";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "audio"
+      "video"
+      "disk"
+      "docker"
+      "vboxusers"
+      "libvirtd"
+      "qemu-libvirtd"
+      "wireshark"
+    ];
+    initialPassword = "password";
+    packages = with pkgs; [ ];
+    # shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "gds";
+  programs = {
+    sway.enable = true;
+    # zsh.enable = true;
+    fish.enable = true;
+    # starship.enable = true;
+    nm-applet.indicator = true;
+    git = {
+      enable = true;
+      package = pkgs.gitFull;
+    };
+    wireshark.enable = true;
+  };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  documentation.dev.enable = true;
+  environment.variables.EDITOR = "hx";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget curl git vifm mc hack-font cryptsetup tmux tree file fzf jq ripgrep neofetch htop killall inotify-tools 
-   sway wl-clipboard alacritty wofi waybar
-   home-manager
+    man-pages
+    man-pages-posix
+    home-manager
+    hack-font
+    git
+    curl
+    wget
+    cryptsetup
+    git-crypt
+    gnupg
+    tmux
+    vim
+    neovim
+    unstable.helix
+    tree
+    vifm
+    mc
+    sshfs-fuse
+    file
+    fzf
+    jq
+    fd
+    ripgrep
+    silver-searcher
+    neofetch
+    htop
+    powertop
+    powerstat
+    killall
+    inotify-tools
+
+    # bash
+
+    #=== controls ===
+    pavucontrol
+    pulseaudio
+    brightnessctl
+    playerctl
+
+    #=== sway ===
+    sway
+    swaylock
+    swayidle
+    waybar
+    wofi
+    dmenu
+    wl-clipboard
+    grim
+    slurp
+    alacritty
+    networkmanagerapplet
   ];
+
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "UbuntuMono" ]; })
+    hack-font
+  ];
+
+  systemd.services.spacefn = {
+    enable = true;
+    description = "SpaceFn";
+    unitConfig = { Type = "simple"; };
+    serviceConfig = {
+      ExecStart = "/bin/sh /home/gds/sub/spacefn-evdev/space";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -83,16 +207,8 @@ nix.settings.experimental-features = "nix-command flakes";
   #   enableSSHSupport = true;
   # };
 
-programs = {
-sway.enable = true;
-git.enable = true;
-
-};
-
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # services.openssh.enable = true; //xz - https://nixos.wiki/wiki/Polkit
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -100,12 +216,6 @@ git.enable = true;
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "22.11";
 
 }
