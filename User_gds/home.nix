@@ -15,19 +15,25 @@
     nixfmt
     xdg-utils
 
-    # Tools
-    atool
+    # Hardware Tools
     ethtool
+    hwinfo
+    lshw
+    lsof
+    sysstat
+    usbutils
+
+    # Network Tools
     inetutils  #telnet
     iperf
-    lsof
     mtr
     openssl
     openvpn
-    sysstat
     teleport
+
+    # Tools
+    atool
     unzip
-    wireguard-tools
 
     # Development
     gdb
