@@ -13,7 +13,9 @@ set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
 # Monitors
 # (swaymsg -t get_outputs)
 
-set $mon_laptop eDP-1
+#set $mon_laptop eDP-1
+set $mon_laptop "Unknown 0x4152 0x00000000"
+
 set $mon_asus  "Unknown ASUS MB169C+ HBLMTF011738"
 set $mon_work1 "Dell Inc. DELL P2419HC F41RC53"
 set $mon_work2 "Dell Inc. DELL P2419HC BJTLK03"
@@ -34,10 +36,14 @@ set $mon_home  "Dell Inc. DELL SE2719H F4HK8V2"
 # output $mon_home   pos     0     0 res 1920x1080 scale 1.0
 # output $mon_laptop pos     0  1080 res 2560x1600 scale 1.6
 
+# Thinkpad X1 OLED 2880x1800
+output $mon_home   pos     0     0 res 1920x1080 scale 1.0
+output $mon_laptop pos     0  1080 res 2880x1800 scale 1.5
+
 # FullHD laptop
-output $mon_work1  pos     0     0 res 1920x1080 scale 1
-output $mon_home   pos     0     0 res 1920x1080 scale 1
-output $mon_laptop pos     0  1080 res 1920x1080 scale 1
+#output $mon_work1  pos     0     0 res 1920x1080 scale 1
+#output $mon_home   pos     0     0 res 1920x1080 scale 1
+#output $mon_laptop pos     0  1080 res 1920x1080 scale 1
 
 focus_follows_mouse yes
 focus output $mon_home

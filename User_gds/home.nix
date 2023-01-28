@@ -23,6 +23,11 @@
     sysstat
     usbutils
 
+    inxi
+    glxinfo
+    xorg.xdpyinfo
+    lm_sensors
+
     # Network Tools
     inetutils  #telnet
     iperf

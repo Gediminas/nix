@@ -79,7 +79,10 @@
     getty.autologinUser = "gds";
     flatpak.enable = true;
     blueman.enable = true;
+    tlp.enable = true;
   };
+  services.uvcvideo.dynctrl.enable = true;
+  services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
 
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;

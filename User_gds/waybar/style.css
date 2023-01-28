@@ -7,10 +7,10 @@
   min-height: 0;
   margin-top: -3;
   margin-bottom: -3;
+  /*background: black;*/
 }
 
 window#waybar {
-  color: white;
   background: black;
 }
 
@@ -19,15 +19,17 @@ window#waybar {
 }
 
 #workspaces button {
-  color: white;
   font-weight: bold;
   padding: 0 5px;
-  background: transparent;
+  /*background: transparent;*/
+  color: #0077FF;
 }
 
 #workspaces button.focused {
+  font-weight: bold;
   color: white;
-  background: #BB7700;
+  background: #0088FF;
+  /*background: #BB7700;*/
 }
 
 #workspaces button.urgent {
@@ -43,28 +45,33 @@ window#waybar {
 #memory,
 #network,
 #pulseaudio {
-  color: grey;
+  /*color: grey;*/
+  /*color: #00AAFF;*/
   padding: 0 7px 0 7px;
   margin-right: 0px;
   margin-top: 0px;
+  color: #0077FF;
 }
 
 #cpu {
-  color: cyan;
+ /* color: cyan;*/
+  /*font-family: "Ubuntu Nerd Font";*/
+  font-size: 14px;
+}
+#cpu.info {
+  color: #00BBFF;
 }
 #cpu.warning {
-  color: orange;
+  color: #FF9944;
 }
 #cpu.critical {
   color: red;
 }
 
 
-#memory.warning {
-  color: orange;
-}
 #temperature.critical {
-  color: red;
+  color: black;
+  background-color: red;
 }
 
 
@@ -81,9 +88,23 @@ window#waybar {
     margin-top: -10px;
     margin-bottom: -10px;
 }
-#battery.full.charging {
-    color: #00AA00; /*green*/
+#battery.full:not(.charging) {
+    color: #0077FF; /*blue*/
 }
+#battery:not(.full).charging {
+    color: orange;
+}
+
+#battery.full.charging {
+    color: orange;
+}
+/*
+#battery:not(.full):not(.charging) {
+    color: yellow;
+}
+*/
+
+
 #battery.warning {
     background-color: #FFFF00;
     color: black;
@@ -106,12 +127,26 @@ window#waybar {
 }
 
 
-#network {
-  color: #00AA00; /*green*/
-}
 #network.disconnected {
   color: #FF0000;
   /*_background: #f53c3c;*/
+}
+/*
+#network.low {
+    color: cyan;
+}
+#network.moderate {
+    color: yellow;
+    background-color: green;
+}
+#network.high {
+    background-color: red;
+}
+*/
+
+#network.eth {
+  color: #00AAFF;
+  background: #222222;
 }
 
 #pulseaudio.warning:not(.bluetooth):not(.muted) {
