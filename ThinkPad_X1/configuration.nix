@@ -1,5 +1,3 @@
-# INSTALL
-#
 # ## MacBookPro Retina WORKAROUND
 # stty rows 50 cols 160
 #
@@ -18,8 +16,16 @@
 # sudo find ~/.ssh/ -type d -exec chmod 700 {} \;
 # sudo find ~/.ssh/ -type f -exec chmod 600 {} \;
 #
-# ## Install vagrant plugins
+# ## Vagrant plugins
 # vagrant plugin install vagrant-reload
+#
+# # Vim LSP install
+# nix-shell -p gcc gnumake lua luarocks rust-analyzer clang python3 pyright nodejs --run nvim
+#
+# # Flatpak
+# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# flatpak install viber
+
 
 { config, pkgs, lib, ... }: {
   boot.loader.systemd-boot.enable = true;
@@ -76,13 +82,26 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-    getty.autologinUser = "gds";
     flatpak.enable = true;
     blueman.enable = true;
     tlp.enable = true;
+
   };
   services.uvcvideo.dynctrl.enable = true;
   services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
+
+  services.getty.autologinUser = "gds";
+  # systemd.services."autovt@tty1".description = "Autologin at the TTY1";
+  # systemd.services."autovt@tty1".after = [ "systemd-logind.service" ];  # without it user session not started and xorg can't be run from this tty
+  # systemd.services."autovt@tty1".wantedBy = [ "multi-user.target" ];
+  # systemd.services."autovt@tty1".serviceConfig =
+  #   { ExecStart = [
+  #       ""  # override upstream default with an empty ExecStart
+  #       "@${pkgs.utillinux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login --autologin gds --noclear %I $TERM"
+  #     ];
+  #     Restart = "always";
+  #     Type = "idle";
+  #   };
 
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
