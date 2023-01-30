@@ -36,10 +36,6 @@
     openvpn
     teleport
 
-    # Experimental
-    kitty
-    viu
-
     # Tools
     atool
     unzip
@@ -73,6 +69,22 @@
     slack
     spotify
     wireshark
+    
+    ############################
+    # Experimental
+    kitty
+    viu
+    xfce.ristretto
+    poppler_utils
+    zathura
+    ffmpeg_5-full
+    mp3info
+    sox
+    sxiv
+    gpicview
+    shotwell
+    xfce.thunar
+    ntfs3g
 
     # Flatpak
     #caprine-bin
