@@ -28,13 +28,18 @@
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  security.polkit.enable = true;
+  #TEMP
   security.sudo.wheelNeedsPassword = false;
+  services.logind.lidSwitchExternalPower = "ignore";
+  services.openssh.enable = true; #xz - https://nixos.wiki/wiki/Polkit
+  #END TEMP
+
+  security.polkit.enable = true;
   security.rtkit.enable = true;
 
   nix.settings.experimental-features = "nix-command flakes";
 
-  networking.hostName = "T2215"; # Define your hostname.
+  networking.hostName = "T2215x"; # Define your hostname.
   networking.networkmanager.enable = true;
   # or
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -206,9 +211,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true; //xz - https://nixos.wiki/wiki/Polkit
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
