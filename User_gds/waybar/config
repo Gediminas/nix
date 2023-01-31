@@ -21,6 +21,8 @@
     },
     "clock": {
         "format": "{:%Y-%m-%d (w%W-%w) <span color='white' font-weight='bold'>%H:%M</span>.%S}",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>",
         "interval": 1,
     },
     "cpu": {
@@ -63,7 +65,7 @@
         "format": "{temperatureC}°C",
     },
     "battery": {
-        /*"full-at": 100,*/
+        "full-at": 99,
         "states": {
             "full": 101,
             "good": 100,
