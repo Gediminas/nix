@@ -100,7 +100,7 @@
 
 
   home.file = {
-    ".tmux.conf".source = ./tmux/tmux.conf;
+    ".tmux.conf".source = ./tmux/.tmux.conf;
     ".tmux/themes".source = ./tmux/themes;
     ".vim/autoload".source = ./vim/autoload;
     ".vim/colors".source = ./vim/colors;
