@@ -98,22 +98,21 @@
     "adobe-reader-9.5.5"
   ];
 
-
   home.file = {
-    ".tmux.conf".source = ./tmux/.tmux.conf;
-    ".tmux/themes".source = ./tmux/themes;
-    ".vim/autoload".source = ./vim/autoload;
-    ".vim/colors".source = ./vim/colors;
-    ".vim/vimrc".source = ./vim/vimrc;
-    ".config/alacritty".source = ./alacritty;
-    ".config/helix".source = ./helix;
-    ".config/fish/config.fish".source = ./fish/config.fish;
-    ".config/kitty".source = ./kitty;
-    ".config/mc/ini".source = ./mc/ini;
-    ".config/nvim/init.lua".source = ./nvim/init.lua;
-    ".config/sway".source = ./sway;
-    ".config/vifm".source = ./vifm;
-    ".config/waybar".source = ./waybar;
-    ".config/wofi".source = ./wofi;
+    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/.tmux.conf";
+    ".tmux/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/themes";
+    ".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/autoload";
+    ".vim/colors".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/colors";
+    ".vim/vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/vimrc";
+    ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/alacritty";
+    ".config/helix".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/helix";
+    ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/fish/config.fish";
+    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/kitty";
+    ".config/mc/ini".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/mc/ini";
+    ".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/nvim/init.lua";
+    ".config/sway".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/sway";
+    ".config/vifm".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vifm";
+    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/waybar";
+    ".config/wofi".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/wofi";
   };
 }
