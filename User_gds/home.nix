@@ -35,6 +35,7 @@
     openssl
     openvpn
     teleport
+    wireguard-tools
 
     # Tools
     atool

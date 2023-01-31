@@ -45,7 +45,7 @@ C-s = ":w" # Maps the Control-s to the typable command :w which is an alias for 
 # 'S-ret' = ":theme my_light"
 
 "D" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
-"G" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
+"G" = "goto_file_end"
 # "C" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
 
 

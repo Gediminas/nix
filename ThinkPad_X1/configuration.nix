@@ -25,6 +25,9 @@
 # # Flatpak
 # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 # flatpak install viber
+#
+# brave://flags/ # enable-webrtc-pipewire-capturer
+
 
 
 { config, pkgs, lib, ... }: {
@@ -32,7 +35,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -87,8 +91,12 @@
     tlp.enable = true;
 
   };
+
+  # TEMP
   services.uvcvideo.dynctrl.enable = true;
   services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
+
+  services.transmission.enable = true;
 
   services.getty.autologinUser = "gds";
   # systemd.services."autovt@tty1".description = "Autologin at the TTY1";
@@ -102,6 +110,9 @@
   #     Restart = "always";
   #     Type = "idle";
   #   };
+
+  # END TEMP
+
 
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
