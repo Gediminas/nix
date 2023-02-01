@@ -77,10 +77,13 @@
     viu
     xfce.ristretto
     poppler_utils
+    #PDF
     zathura
     mupdf
     masterpdfeditor
     adobe-reader
+    # foxitreader     # +2GB?!
+    #media
     ffmpeg_5-full
     mp3info
     sox
@@ -97,6 +100,7 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
+    # "qtwebkit-5.212.0-alpha4" #foxitreader
   ];
 
   home.file = {
