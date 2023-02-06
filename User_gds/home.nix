@@ -38,6 +38,7 @@
     wireguard-tools
 
     # Tools
+    bc
     atool
     unzip
 
