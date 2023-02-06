@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-NET_INTERFACE=$1
+NET_INTERFACE="${1:-wlp0s20f3}"
 PROC_NET_DEV=/proc/net/dev
-TMP_NET_PREV=/tmp/net
+TMP_NET_PREV=/tmp/.net_traffic
+TMP_NET_PING=/tmp/.net_ping
 
 echo_html_value () {
   level=$1
@@ -52,6 +53,9 @@ echo_human_value() {
 }
 
 
+#Workaround: > makes file empty first, and no value is read later
+(ping -c 1 8.8.8.8 | awk -F '/' 'END {print $5}' >> $TMP_NET_PING) &
+
 # Read prev values from /tmp/net
 while read tm rx tx; do
   prev_tm=$tm; prev_rx=$rx; prev_tx=$tx
@@ -76,5 +80,8 @@ diff_tm_ms=$(( ($curr_tm-$prev_tm) ))
 echo_human_value ↓ $prev_rx $curr_rx $diff_tm_ms
 echo -n " "
 echo_human_value ↑ $prev_tx $curr_tx $diff_tm_ms
-echo ""
+
+png=$(tail -1 $TMP_NET_PING)
+printf " <span color='green'>%3.0f ms</span>\n" $png
+echo "" > $TMP_NET_PING
 
