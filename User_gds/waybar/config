@@ -5,7 +5,7 @@
     "modules-left": ["sway/workspaces"],
     /*"modules-center": ["sway/window"],*/
     "modules-center": ["tray"],
-    "modules-right": ["network#tun", "network#eth", "network", "pulseaudio", "backlight", "cpu",  "temperature", "memory", "battery", "clock"],
+    "modules-right": ["custom/pom", "network#tun", "network#eth", "network", "custom/net", "pulseaudio", "backlight", "cpu",  "temperature", "memory", "battery", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "disable-cl16k": false,
@@ -85,7 +85,9 @@
 	  //⚠
       "interface":           "wlp0s20f3",
       "format":              "",
-      "format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='16'>↓</span> {bandwidthUpBits:>7}<span font='16'>↑</span>  <span font='8' >{ipaddr}/{cidr}</span>",
+      /*"format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='16'>↓</span> {bandwidthUpBits:>7}<span font='16'>↑</span>  <span font='8' >{ipaddr}/{cidr}</span>",*/
+      /*"format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='16'>↓</span> {bandwidthUpBits:>7}<span font='16'>↑</span>",*/
+      "format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span>",
       "format-disconnected": "{icon} Disconnected",
       "format-disabled":     "{icon} DISABLED",
       "format-alt":          "<span font='26' rise='-8000'>{icon}</span>",
@@ -106,8 +108,8 @@
       // },
       "tooltip": true,
 	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
-      //"min-length": 60,
-      //"max-length": 60,
+      //"min-length": 50,
+      //"max-length": 50,
       "align": 0,
       "interval": 1
       /*"on-click": "alacritty -e nmtui",*/
@@ -153,6 +155,24 @@
       },
       "on-click": "pavucontrol",
       "on-click-right": "pavucontrol"
+    },
+
+    //https://simonvandevelde.be/posts/Sway_Pomodoro_Timer.html
+    "custom/pom": {
+        "format": "{}",
+        "exec": "~/dev/pom/pomo.sh clock",
+        "on-click": "~/dev/pom/pomo.sh start",
+        "on-click-middle": "~/dev/pom/pomo.sh stop",
+        "on-click-right": "~/dev/pom/pomo.sh pause",
+        "interval": 1,
+    },
+
+    "custom/net": {
+        "format": "{}",
+        "exec": "~/dev/waybar/networker/networker.sh wlp0s20f3",
+        "interval": 1,
+      "min-length": 25,
+      "max-length": 25,
     },
 
     /*

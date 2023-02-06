@@ -44,7 +44,9 @@ window#waybar {
 #cpu,
 #memory,
 #network,
-#pulseaudio {
+#pulseaudio,
+#custom-pom
+{
   /*color: grey;*/
   /*color: #00AAFF;*/
   padding: 0 7px 0 7px;
