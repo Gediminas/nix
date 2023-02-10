@@ -100,7 +100,7 @@ vim.opt.autowriteall = true           -- ??? enable autowriteall
 -- vim.opt.backup = false           -- Disable backup file
 -- vim.opt.termguicolors = true     -- Enable 24-bit RGB colors
 vim.opt.list = true                 -- Enable show tab chracters
-vim.opt.listchars = 'tab:>-'          -- ..Show tab chracters
+vim.opt.listchars = 'tab:>-'        -- ..Show tab chracters //→
 --------------------------------------------------------------------------------
 --- Plugins
 
@@ -159,8 +159,9 @@ require("packer").startup(function(use)
   use 'neovim/nvim-lspconfig'
 
   -- Language Server installer
-  use { 'williamboman/nvim-lsp-installer',
-    requires = 'neovim/nvim-lspconfig',
+  use {
+    "williamboman/nvim-lsp-installer",
+    "neovim/nvim-lspconfig",
   }
 
   -- BONUS: Customizations over LSP
@@ -182,7 +183,7 @@ require("packer").startup(function(use)
         'rafamadriz/friendly-snippets', } }
 
   -- bracket autocompletion
-  use 'vim-scripts/auto-pairs-gentle'
+  --use 'vim-scripts/auto-pairs-gentle'
 
   -- Fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter'
@@ -379,7 +380,9 @@ local lsp_installer = require("nvim-lsp-installer")
 local servers = {
   "rust_analyzer",
   "bashls",
-  "pyright",
+  "gopls",
+  --"pyright",
+  "pylsp",
   "sumneko_lua",
   "html",
   "clangd",
@@ -626,20 +629,19 @@ cmp.setup.cmdline(':', {
   })
 })
 
-
-vim.g.AutoPairs = {
-  ['(']=')',
-  ['[']=']',
-  ['{']='}',
-  ["'"]="'",
-  ['"']='"',
-  ['`']='`',
-  ['<']='>',
-}
-
+vim.g.AutoPairs = nil
+--vim.g.AutoPairs = {
+--  ['(']=')',
+--  ['[']=']',
+--  ['{']='}',
+--  ["'"]="'",
+--  ['"']='"',
+--  ['`']='`',
+--  ['<']='>',
+--}
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {"python", "rust", "c", "cpp", "bash", "go", "html"},
+  ensure_installed = {"python", "rust", "c", "cpp", "bash", "go", "html", "nix", "markdown", "lua", "bash", "fish"},
   highlight = {
     enable = true, -- false will disable the whole extension
   },

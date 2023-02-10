@@ -40,6 +40,7 @@
     # Tools
     bc
     atool
+    zip
     unzip
 
     # Development
@@ -83,6 +84,7 @@
     mupdf
     masterpdfeditor
     adobe-reader
+    calibre
     # foxitreader     # +2GB?!
     #media
     ffmpeg_5-full
@@ -93,6 +95,8 @@
     shotwell
     xfce.thunar
     ntfs3g
+
+    transmission
 
     # Flatpak
     #caprine-bin

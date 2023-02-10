@@ -65,10 +65,10 @@
         "format": "{temperatureC}°C",
     },
     "battery": {
-        "full-at": 99,
+        "full-at": 100,
         "states": {
             "full": 101,
-            "good": 100,
+            "good": 95,
             "warning": 30,
             "critical": 10
         },
@@ -108,8 +108,8 @@
       // },
       "tooltip": true,
 	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
-      //"min-length": 50,
-      //"max-length": 50,
+      //"min-length": 60,
+      //"max-length": 60,
       "align": 0,
       "interval": 1
       /*"on-click": "alacritty -e nmtui",*/
@@ -169,10 +169,10 @@
 
     "custom/net": {
         "format": "{}",
-        "exec": "~/dev/waybar/networker/networker.sh wlp0s20f3",
+        "exec": "~/.config/waybar/scripts/networker.sh wlp0s20f3",
         "interval": 1,
-      "min-length": 25,
-      "max-length": 25,
+      "min-length": 30,
+      "max-length": 30,
     },
 
     /*
