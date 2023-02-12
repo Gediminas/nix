@@ -13,6 +13,7 @@
     fish
     fishPlugins.tide
     nixfmt
+    direnv
     xdg-utils
 
     # Hardware Tools
@@ -97,6 +98,7 @@
     ntfs3g
 
     transmission
+    xfce.xfce4-taskmanager
 
     # Flatpak
     #caprine-bin

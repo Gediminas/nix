@@ -9,7 +9,7 @@ true-color = true
 color-modes = true
 auto-pairs = false
 auto-completion = true
-auto-format = false
+auto-format = true
 auto-info = true
 
 [editor.cursor-shape]
@@ -21,7 +21,7 @@ select = "underline"
 space = "none"
 tab = "all"
 nbsp = "all"
-newline = "none"
+newline = "all"
 
 # [editor.file-picker]
 # hidden = true
