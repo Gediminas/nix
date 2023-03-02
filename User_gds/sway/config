@@ -40,8 +40,9 @@ set $mon_home  "Dell Inc. DELL SE2719H F4HK8V2"
 #output $mon_home   pos     0     0 res 1920x1080 scale 1.0
 #output $mon_laptop pos  1920  0 res 2880x1800 scale 1.5
 #output $mon_laptop pos     0  0 res 2880x1800 scale 1.5
-output $mon_laptop pos     0  0 res 2880x1800 scale 1.5
-output $mon_asus   pos  1920  0 res 1920x1080 scale 1.0
+
+output $mon_asus   pos  0  0    res 1920x1080 scale 1.0
+output $mon_laptop pos  0  1080 res 2880x1800 scale 1.5
 
 # FullHD laptop
 #output $mon_work1  pos     0     0 res 1920x1080 scale 1

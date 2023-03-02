@@ -43,6 +43,8 @@
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
   security.rtkit.enable = true;
+  #security.pam.enableSSHAgentAuth = true;
+
 
   nix.settings.experimental-features = "nix-command flakes";
 
@@ -100,7 +102,7 @@
 
   services.transmission.enable = true;
 
-  services.getty.autologinUser = "gds";
+  # services.getty.autologinUser = "gds";
   # systemd.services."autovt@tty1".description = "Autologin at the TTY1";
   # systemd.services."autovt@tty1".after = [ "systemd-logind.service" ];  # without it user session not started and xorg can't be run from this tty
   # systemd.services."autovt@tty1".wantedBy = [ "multi-user.target" ];

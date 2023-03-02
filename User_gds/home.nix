@@ -35,6 +35,7 @@
     mtr
     openssl
     openvpn
+    tcpdump
     teleport
     wireguard-tools
 
@@ -99,6 +100,7 @@
 
     transmission
     xfce.xfce4-taskmanager
+    anki-bin
 
     # Flatpak
     #caprine-bin
