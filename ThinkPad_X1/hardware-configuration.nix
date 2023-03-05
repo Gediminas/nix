@@ -10,11 +10,9 @@
     [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "uvcvideo" ];
-  #boot.kernelParams = [ "i915.force_probe=46a6" ];
-  boot.extraModulePackages = [ ];
-
-  #GL
+  #boot.kernelParams = [ "i915.force_probe=46a6" ]; #GL
   boot.blacklistedKernelModules = [ "mtk_t7xx" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
@@ -24,23 +22,29 @@
   boot.initrd.luks.devices."luks-8d432608-e9e6-4886-8d20-87cb36a2db0a".device =
     "/dev/disk/by-uuid/8d432608-e9e6-4886-8d20-87cb36a2db0a";
 
-  boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".keyFile =
-    "/crypto_keyfile.bin";
-
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/194D-6205";
     fsType = "vfat";
   };
+
+  ##############################################
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
     fsType = "ext4";
   };
 
+  boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".keyFile =
+    "/crypto_keyfile.bin";
+
   boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".device =
     "/dev/disk/by-uuid/574fa299-7773-4077-b061-4c036571f10e";
 
+  ##############################################
+
   swapDevices = [ ];
+
+  ##############################################
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
