@@ -151,7 +151,16 @@
   programs = {
     sway.enable = true;
     # zsh.enable = true;
-    fish.enable = true;
+
+    fish = {
+      enable = true;
+      loginShellInit = ''
+        if test (id --user $USER) -ge 1000 && test (tty) = "/dev/tty1"
+          exec sway
+        end
+      '';
+    };
+
     # starship.enable = true;
     nm-applet.indicator = true;
     git = {

@@ -44,6 +44,7 @@
     atool
     zip
     unzip
+    p7zip
 
     # Development
     gdb
