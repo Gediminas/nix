@@ -1,0 +1,195 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 14,
+    "modules-left": ["sway/workspaces"],
+    /*"modules-center": ["sway/window"],*/
+    "modules-center": ["tray"],
+    "modules-right": ["custom/pom", "network#tun", "network#eth", "network", "custom/net", "pulseaudio", "backlight", "cpu",  "temperature", "memory", "battery", "clock"],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-cl16k": false,
+    },
+    "tray": {
+      "icon-size": 16,
+      "spacing": 10,
+    },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon} {percent}%",
+      "format-icons": ["", ""],
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d (w%W-%w) <span color='white' font-weight='bold'>%H:%M</span>.%S}",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>",
+        "interval": 1,
+    },
+    "cpu": {
+      /**/
+      "interval": 1,
+      "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{usage:>3d}% {load:>2.1f}",
+      "format-icons": [
+          "<span color='#0077FF'>▁</span>",
+          "<span color='#0077FF'>▂</span>",
+          "<span color='#0077FF'>▃</span>",
+          "<span color='#00FFFF'>▄</span>",
+          "<span color='#00FFFF'>▅</span>",
+          "<span color='#FF9944'>▆</span>",
+          "<span color='#FF9944'>▇</span>",
+          "<span color='#FF0000'>█</span>"],
+       "states": {
+          "info": 40,
+          "warning": 70,
+          "critical": 95
+       },
+      "tooltip": true,
+      "min-length": 28,
+      "max-length": 28,
+    },
+    "memory": {
+      "format": "<span font='20' rise='-4000'></span><span font='4'> </span>{percentage}%<span font='4'> </span>({avail:0.1f}G)",
+      "tooltip": true,
+      "interval": 10,
+      "states": {
+          "warning": 90,
+          "critical": 95
+       },
+    },
+    "temperature": {
+	    // Thinkpad T490s
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+	    // Thinkpad X1 gen10
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 55,
+        "format": "{temperatureC}°C",
+    },
+    "battery": {
+        "full-at": 100,
+        "states": {
+            "full": 101,
+            "good": 95,
+            "warning": 30,
+            "critical": 10
+        },
+
+        "format": "<span font='8.5'>{time} -{power:>2.1f}w </span><span font='32' rise='-9000'>{icon}</span> {capacity}%",
+        "format-charging": "<span font='8.5' >{time} +{power:>2.1f}w </span> ⚡<span font='26' rise='-5000'>{icon}</span> {capacity}%",
+        /* "format": "{icon} {capacity}%", */
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": "{H}:{m}",
+        "interval": 2
+    },
+    "network": {
+	  //⚠
+      "interface":           "wlp0s20f3",
+      "format":              "",
+      /*"format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='16'>↓</span> {bandwidthUpBits:>7}<span font='16'>↑</span>  <span font='8' >{ipaddr}/{cidr}</span>",*/
+      /*"format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='16'>↓</span> {bandwidthUpBits:>7}<span font='16'>↑</span>",*/
+      "format-wifi":         "<span font='26' rise='-7000'>{icon}</span> {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span>",
+      "format-disconnected": "{icon} Disconnected",
+      "format-disabled":     "{icon} DISABLED",
+      "format-alt":          "<span font='26' rise='-8000'>{icon}</span>",
+      "format-alt-click":    "click-right",
+      "format-icons": {
+        "wifi": [
+          "<span color='yellow'>睊</span>",
+          "<span color='#AABBFF'>直</span>",
+          "<span color='#0077FF'></span>"
+        ],
+        "ethernet": ["<span font='26' rise='-9500'></span>"],
+        "disconnected": ["<span color='red' font='26' rise='-9500'></span>"]
+      },
+      // "states": {
+      //   "low":      5,
+      //   "moderate": 10,
+      //   "high":     100
+      // },
+      "tooltip": true,
+	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
+      //"min-length": 60,
+      //"max-length": 60,
+      "align": 0,
+      "interval": 1
+      /*"on-click": "alacritty -e nmtui",*/
+    },
+    "network#eth": {
+      "interface": "enp0s13f0u3u2u1",
+      "format": "",
+      "format-ethernet": "<span font='26' rise='-7000'></span>{bandwidthDownBits:>7}<span font='16'>↓</span> {bandwidthUpBits:>7}<span font='16'>↑</span>",
+      "tooltip": true,
+	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
+      "align": 0,
+      "interval": 1
+    },
+    "network#tun": {
+      "interface": "tun0",
+      "format": "",
+      "format-ethernet": "🌀",
+      "tooltip": true,
+	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
+      "align": 0,
+      "interval": 1
+    },
+    "pulseaudio": {
+      "format":           "<span font='20' rise='-4000'>{icon}</span> {volume}%",
+      "format-bluetooth": "<span font='20' rise='-4000'>{icon}</span> {volume}%",
+      "format-muted":     "<span font='20' rise='-4000'></span>X",
+      "format-icons": {
+        "headphones": "P",
+        "handsfree": "F",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""],
+        // "default": [
+        //   "<span color='yellow'></span>",
+        //   "<span color='yellow'></span>",
+        //   "<span color='yellow'></span>"
+        // ]
+      },
+      "states": {
+        "warning": 5,
+      },
+      "on-click": "pavucontrol",
+      "on-click-right": "pavucontrol"
+    },
+
+    //https://simonvandevelde.be/posts/Sway_Pomodoro_Timer.html
+    "custom/pom": {
+        "format": "{}",
+        "exec": "~/dev/pom/pomo.sh clock",
+        "on-click": "~/dev/pom/pomo.sh start",
+        "on-click-middle": "~/dev/pom/pomo.sh stop",
+        "on-click-right": "~/dev/pom/pomo.sh pause",
+        "interval": 1,
+    },
+
+    "custom/net": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/networker.sh wlp0s20f3",
+        "interval": 1,
+      "min-length": 30,
+      "max-length": 30,
+    },
+
+    /*
+    "custom/germany": {
+        "format": "{}",
+        "exec": "TZ=Europe/Berlin date \"+%H:%M %Z\"",
+        "interval": 30,
+    },
+    "bluetooth": {
+      "format": "{icon}",
+      //"format-alt": "bluetooth: {status}",
+      "format-icons": {
+        "enabled": "",
+        "disabled": ""
+      },
+      "tooltip-format": "{}",
+      "on-click-right": "blueman-manager"
+    },
+    */
+}

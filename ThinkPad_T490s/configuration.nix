@@ -26,7 +26,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   #TEMP
   security.sudo.wheelNeedsPassword = false;
@@ -61,39 +62,51 @@
     pulseaudio.enable = false;
   };
 
-  # Flatpak desktop extensions
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    # extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
-  };
+  # GNOME
+  # # Flatpak desktop extensions
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+
+  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; 
+  #   # extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+  # };
 
   services = {
     # Configure keymap in X11
     xserver = {
+      enable = true; #GNOME
       layout = "us";
       xkbVariant = "";
+
+      # desktopManager.plasma5.enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
     };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-    getty.autologinUser = "gds";
-    flatpak.enable = true;
-    blueman.enable = true;
+
+    # GNOME
+    # getty.autologinUser = "gds";
+    # flatpak.enable = true;
+    # blueman.enable = true;
   };
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
+  # GNOME
+  # virtualisation.libvirtd.enable = true;
+  # virtualisation.docker.enable = true;
 
-  #Virtualbox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "gds" ];
-  #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
-  environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
+  # GNOME
+  # #Virtualbox
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "gds" ];
+  # #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
+  # environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
 
   users.users.gds = {
     isNormalUser = true;
@@ -116,8 +129,30 @@
     shell = pkgs.fish;
   };
 
+  users.users.eleonora = {
+    isNormalUser = true;
+    description = "Eleonora";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "audio"
+      "video"
+      "disk"
+      "docker"
+      "vboxusers"
+      "libvirtd"
+      "qemu-libvirtd"
+      "wireshark"
+    ];
+    initialPassword = "password";
+    packages = with pkgs; [ ];
+    # shell = pkgs.zsh;
+    shell = pkgs.fish;
+  };
+
   programs = {
-    sway.enable = true;
+    sway.enable = false; #GNOME
+
     # zsh.enable = true;
     fish.enable = true;
     # starship.enable = true;
@@ -176,16 +211,16 @@
     playerctl
 
     #=== sway ===
-    sway
-    swaylock
-    swayidle
-    waybar
-    wofi
-    dmenu
-    wl-clipboard
-    grim
-    slurp
-    alacritty
+    # sway
+    # swaylock
+    # swayidle
+    # waybar
+    # wofi
+    # dmenu
+    # wl-clipboard
+    # grim
+    # slurp
+    # alacritty
     networkmanagerapplet
   ];
 

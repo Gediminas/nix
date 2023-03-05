@@ -43,6 +43,22 @@
         ];
       };
 
+      # User eleonora
+      homeConfigurations.eleonora = home-manager.lib.homeManagerConfiguration {
+        #pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = pkgs_imp;
+        modules = [
+          ./User_eleonora/home.nix
+          {
+            home = {
+              username = "Eleonora";
+              homeDirectory = "/home/eleonora";
+              stateVersion = "22.11";
+            };
+          }
+        ];
+      };
+
       # MacBookPro 14.2 with TouchBar 2017
       nixosConfigurations.mbp14 = nixpkgs.lib.nixosSystem {
         inherit system;

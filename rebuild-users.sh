@@ -2,10 +2,11 @@
 
 set +x
 
-ACTION=$1
+USER=$1
+ACTION=$2
 
 DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
-home-manager --flake ".#gds" ${ACTION}
+home-manager --flake ".#"${USER} ${ACTION}
 
 # DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 # nix build "${DIR}/.#homeManagerConfigurations.gds.activationPackage"

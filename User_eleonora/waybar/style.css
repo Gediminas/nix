@@ -1,0 +1,157 @@
+* {
+  border: none;
+  border-radius: 0;
+  /*font-family: "Ubuntu Nerd Font";*/
+  font-family: "Hack";
+  font-size: 14px;
+  min-height: 0;
+  margin-top: -3;
+  margin-bottom: -3;
+  /*background: black;*/
+}
+
+window#waybar {
+  background: black;
+}
+
+#window {
+  margin-top: 0px;
+}
+
+#workspaces button {
+  font-weight: bold;
+  padding: 0 5px;
+  /*background: transparent;*/
+  color: #0077FF;
+}
+
+#workspaces button.focused {
+  font-weight: bold;
+  color: white;
+  background: #0088FF;
+  /*background: #BB7700;*/
+}
+
+#workspaces button.urgent {
+  background: red;
+}
+
+#tray,
+#temperature,
+#backlight,
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#custom-pom
+{
+  /*color: grey;*/
+  /*color: #00AAFF;*/
+  padding: 0 7px 0 7px;
+  margin-right: 0px;
+  margin-top: 0px;
+  color: #0077FF;
+}
+
+#cpu {
+ /* color: cyan;*/
+  /*font-family: "Ubuntu Nerd Font";*/
+  font-size: 14px;
+}
+#cpu.info {
+  color: #00BBFF;
+}
+#cpu.warning {
+  color: #FF9944;
+}
+#cpu.critical {
+  color: red;
+}
+
+
+#temperature.critical {
+  color: black;
+  background-color: red;
+}
+
+
+#memory.warning {
+  color: orange;
+}
+#memory.critical {
+  color: red;
+}
+
+
+#battery {
+    color: yellow;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+#battery.full:not(.charging) {
+    color: #0077FF; /*blue*/
+}
+#battery:not(.full).charging {
+    color: orange;
+}
+
+#battery.full.charging {
+    color: orange;
+}
+/*
+#battery:not(.full):not(.charging) {
+    color: yellow;
+}
+*/
+
+
+#battery.warning {
+    background-color: #FFFF00;
+    color: black;
+    font-weight: bold;
+}
+#battery.critical:not(.charging) {
+  /* color: orange; */
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes blink {
+  to {
+    background-color: #FFFF00;
+    color: black;
+    font-weight: bold;
+  }
+}
+
+
+#network.disconnected {
+  color: #FF0000;
+  /*_background: #f53c3c;*/
+}
+/*
+#network.low {
+    color: cyan;
+}
+#network.moderate {
+    color: yellow;
+    background-color: green;
+}
+#network.high {
+    background-color: red;
+}
+*/
+
+#network.eth {
+  color: #00AAFF;
+  background: #222222;
+}
+
+#pulseaudio.warning:not(.bluetooth):not(.muted) {
+    background-color: yellow;
+    color: black;
+}
