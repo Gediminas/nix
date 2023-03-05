@@ -15,7 +15,8 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
+    # device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
+    device = "/dev/disk/by-label/NIX_ROOT";
     fsType = "ext4";
   };
 
@@ -23,14 +24,15 @@
     "/dev/disk/by-uuid/8d432608-e9e6-4886-8d20-87cb36a2db0a";
 
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/194D-6205";
+    device = "/dev/disk/by-label/NIX_BOOT";
     fsType = "vfat";
   };
 
   ##############################################
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
+    # device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
+    device = "/dev/disk/by-label/NIX_HOME";
     fsType = "ext4";
   };
 
