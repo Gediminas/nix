@@ -4,11 +4,10 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "uvcvideo" ];
   #boot.kernelParams = [ "i915.force_probe=46a6" ];
@@ -17,26 +16,29 @@
   #GL
   boot.blacklistedKernelModules = [ "mtk_t7xx" ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
+    fsType = "ext4";
+  };
 
-  boot.initrd.luks.devices."luks-8d432608-e9e6-4886-8d20-87cb36a2db0a".device = "/dev/disk/by-uuid/8d432608-e9e6-4886-8d20-87cb36a2db0a";
+  boot.initrd.luks.devices."luks-8d432608-e9e6-4886-8d20-87cb36a2db0a".device =
+    "/dev/disk/by-uuid/8d432608-e9e6-4886-8d20-87cb36a2db0a";
 
-  boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".keyFile = "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".keyFile =
+    "/crypto_keyfile.bin";
 
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/194D-6205";
-      fsType = "vfat";
-    };
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/194D-6205";
+    fsType = "vfat";
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
-      fsType = "ext4";
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
+    fsType = "ext4";
+  };
 
-  boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".device = "/dev/disk/by-uuid/574fa299-7773-4077-b061-4c036571f10e";
+  boot.initrd.luks.devices."luks-574fa299-7773-4077-b061-4c036571f10e".device =
+    "/dev/disk/by-uuid/574fa299-7773-4077-b061-4c036571f10e";
 
   swapDevices = [ ];
 
@@ -49,5 +51,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

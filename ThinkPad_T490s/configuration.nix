@@ -31,7 +31,7 @@
   #TEMP
   security.sudo.wheelNeedsPassword = false;
   services.logind.lidSwitchExternalPower = "ignore";
-  services.openssh.enable = true; #xz - https://nixos.wiki/wiki/Polkit
+  services.openssh.enable = true; # xz - https://nixos.wiki/wiki/Polkit
   #END TEMP
 
   security.polkit.enable = true;

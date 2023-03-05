@@ -31,7 +31,6 @@
 # TODO
 # echo  'ACTION=="add",SUBSYSTEM=="input",ATTR{name}=="TPPS/2 IBM TrackPoint",ATTR{device/drift_time}="25"'  > /etc/udev/rules.d/10-trackpoint.rules
 
-
 { config, pkgs, lib, ... }: {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -44,7 +43,6 @@
   security.sudo.wheelNeedsPassword = false;
   security.rtkit.enable = true;
   #security.pam.enableSSHAgentAuth = true;
-
 
   nix.settings.experimental-features = "nix-command flakes";
 
@@ -116,7 +114,6 @@
   #   };
 
   # END TEMP
-
 
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
