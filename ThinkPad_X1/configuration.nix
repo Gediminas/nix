@@ -146,7 +146,7 @@
   };
 
   programs = {
-    sway.enable = true;
+    # sway.enable = true;
     # zsh.enable = true;
 
     fish = {
@@ -165,6 +165,27 @@
       package = pkgs.gitFull;
     };
     wireshark.enable = true;
+  };
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # so that gtk works properly
+    extraSessionCommands = "export MOZ_ENABLE_WAYLAND=1";
+    extraPackages = with pkgs; [
+      alacritty
+      dmenu
+      grim
+      mako
+      slurp
+      swappy
+      swayidle
+      swayimg
+      swaylock
+      waybar
+      wl-clipboard
+      wofi
+      xwayland
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -214,16 +235,16 @@
     playerctl
 
     #=== sway ===
-    sway
-    swaylock
-    swayidle
-    waybar
-    wofi
-    dmenu
-    wl-clipboard
-    grim
-    slurp
-    alacritty
+    # sway
+    # swaylock
+    # swayidle
+    # waybar
+    # wofi
+    # dmenu
+    # wl-clipboard
+    # grim
+    # slurp
+    # alacritty
     networkmanagerapplet
   ];
 

@@ -38,7 +38,7 @@ if status is-interactive
 
     # if hash tmux 2>/dev/null
     alias ts="tmux -u new -A -s System"
-    alias tt="tmux -u"
-    alias ta="tmux -u a"
+    alias tn="tmux -u"
+    alias tt="tmux -u a"
     # end
 end

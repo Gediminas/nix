@@ -21,7 +21,7 @@
   };
 
   boot.initrd.luks.devices."luks-8d432608-e9e6-4886-8d20-87cb36a2db0a".device =
-    "/dev/disk/by-uuid/8d432608-e9e6-4886-8d20-87cb36a2db0a";
+    "/dev/disk/by-label/NIX_ROOT";
 
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-label/NIX_BOOT";

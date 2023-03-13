@@ -38,6 +38,7 @@
     tcpdump
     teleport
     wireguard-tools
+    ansible
 
     # Tools
     bc
@@ -59,10 +60,6 @@
     htop
     gitui
     lazygit
-
-    # Sway
-    swappy
-    swayimg
 
     # GUI Apps
     brave
