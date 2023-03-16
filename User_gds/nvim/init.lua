@@ -133,9 +133,9 @@ require("packer").startup(function(use)
         'sindrets/diffview.nvim' }}
 
 
-  use { 'petertriho/nvim-scrollbar', requires = {
-        'kevinhwang91/nvim-hlslens',              -- better glance at matched information, seamlessly jump between matched instances
-        'lewis6991/gitsigns.nvim' }}
+  --use { 'petertriho/nvim-scrollbar', requires = {
+        --'kevinhwang91/nvim-hlslens',              -- better glance at matched information, seamlessly jump between matched instances
+        --'lewis6991/gitsigns.nvim' }}
 
   use { 'kdheepak/tabline.nvim',
     config = function()
@@ -335,10 +335,10 @@ if ok then
   p.setup()
 end
 
-local ok, p = pcall(require, "scrollbar")
-if ok then
-  p.setup()
-end
+--local ok, p = pcall(require, "scrollbar")
+--if ok then
+  --p.setup()
+--end
 
 --local codewindow = require('codewindow')
 --codewindow.setup()
@@ -383,7 +383,7 @@ local servers = {
   "gopls",
   --"pyright",
   "pylsp",
-  "sumneko_lua",
+  --"sumneko_lua",
   "html",
   "clangd",
   "vimls",
@@ -446,17 +446,17 @@ end
 
 
 local server_specific_opts = {
-  sumneko_lua = function(opts)
-    opts.settings = {
-      Lua = {
-        -- NOTE: This is required for expansion of lua function signatures!
-        completion = {callSnippet = "Replace"},
-        diagnostics = {
-          globals = {'vim'},
-        },
-      },
-    }
-  end,
+  --sumneko_lua = function(opts)
+    --opts.settings = {
+      --Lua = {
+        ---- NOTE: This is required for expansion of lua function signatures!
+        --completion = {callSnippet = "Replace"},
+        --diagnostics = {
+          --globals = {'vim'},
+        --},
+      --},
+    --}
+  --end,
 
   html = function(opts)
     opts.filetypes = {"html", "htmldjango"}

@@ -99,6 +99,7 @@
     transmission
     xfce.xfce4-taskmanager
     anki-bin
+    flameshot
 
     # Flatpak
     #caprine-bin
