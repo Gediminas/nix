@@ -169,8 +169,8 @@
 
   programs.sway = {
     enable = true;
-    wrapperFeatures.gtk = true; # so that gtk works properly
-    extraSessionCommands = "export MOZ_ENABLE_WAYLAND=1";
+    # wrapperFeatures.gtk = true; # so that gtk works properly
+    # extraSessionCommands = "export MOZ_ENABLE_WAYLAND=1";
     extraPackages = with pkgs; [
       alacritty
       dmenu

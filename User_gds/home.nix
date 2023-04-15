@@ -46,6 +46,7 @@
     zip
     unzip
     p7zip
+    unrar
 
     # Development
     gdb
@@ -63,6 +64,7 @@
 
     # GUI Apps
     brave
+    chromium
     bitwarden
     gimp
     imagemagick
@@ -95,11 +97,17 @@
     shotwell
     xfce.thunar
     ntfs3g
+    nfs-utils
+    libreoffice-qt
 
     transmission
     xfce.xfce4-taskmanager
     anki-bin
     flameshot
+
+    obsidian
+    joplin
+    joplin-desktop
 
     # Flatpak
     #caprine-bin

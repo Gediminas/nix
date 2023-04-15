@@ -15,13 +15,15 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    # device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
-    device = "/dev/disk/by-label/NIX_ROOT";
+    device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";
+    # device = "/dev/disk/by-label/NIX_ROOT";
     fsType = "ext4";
   };
 
   boot.initrd.luks.devices."luks-8d432608-e9e6-4886-8d20-87cb36a2db0a".device =
-    "/dev/disk/by-label/NIX_ROOT";
+    "/dev/disk/by-uuid/8d432608-e9e6-4886-8d20-87cb36a2db0a";
+    # "/dev/disk/by-label/NIX_ROOT";
+     
 
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-label/NIX_BOOT";
@@ -31,8 +33,8 @@
   ##############################################
 
   fileSystems."/home" = {
-    # device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
-    device = "/dev/disk/by-label/NIX_HOME";
+    device = "/dev/disk/by-uuid/91b97626-2c44-4206-9fd7-fc49f99b49d6";
+    # device = "/dev/disk/by-label/NIX_HOME";
     fsType = "ext4";
   };
 
@@ -44,7 +46,7 @@
 
   ##############################################
 
-  swapDevices = [ ];
+  swapDevices = [ { device = "/swapfile"; size = 32768; } ];
 
   ##############################################
 

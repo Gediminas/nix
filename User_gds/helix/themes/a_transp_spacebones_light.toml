@@ -1,0 +1,110 @@
+# Author : Koen Van der Auwera <atog@hey.com>
+# Based on SpaceBones Light https://github.com/chipotle/spacebones
+# https://github.com/chipotle/spacebones/blob/main/SpaceBones%20Light.bbColorScheme
+
+"attribute" = "#000000"
+"keyword" = { fg = "#715ab1", modifiers = ["bold"] }
+"keyword.directive" = "#715ab1"
+"namespace" = "#000000"
+"punctuation" = "#000000"
+"punctuation.delimiter" = "#000000"
+"operator" =  { fg = "#715ab1", modifiers = ["bold"] }
+"special" = "#000000"
+"variable" = { fg = "#00aa00" }
+"variable.property" = "#000000"
+"variable.builtin" = "#f00000"
+"variable.parameter" = "#000000"
+"type" = "#000000"
+"type.builtin" = "#000000"
+"constructor" = { fg = "#000000", modifiers = ["bold"] }
+"function" = { fg = "#0000aa" }
+"function.macro" = "#000000"
+"function.builtin" = "#000000"
+"comment" = { fg = "#aaaaaa" }
+"constant" = { fg = "#000000" }
+"constant.builtin" = { fg = "#000000", modifiers = ["bold"] }
+"string" = "theme_aqua"
+"number" = "#6c3163"
+"escape" = { fg = "fg2", modifiers = ["bold"] }
+"label" = "#000000"
+"module" = "#000000"
+
+# TODO
+# "markup.heading" = { fg = "#ff0088", modifiers = ["bold", "underlined"] }
+# "markup.heading" = { fg = "#000000", bg = "#ff7700", modifiers = ["bold"] }
+"markup.heading" = { fg = "#7700dd", modifiers = ["bold", "underlined"] }
+
+"markup.list" = { fg = "#ff0000", modifiers = ["bold"] }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.strikethrough" = { fg = "#555555", modifiers = ["crossed_out"] }
+"markup.link.url" = { fg = "#000077", modifiers = ["underlined"] }
+"markup.link.text" = { fg = "fg1" }
+"markup.quote" = "theme_cyan"
+"markup.raw" = { fg = "#000000" }
+"markup.italic" = { fg = "fg1", bg = "#ffff77" }
+
+"diff.plus" = "theme_aqua"
+"diff.delta" = "#715ab1"
+"diff.minus" = "#ba2f59"
+
+"warning" = { fg = "meta" }
+"error" = { fg = "#e0211d" }
+"info" = { fg = "theme_yellow" }
+"hint" = { fg = "bg2" }
+
+"ui.background" = { bg = "" }
+"ui.linenr" = { fg = "#aaaaaa" }
+"ui.linenr.selected" = { fg = "#888888", modifiers = ["bold"] }
+"ui.cursorline" = { bg = "bg2" }
+"ui.statusline" = { fg = "fg1", bg = "bg2" }
+"ui.statusline.inactive" = { fg = "fg4", bg = "bg1" }
+"ui.statusline.normal" = { fg = "bg1", bg = "theme_cyan" }
+"ui.statusline.insert" = { fg = "bg1", bg = "theme_green" }
+"ui.statusline.select" = { fg = "bg1", bg = "theme_magenta" }
+"ui.popup" = { bg = "bg1" }
+"ui.window" = { bg = "bg1" }
+"ui.help" = { bg = "bg1", fg = "fg1" }
+"ui.text" = { fg = "fg1" }
+"ui.text.focus" = { fg = "fg1" }
+"ui.selection" = { bg = "#ffaaff" }
+
+"ui.selection.primary" = { bg = "#ffaaff" }
+"ui.cursor.primary" = { fg = "#ffff00", bg = "#0000ff" }
+"ui.cursor.match" = { bg = "#ddddff", modifiers = ["bold"] }
+
+"ui.cursorline.primary" = { bg = "bg1" }
+"ui.menu" = { fg = "fg1", bg = "bg2" }
+"ui.menu.selected" = { fg = "base", bg = "bg2", modifiers = ["bold"] }
+"ui.virtual" = "base-dim"
+"ui.virtual.ruler" = { bg = "bg1" }
+
+"diagnostic.warning" = { underline = { style = "curl", color = "meta" } }
+"diagnostic.error" = { underline = { style = "curl", color = "#e0211d" } }
+"diagnostic.info" = { underline = { style = "curl", color = "theme_yellow" } }
+"diagnostic.hint" = { underline = { style = "curl", color = "bg2" } }
+
+[palette]
+base = "#655370"
+base-dim = "#a094a2"
+meta = "#da8b55"
+
+bg0 = "#fbf8ef"
+bg1 = "#efeae9"
+bg2 = "#d1dcdf"
+bg3 = "#b4c6cb"
+
+hl1 = "#d3d3e7"
+hl2 = "#e7e7fc"
+
+fg1 = "#000000"
+fg2 = "#5f3bc4"
+fg3 = "#bdae93"
+fg4 = "#a89984"
+
+theme_magenta = "#a31db1"
+theme_blue = "#3a81c3"
+theme_yellow = "#cccc00"
+theme_cyan = "#21b8c7"
+theme_aqua = "#2d9574"
+theme_green = "#67b11d"
+theme_red = "#c10e0b"
