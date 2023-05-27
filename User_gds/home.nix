@@ -39,6 +39,8 @@
     teleport
     wireguard-tools
     ansible
+    nmap
+    netcat
 
     # Tools
     bc

@@ -32,6 +32,8 @@
 # echo  'ACTION=="add",SUBSYSTEM=="input",ATTR{name}=="TPPS/2 IBM TrackPoint",ATTR{device/drift_time}="25"'  > /etc/udev/rules.d/10-trackpoint.rules
 
 { config, pkgs, lib, ... }: {
+  system.stateVersion = "22.11";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -92,8 +94,18 @@
     blueman.enable = true;
     tlp.enable = true;
 
+    fprintd = {
+      enable = true;
+      tod = {
+        enable = true;
+        driver = pkgs.libfprint-2-tod1-vfs0090;# (If the vfs0090 Driver does not work, use the following driver)
+        #driver = pkgs.libfprint-2-tod1-goodix; (On my device it only worked with this driver)
+      };
+    };
   };
-
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.xscreensaver.fprintAuth = true;
+  security.pam.services.xlock.fprintAuth = true;
   # TEMP
   services.uvcvideo.dynctrl.enable = true;
   services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
@@ -115,10 +127,8 @@
 
   # END TEMP
 
-  virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
-
-  #Virtualbox
+  virtualisation.libvirtd.enable = true;
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "gds" ];
   #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
@@ -246,6 +256,8 @@
     # slurp
     # alacritty
     networkmanagerapplet
+
+    fprintd
   ];
 
   fonts.fonts = with pkgs; [
@@ -279,7 +291,4 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  system.stateVersion = "22.11";
-
 }
