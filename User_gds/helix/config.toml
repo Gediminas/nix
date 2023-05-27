@@ -1,7 +1,7 @@
 ###################################################################
 
-# theme = "a_transp_dracula"
-theme = "a_transp_spacebones_light"
+theme = "a_transp_dracula"
+# theme = "a_transp_spacebones_light"
 
 ###################################################################
 [editor]
@@ -13,6 +13,7 @@ auto-pairs = false
 auto-completion = true
 auto-format = true
 auto-info = true
+# statusline = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -26,12 +27,16 @@ tab = "all"
 nbsp = "all"
 newline = "all"
 
+# [editor.soft-wrap]
+# enable = true
+
 # [editor.file-picker]
 # hidden = true
 # git-ignore = false
 
 [editor.lsp]
 display-messages = true
+# display-inlay-hints = true
 
 ##########################################################################################################
 ##########################################################################################################
@@ -41,6 +46,8 @@ C-F5 = ":config-reload"
 C-r = ":config-reload"
 C-e = "goto_last_accessed_file"
 C-s = ":update" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
+C-n = "goto_next_diag"
+C-p = "goto_prev_diag"
 
 F1  = ":theme a_transp_zenburn"
 F2  = ":theme a_transp_dracula"
@@ -174,6 +181,9 @@ c = "toggle_comments"
 # m = "save_selection"
 # "*" = [ "move_prev_word_start", "select_mode",  "move_next_word_end", "global_search", "search_next" ]
 
+[keys.normal.space.t]
+t = ":toggle-option soft-wrap.enable"
+h = ":toggle-option lsp.display-inlay-hints"
 
 ##########################################################################################################
 ##########################################################################################################
