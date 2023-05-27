@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 ### Variables
  
@@ -46,14 +47,16 @@ set $mon_home  "Lenovo Group Limited T27hv-20 V308W93L"
 
 
 
-#output $mon_home   pos     0     0 res 2560x1440 scale 1.0
-#output $mon_laptop pos     0  1440 res 2880x1800 scale 1.5
+# HOME
+output $mon_home   pos     0     0 res 2560x1440 scale 1.0
+output $mon_laptop pos     0  1440 res 2880x1800 scale 1.5
 
-#output $mon_home   pos     0     0 res 2560x1440 scale 1.0
-output $mon_laptop pos     0  0 res 2880x1800 scale 1.5
+# WORK
+# output $mon_work1  pos     0     0 res 1920x1080 scale 0.8
+# output $mon_laptop pos     0  1350 res 2880x1800 scale 1.5
+
 
 # FullHD laptop
-#output $mon_work1  pos     0     0 res 1920x1080 scale 1
 #output $mon_home   pos     0     0 res 1920x1080 scale 1
 #output $mon_laptop pos     0  1080 res 1920x1080 scale 1
 
@@ -131,6 +134,7 @@ input "type:keyboard" {
     # Kill focused window
     bindsym $mod+Shift+q kill
     #bindsym $mod+Escape kill
+    bindsym $mod+Alt+Ctrl+Shift+q [workspace=__focused__] kill
 
     # Start your launcher
     bindsym $mod+q      exec wofi --show=drun --lines=5 --prompt=""
