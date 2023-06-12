@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   home.username = "gds";
   home.homeDirectory = "/home/gds";
@@ -15,6 +15,7 @@
     nixfmt
     direnv
     xdg-utils
+    virtualbox
 
     # Hardware Tools
     ethtool
@@ -54,7 +55,6 @@
     gdb
     lldb
     valgrind
-    vagrant
     cloc # Code line counter
     marksman # LSP markdown
     nil # LSP nix
@@ -76,6 +76,7 @@
     slack
     spotify
     wireshark
+    # remmina #RDC
 
     ############################
     # Experimental

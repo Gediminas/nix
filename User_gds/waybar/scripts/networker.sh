@@ -54,7 +54,7 @@ echo_human_value() {
 
 
 #Workaround: > makes file empty first, and no value is read later
-(ping -c 1 8.8.8.8 | awk -F '/' 'END {print $5}' >> $TMP_NET_PING) &
+(ping -c 1 1.1.1.1 | awk -F '/' 'END {print $5}' >> $TMP_NET_PING) &
 
 # Read prev values from /tmp/net
 while read tm rx tx; do

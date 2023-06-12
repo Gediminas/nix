@@ -93,8 +93,8 @@ vim.opt.iskeyword:append("-")       -- Treats words with `-` as single words
 vim.opt.undofile = true             -- Enable persistent undo
 vim.opt.expandtab = true            -- Transform a Tab character to spaces
 vim.opt.smartindent = true          -- Make indenting smarter again
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.signcolumn = "yes"          -- ? always show the sign column, otherwise it would shift the text each time
 vim.opt.autowriteall = true           -- ??? enable autowriteall
 -- vim.opt.backup = false           -- Disable backup file

@@ -38,8 +38,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_5_15;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -70,6 +70,10 @@
     pulseaudio.enable = false;
   };
 
+  #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
+  hardware.ipu6.enable = true;
+  hardware.ipu6.platform = "ipu6ep";
+  
   # Flatpak desktop extensions
   xdg.portal = {
     enable = true;
@@ -130,7 +134,10 @@
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "gds" ];
+  # with these fails vagrant up
+  # virtualisation.virtualbox.host.enableExtensionPack = true; #USB support
+  # users.extraGroups.vboxusers.members = [ "gds" ];
+
   #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
   environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
 
@@ -205,6 +212,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
+    gst_all_1.icamerasrc-ipu6ep
+
     man-pages
     man-pages-posix
     home-manager
@@ -235,6 +245,7 @@
     powerstat
     killall
     inotify-tools
+    vagrant
 
     # bash
 
