@@ -38,8 +38,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_5_15;
+  boot.kernelPackages = pkgs.linuxPackages_6_1;
+  # boot.kernelPackages = pkgs.linuxPackages_5_27;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -71,8 +73,8 @@
   };
 
   #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-  hardware.ipu6.enable = true;
-  hardware.ipu6.platform = "ipu6ep";
+  # hardware.ipu6.enable = true;
+  # hardware.ipu6.platform = "ipu6ep";
   
   # Flatpak desktop extensions
   xdg.portal = {
@@ -132,8 +134,9 @@
   # END TEMP
 
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
+  # virtualisation.libvirtd.enable = true;
   virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.package = pkgs.unstable.virtualbox;
   # with these fails vagrant up
   # virtualisation.virtualbox.host.enableExtensionPack = true; #USB support
   # users.extraGroups.vboxusers.members = [ "gds" ];
@@ -213,7 +216,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-    gst_all_1.icamerasrc-ipu6ep
+    # gst_all_1.icamerasrc-ipu6ep
 
     man-pages
     man-pages-posix
@@ -245,7 +248,7 @@
     powerstat
     killall
     inotify-tools
-    vagrant
+    # vagrant
 
     # bash
 

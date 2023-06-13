@@ -15,7 +15,8 @@
     nixfmt
     direnv
     xdg-utils
-    virtualbox
+    vagrant
+    # virtualbox
 
     # Hardware Tools
     ethtool
