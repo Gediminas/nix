@@ -36,6 +36,7 @@ set $mon_home  "Lenovo Group Limited T27hv-20 V308W93L"
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # swaymsg -t get_outputs
+# xrandr --current
 
 # MacBook
 # output $mon_home   pos     0     0 res 1920x1080 scale 1.0
@@ -50,9 +51,19 @@ set $mon_home  "Lenovo Group Limited T27hv-20 V308W93L"
 
 
 # HOME
-output $mon_home   pos     0     0 res 2560x1440 scale 1.0
-output $mon_work1  pos     0     0 res 1920x1080 scale 0.75
-output $mon_laptop pos     0  1440 res 2880x1800 scale 1.5
+# output $mon_home   pos     0     0 res 2560x1440 scale 1.0
+# output $mon_home   pos     0     0 res 2560x1440
+output $mon_home   pos     0     0 res 1920x1080
+
+# output $mon_work1  pos     0     0 res 1920x1080 scale 0.75
+# output $mon_laptop pos     0  1440 res 2880x1800 scale 1.5
+
+# output $mon_work1  pos     0     0 res 1920x1080
+# output $mon_laptop pos     0  1080 res 2880x1800 scale 1.5
+
+output $mon_work1  pos     0     0 res 1920x1080
+output $mon_laptop pos     0  1080 res 1920x1200
+
 
 # WORK
 # output $mon_work1  pos     0     0 res 1920x1080 scale 0.75

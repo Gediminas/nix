@@ -38,7 +38,7 @@ echo_html_value () {
 
   #echo -n "<span font='8' color='#FFFFFF'>L$level </span>"
   #echo -n "<span color='$color'>${value} ${units}<span font='16'>$symbol</span></span>"
-  printf "<span color='%s'>%5.1f %s<span font='16'>%s</span></span>" $color $value $units $symbol
+  printf "<span color='%s'>%5.1f %s<span font='14'>%s</span></span>" $color $value $units $symbol
 }
 
 echo_human_value() {

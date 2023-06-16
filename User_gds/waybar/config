@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 16,
+    "height": 14,
     "modules-left": ["sway/workspaces"],
     /*"modules-center": ["sway/window"],*/
     "modules-center": ["tray"],
@@ -11,13 +11,13 @@
         "disable-cl16k": false,
     },
     "tray": {
-      "icon-size": 14,
-      "spacing": 10,
+      "icon-size": 12,
+      "spacing": 6,
     },
     "backlight": {
       "device": "intel_backlight",
       "format": "{icon} {percent}%",
-      "format-icons": ["", "8"],
+      "format-icons": ["", ""], //
     },
     "clock": {
         "format": "{:%Y-%m-%d (w%W-%w) <span color='white' font-weight='bold'>%H:%M</span>.%S}",
@@ -28,7 +28,7 @@
     "cpu": {
       /**/
       "interval": 1,
-      "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{usage:>3d}% {load:>2.1f}",
+      "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}{icon16}{icon17}{icon18}{icon19}{usage:>3d}% L{load:>2.1f}",
       "format-icons": [
           "<span color='#0077FF'>▁</span>",
           "<span color='#0077FF'>▂</span>",
@@ -44,11 +44,11 @@
           "critical": 95
        },
       "tooltip": true,
-      "min-length": 28,
-      "max-length": 28,
+      "min-length": 30,
+      "max-length": 30,
     },
     "memory": {
-      "format": "<span font='12'></span><span font='4'> </span>{percentage}%<span font='4'> </span>({avail:0.1f}G)",
+      "format": "{percentage}%({avail:0.1f}G)",
       "tooltip": true,
       "interval": 10,
       "states": {
@@ -73,9 +73,8 @@
             "critical": 10
         },
 
-        "format": "<span font='8.5'>{time} -{power:>2.1f}w </span><span font='14'>{icon}</span> {capacity}%",
-        "format-charging": "<span font='8.5' >{time} +{power:>2.1f}w </span> ⚡<span font='14'>{icon}</span> {capacity}%",
-        /* "format": "{icon} {capacity}%", */
+        "format": "<span font='6'>{time} -{power:>2.1f}w </span>{icon} {capacity}%",
+        "format-charging": "<span font='6' >{time} +{power:>2.1f}w </span> ⚡<span font='6'>{icon}</span> {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
         "format-time": "{H}:{m}",
@@ -85,12 +84,10 @@
 	  //⚠
       "interface":           "wlp0s20f3",
       "format":              "",
-      /*"format-wifi":         "<span font='14'>{icon}</span>  {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='14'>↓</span> {bandwidthUpBits:>7}<span font='14'>↑</span>  <span font='8' >{ipaddr}/{cidr}</span>",*/
-      /*"format-wifi":         "<span font='14'>{icon}</span>  {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span> {bandwidthDownBits:>7}<span font='14'>↓</span> {bandwidthUpBits:>7}<span font='14'>↑</span>",*/
-      "format-wifi":         "<span font='14'>{icon}</span>  {signalStrength}% {essid}<span font='8.5'> ({frequency}MHz)</span>",
+      "format-wifi":         "{icon} {signalStrength}% {essid}<span font='6'> ({frequency}MHz)</span>",
       "format-disconnected": "{icon} Disconnected",
       "format-disabled":     "{icon} DISABLED",
-      "format-alt":          "<span font='14'>{icon}</span>",
+      "format-alt":          "{icon}",
       "format-alt-click":    "click-right",
       "format-icons": {
         "wifi": [
@@ -98,26 +95,18 @@
           "<span color='#AABBFF'>直</span>",
           "<span color='#0077FF'></span>"
         ],
-        "ethernet": ["<span font='14'></span>"],
-        "disconnected": ["<span color='red' font='14'></span>"]
+        "ethernet": [""],
+        "disconnected": ["<span color='red'></span>"]
       },
-      // "states": {
-      //   "low":      5,
-      //   "moderate": 10,
-      //   "high":     100
-      // },
       "tooltip": true,
 	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
-      //"min-length": 60,
-      //"max-length": 60,
       "align": 0,
       "interval": 1
-      /*"on-click": "alacritty -e nmtui",*/
     },
     "network#eth": {
       "interface": "enp0s13f0u3u2u1",
       "format": "",
-      "format-ethernet": "<span font='14'></span>{bandwidthDownBits:>7}<span font='14'>↓</span> {bandwidthUpBits:>7}<span font='14'>↑</span>",
+      "format-ethernet": "{bandwidthDownBits:>7}↓ {bandwidthUpBits:>7}↑",
       "tooltip": true,
 	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
       "align": 0,
@@ -126,29 +115,24 @@
     "network#tun": {
       "interface": "tun0",
       "format": "",
-      "format-ethernet": "🌀",
+      "format-ethernet": "<span font='8'>🌀</span>",
       "tooltip": true,
 	  "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}",
       "align": 0,
       "interval": 1
     },
     "pulseaudio": {
-      "format":           "<span font='14'>{icon}</span> {volume}%",
-      "format-bluetooth": "<span font='14'>{icon}</span> {volume}%",
-      "format-muted":     "<span font='14'></span>X",
+      "format":           "{icon} {volume}%",
+      "format-bluetooth": "{icon} {volume}%",
+      "format-muted":     "X",
       "format-icons": {
-        "headphones": "P",
-        "handsfree": "F",
-        "headset": "",
+        "headphones": " H",
+        "handsfree": " F",
+        "headset": " ",
         "phone": "",
         "portable": "",
         "car": "",
         "default": ["", "", ""],
-        // "default": [
-        //   "<span color='yellow'></span>",
-        //   "<span color='yellow'></span>",
-        //   "<span color='yellow'></span>"
-        // ]
       },
       "states": {
         "warning": 5,
@@ -171,25 +155,7 @@
         "format": "{}",
         "exec": "~/.config/waybar/scripts/networker.sh wlp0s20f3",
         "interval": 1,
-      "min-length": 30,
-      "max-length": 30,
+      "min-length": 32,
+      "max-length": 32,
     },
-
-    /*
-    "custom/germany": {
-        "format": "{}",
-        "exec": "TZ=Europe/Berlin date \"+%H:%M %Z\"",
-        "interval": 30,
-    },
-    "bluetooth": {
-      "format": "{icon}",
-      //"format-alt": "bluetooth: {status}",
-      "format-icons": {
-        "enabled": "",
-        "disabled": ""
-      },
-      "tooltip-format": "{}",
-      "on-click-right": "blueman-manager"
-    },
-    */
 }
