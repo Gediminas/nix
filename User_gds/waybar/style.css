@@ -49,10 +49,15 @@ window#waybar {
 {
   /*color: grey;*/
   /*color: #00AAFF;*/
-  padding: 0 7px 0 7px;
+  padding: 0 5px 0 7px;
   margin-right: 0px;
   margin-top: 0px;
   color: #0077FF;
+}
+
+#custom-notiff
+{
+  padding: 0 0px 0 0px;
 }
 
 #cpu.info {

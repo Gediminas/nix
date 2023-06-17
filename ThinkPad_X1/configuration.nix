@@ -195,7 +195,6 @@
       alacritty
       dmenu
       grim
-      mako
       slurp
       swappy
       swayidle

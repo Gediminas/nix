@@ -5,7 +5,7 @@
     "modules-left": ["sway/workspaces"],
     /*"modules-center": ["sway/window"],*/
     "modules-center": ["tray"],
-    "modules-right": ["custom/pom", "network#tun", "network#eth", "network", "custom/net", "pulseaudio", "backlight", "cpu",  "temperature", "memory", "battery", "clock"],
+    "modules-right": ["custom/pom", "network#tun", "network#eth", "network", "custom/net", "pulseaudio", "backlight", "cpu",  "temperature", "memory", "battery", "clock", "custom/notiff" ],
     "sway/workspaces": {
         "disable-scroll": true,
         "disable-cl16k": false,
@@ -154,8 +154,18 @@
     "custom/net": {
         "format": "{}",
         "exec": "~/.config/waybar/scripts/networker.sh wlp0s20f3",
+        "min-length": 32,
+        "max-length": 32,
         "interval": 1,
-      "min-length": 32,
-      "max-length": 32,
+    },
+
+    "custom/notiff": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/notiff.sh",
+        "tooltip": false,
+        "on-click":        "dunstctl history-pop; dunstctl history-rm",
+        "on-click-middle": "dunstctl close-all; dunstctl history-clear",
+        "on-click-right":  "dunstctl close-all",
+        "interval": 1,
     },
 }
