@@ -38,7 +38,7 @@ echo_html_value () {
 
   #echo -n "<span font='8' color='#FFFFFF'>L$level </span>"
   #echo -n "<span color='$color'>${value} ${units}<span font='16'>$symbol</span></span>"
-  printf "<span color='%s'>%5.1f %s<span font='14'>%s</span></span>" $color $value $units $symbol
+  printf "<span color='%s'>%5.1f %s<span font='12'>%s</span></span>" $color $value $units $symbol
 }
 
 echo_human_value() {
@@ -81,7 +81,13 @@ echo_human_value ↓ $prev_rx $curr_rx $diff_tm_ms
 echo -n " "
 echo_human_value ↑ $prev_tx $curr_tx $diff_tm_ms
 
+sleep 0.5
 png=$(tail -1 $TMP_NET_PING)
-printf " <span color='green'>%3.0f ms</span>\n" $png
-echo "" > $TMP_NET_PING
+if [ "$png" = "" ]; then
+  printf " <span color='green'>-- ms</span>\n" $png
+else
+  printf " <span color='green'>%3.0f ms</span>\n" $png
+  echo "" > $TMP_NET_PING
+fi
+
 

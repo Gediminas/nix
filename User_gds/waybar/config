@@ -16,7 +16,7 @@
     },
     "backlight": {
       "device": "intel_backlight",
-      "format": "{icon} {percent}%",
+      "format": "{icon}{percent}%",
       "format-icons": ["", ""], //
     },
     "clock": {
@@ -73,12 +73,12 @@
             "critical": 10
         },
 
-        "format": "<span font='6'>{time} -{power:>2.1f}w </span>{icon} {capacity}%",
-        "format-charging": "<span font='6' >{time} +{power:>2.1f}w </span> ⚡<span font='6'>{icon}</span> {capacity}%",
+        "format": "<span font='6'>{time} -{power:>2.1f}w </span> <span font='10'>{icon}</span> {capacity}%",
+        "format-charging": "<span font='6' >{time} +{power:>2.1f}w </span>⚡<span font='10'>{icon}</span>  {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
         "format-time": "{H}:{m}",
-        "interval": 2
+        "interval": 5
     },
     "network": {
 	  //⚠
