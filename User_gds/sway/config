@@ -276,23 +276,29 @@ input "type:keyboard" {
     #swaymsg -t get_tree | grep class
 
     ###########################################
-    ## Notes
+    ## Notes - Simplenote
+    #
+    # for_window [class="Simplenote"] {
+    #     move scratchpad
+    #     #resize set 1024 768
+    #     border pixel 4
+    #     border toggle
+    #     scratchpad show
+    # }
+    # bindsym $mod+minus exec swaymsg [class="Simplenote"] scratchpad show || exec Simplenote
 
-    for_window [class="Simplenote"] {
+    ###########################################
+    # ## Notes tmux+nvim/hx - Disabled
+    #
+    set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s Notes
+    for_window [title="^Notes$"] {
         move scratchpad
         #resize set 1024 768
         border pixel 4
         border toggle
         scratchpad show
     }
-    bindsym $mod+minus exec swaymsg [class="Simplenote"] scratchpad show || exec Simplenote
-
-    ###########################################
-    # ## Notes tmux+nvim/hx - Disabled
-    #
-    # set $notes $term --title Notes --working-directory ~/notes --command tmux -u new -A -s Notes
-    # for_window [title="^Notes$"] {
-    # bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
+    bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
 
     ###########################################
     # ## Notes wine+Resophnotes - Disabled
