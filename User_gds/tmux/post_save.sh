@@ -1,5 +1,3 @@
-#!/bin/env bash
-
 fname=$1
 
 # #test
