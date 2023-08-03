@@ -44,4 +44,6 @@ if status is-interactive
     alias tn="tmux -u"
     alias tt="tmux -u a"
     # end
+
+    alias e="nvim"
 end
