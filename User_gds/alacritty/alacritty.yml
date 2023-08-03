@@ -18,9 +18,11 @@ env:
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  # TERM: alacritty
   # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
-  TERM: xterm-256color
+  # TERM: xterm-256color
+  TERM: screen-256color
+  # TERM: screen-256color-bce
 
 #window:
   # Window dimensions (changes require restart)
