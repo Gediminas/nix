@@ -31,7 +31,7 @@
 # TODO
 # echo  'ACTION=="add",SUBSYSTEM=="input",ATTR{name}=="TPPS/2 IBM TrackPoint",ATTR{device/drift_time}="25"'  > /etc/udev/rules.d/10-trackpoint.rules
 
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
   system.stateVersion = "23.05";
 
   boot.loader.systemd-boot.enable = true;
