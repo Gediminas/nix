@@ -9,6 +9,7 @@
   home.file = {
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/.tmux.conf";
     ".tmux/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/themes";
+    ".tmux/post_save.sh".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/post_save.sh";
     ".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/autoload";
     ".vim/colors".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/colors";
     ".vim/vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/vimrc";
@@ -18,7 +19,7 @@
     ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/fish/config.fish";
     ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/kitty";
     ".config/mc/ini".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/mc/ini";
-    ".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/nvim/init.lua";
+    # ".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/nvim/init.lua";
     ".config/sway".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/sway";
     ".config/vifm/colors".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vifm/colors";
     ".config/vifm/vifmrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vifm/vifmrc";
@@ -72,6 +73,7 @@
     unzip
     p7zip
     unrar
+    vimv
 
     # Development
     gdb
@@ -80,6 +82,19 @@
     cloc # Code line counter
     marksman # LSP markdown
     nil # LSP nix
+    # rnix-lsp # LSP nix
+
+    # LSP
+    # lua_ls
+    rust-analyzer
+    gopls
+    clang-tools
+    # bashls
+    # "eslint", "gopls", "jsonls", "marksman", "pylsp",
+    # "rust_analyzer", "lua_ls", "terraformls", "tflint",
+    # "tsserver", "yamlls"
+    nodejs
+    nodePackages.bash-language-server
 
     # TUI Apps
     htop
@@ -89,6 +104,7 @@
     # GUI Apps
     brave
     chromium
+    firefox
     bitwarden
     gimp
     imagemagick

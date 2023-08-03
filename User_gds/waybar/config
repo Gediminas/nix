@@ -91,8 +91,13 @@
       "format-alt-click":    "click-right",
       "format-icons": {
         "wifi": [
-          "<span color='yellow'>睊</span>",
-          "<span color='#AABBFF'>直</span>",
+          //"<span color='yellow'>睊</span>",
+          //"<span color='#AABBFF'>直</span>",
+          //"<span color='#0077FF'></span>"
+          "<span color='red'></span>",
+          "<span color='orange'></span>",
+          "<span color='yellow'></span>",
+          "<span color='#AABBFF'></span>",
           "<span color='#0077FF'></span>"
         ],
         "ethernet": [""],

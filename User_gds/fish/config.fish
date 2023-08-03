@@ -3,6 +3,9 @@ if status is-interactive
     # Variables
     set -gx fish_greeting
     set -gx fish_prompt_pwd_dir_length 0
+    # set -gx TERM xterm-256color;
+    # set -gx TERM screen-256color-bce; #Enable tmux Home/End keys
+    # set -gx TERM screen-256color;
 
     # Keybindings
     bind \c\af 'clear; commandline -f repaint; source ~/.config/fish/config.fish'
@@ -37,7 +40,7 @@ if status is-interactive
     alias ii="clear; neofetch"
 
     # if hash tmux 2>/dev/null
-    alias ts="tmux -u new -A -s System"
+    alias ts="tmux -u new -A -s SYSTEM"
     alias tn="tmux -u"
     alias tt="tmux -u a"
     # end

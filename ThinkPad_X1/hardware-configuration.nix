@@ -10,9 +10,12 @@
     [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "uvcvideo" ];
-  #boot.kernelParams = [ "i915.force_probe=46a6" ]; #GL
   boot.blacklistedKernelModules = [ "mtk_t7xx" ];
   boot.extraModulePackages = [ ];
+
+  #boot.kernelParams = [ "i915.force_probe=46a6" ]; #GL
+  boot.kernelParams = [ "i915.force_probe=46a6" "i915.enable_psr=0" ]; #GL
+  
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/690c84c6-d9af-4aea-be6c-39c2e2143dd8";

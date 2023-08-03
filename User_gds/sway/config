@@ -6,9 +6,13 @@
 set $mod Mod4
 set $term alacritty
 
-set $lock_img ~/Downloads/Logo/nix_black2_blur.png
-set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
-set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
+# set $lock_img ~/Downloads/Logo/nix_black2_blur.png
+# set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
+# set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
+
+set $lock_img ~/Downloads/Logo/night_sky.jpg
+set $mon_img  ~/Downloads/Logo/night_sky.jpg
+set $lapt_img ~/Downloads/Logo/night_sky.jpg
 
 ###########################################################################
 # Monitors
@@ -290,7 +294,7 @@ input "type:keyboard" {
     ###########################################
     # ## Notes tmux+nvim/hx - Disabled
     #
-    set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s Notes
+    set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s NOTES
     for_window [title="^Notes$"] {
         move scratchpad
         #resize set 1024 768
@@ -471,7 +475,7 @@ include /etc/sway/config.d/*
 exec (sleep 5s && blueman-applet) &
 exec (sleep 4s && nm-applet --indicator) &
 
-exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s System; workspace S; exec brave"
+exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
 
 # bindsym $mod+period exec dunstctl close #- panguin + backspace
 # bindsym $mod+comma exec dunstctl history-pop ###- penguing + dot

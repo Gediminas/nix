@@ -32,16 +32,15 @@
 # echo  'ACTION=="add",SUBSYSTEM=="input",ATTR{name}=="TPPS/2 IBM TrackPoint",ATTR{device/drift_time}="25"'  > /etc/udev/rules.d/10-trackpoint.rules
 
 { config, pkgs, lib, ... }: {
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_5_15;
   boot.kernelPackages = pkgs.linuxPackages_6_1;
-  # boot.kernelPackages = pkgs.linuxPackages_5_27;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -75,7 +74,7 @@
   #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
   # hardware.ipu6.enable = true;
   # hardware.ipu6.platform = "ipu6ep";
-  
+
   # Flatpak desktop extensions
   xdg.portal = {
     enable = true;
@@ -134,12 +133,12 @@
   # END TEMP
 
   virtualisation.docker.enable = true;
-  # virtualisation.libvirtd.enable = true;
   virtualisation.virtualbox.host.enable = true;
+  # virtualisation.libvirtd.enable = true;
   # virtualisation.virtualbox.host.package = pkgs.unstable.virtualbox;
   # with these fails vagrant up
   # virtualisation.virtualbox.host.enableExtensionPack = true; #USB support
-  # users.extraGroups.vboxusers.members = [ "gds" ];
+  users.extraGroups.vboxusers.members = [ "gds" ];
 
   #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
   environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
@@ -160,7 +159,7 @@
       "wireshark"
     ];
     initialPassword = "password";
-    packages = with pkgs; [ ];
+    # packages = with pkgs; [ ];
     # shell = pkgs.zsh;
     shell = pkgs.fish;
   };
@@ -209,14 +208,20 @@
 
   nixpkgs.config.allowUnfree = true;
   documentation.dev.enable = true;
-  environment.variables.EDITOR = "hx";
+
+  # environment.variables.EDITOR = "hx";
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
     # gst_all_1.icamerasrc-ipu6ep
-
+    # linuxKernel.packages.linux_5_15.rtw89
+    linuxHeaders
     man-pages
     man-pages-posix
     home-manager
@@ -229,7 +234,7 @@
     gnupg
     tmux
     vim
-    neovim
+    # neovim
     unstable.helix
     tree
     vifm
