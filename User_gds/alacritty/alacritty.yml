@@ -20,9 +20,9 @@ env:
   # available, otherwise `xterm-256color` is used.
   # TERM: alacritty
   # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
-  # TERM: xterm-256color
-  TERM: screen-256color
+  # TERM: screen-256color
   # TERM: screen-256color-bce
+  TERM: xterm-256color
 
 #window:
   # Window dimensions (changes require restart)
