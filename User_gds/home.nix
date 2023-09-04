@@ -105,6 +105,10 @@
     brave
     chromium
     firefox
+
+    dropbox
+    drive
+
     bitwarden
     gimp
     imagemagick
