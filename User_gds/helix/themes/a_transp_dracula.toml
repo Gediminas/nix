@@ -1,8 +1,9 @@
 inherits = "dracula"
 "ui.background" = {}
 # "ui.selection" = { bg = "#aa00aa" }
-"ui.selection.primary" = { bg = "#000099" }
-# "ui.selection.primary" = { bg = "#999999" }
+#"ui.selection.primary" = { bg = "#000099" }
+# "ui.selection.primary" = { bg = "#770077" }
+"ui.selection.primary" = { bg = "#990099" }
 "ui.cursor.primary.normal" = { fg = "#000000", bg = "#ffff00"}
-"ui.cursor.primary.select" = { fg = "#000000", bg = "#9999ff"}
+# "ui.cursor.primary.select" = { fg = "#000000", bg = "#9999ff"}
 # "ui.cursor.match" = { bg = "#00ff00"}

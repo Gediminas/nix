@@ -209,7 +209,8 @@
   nixpkgs.config.allowUnfree = true;
   documentation.dev.enable = true;
 
-  # environment.variables.EDITOR = "hx";
+  environment.variables.EDITOR = "hx";
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -276,6 +277,9 @@
     networkmanagerapplet
 
     fprintd
+
+    #for wg script
+    dig
   ];
 
   fonts.fonts = with pkgs; [

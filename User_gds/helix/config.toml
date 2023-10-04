@@ -1,58 +1,108 @@
 ###################################################################
+# https://docs.helix-editor.com/configuration.html
 
 theme = "a_transp_dracula"
 # theme = "a_transp_spacebones_light"
 
-###################################################################
+# ###################################################################
 [editor]
 line-number = "relative"
 cursorline = true
+# cursorcolumn = false
 true-color = true
-color-modes = true
-auto-pairs = false
-auto-completion = true
-auto-format = true
-auto-info = true
+# color-modes = true
+# auto-pairs = false
+# auto-completion = true
+# auto-format = true
+# auto-info = true
+auto-save = true
 rulers = [80, 120]
 #statusline = true
+color-modes = true
+
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
 select = "underline"
-# select = "underline"
 
-[editor.whitespace.render]
-space = "none"
-tab = "all"
-nbsp = "all"
-newline = "all"
+[editor.whitespace]
+render = "all"
 
-# [editor.file-picker]
-# hidden = false
-# parents = false
-# git-ignore = false
+#       # or control each character
+# [editor.whitespace.render]
+# space = "all"
+# tab = "all"
+# newline = "all"
 
-[editor.indent-guides]
-render = true
-# character = "╎"
+[editor.whitespace.characters]
+# space = "·"
+# nbsp = "⍽"
+# tab = "→"
+tab = ">"
+# newline = "⏎"
+# tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+tabpad = "→"
 
-# [editor.soft-wrap]
-# enable = true
+# [editor.whitespace.render]
+# # space = "none"
+# tab = "all"
+# # nbsp = "all"
+# # newline = "all"
 
-# [editor.file-picker]
-# hidden = true
-# git-ignore = false
+# # [editor.file-picker]
+# # hidden = false
+# # parents = false
+# # git-ignore = false
+
+#[editor.indent-guides]
+#render = false
+# # character = "╎"
+
+# # [editor.soft-wrap]
+# # enable = true
+
+# # [editor.file-picker]
+# # hidden = true
+# # git-ignore = false
+
+[editor.statusline]
+# defaults:
+# L: ["mode", "spinner", "file-name"]
+# C: []
+# R: ["diagnostics", "selections", "position", "file-encoding"]
+
+left = ["mode", "file-name", "file-modification-indicator", "spinner", "diagnostics"]
+center = ["separator", "version-control", "separator"] 
+right = ["primary-selection-length", "file-type", "selections", "position", "total-line-numbers", "position-percentage", "file-encoding"]
+
+# `mode`, `spinner`, `file-base-name`, `file-name`, `file-modification-indicator`,
+# `file-encoding`, `file-line-ending`, `file-type`, `diagnostics`, `workspace-diagnostics`,
+# `selections`, `primary-selection-length`,
+# `position`, `separator`, `position-percentage`, `total-line-numbers`, `spacer`, `version-control`
+
+# separator = "│"
+separator = "/"
+mode.normal = ""
+mode.insert = ""
+mode.select = ""
+
 
 [editor.lsp]
-display-messages = true
+enable = true
+# display-messages = true
+# auto-signature-help = true
+# display-signature-help-docs = true
 # display-inlay-hints = true
+# snippets = true
+# goto-reference-include-declaration = true
+
+# # display-inlay-hints = true
 
 ##########################################################################################################
 ##########################################################################################################
 [keys.normal]
 
-C-F5 = ":config-reload"
 C-r = ":config-reload"
 C-e = "goto_last_accessed_file"
 C-s = ":update" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
@@ -61,130 +111,123 @@ C-p = "goto_prev_diag"
 
 F1  = ":theme a_transp_zenburn"
 F2  = ":theme a_transp_dracula"
-F3  = ":theme a_transp_bogster"
-F4  = ":theme a_transp_solarized_dark"
-F5  = ":theme zenburn"
-F6  = ":theme dracula"
-F7  = ":theme bogster"
-F8  = ":theme solarized_dark"
+F3  = ":theme a_transp_tokyonight"
+F4  = ":theme a_transp_tokyonight_storm"
+F5  = ":theme a_transp_bogster"
+F6  = ":theme a_transp_solarized_dark"
+
 F9  = ":theme default"
 F10 = ":theme spacebones_light"
 F11 = ":theme bogster_light"
-F12 = ":theme solarized_light"
+F12 = ":theme github_light"
 
 
-# # C-p = "goto_prev_diag"
-# # C-n = "goto_next_diag"
-# # C-q = ":sh tmux split-window -h vifm -c ':only'"
+# # # C-p = "goto_prev_diag"
+# # # C-n = "goto_next_diag"
+# # # C-q = ":sh tmux split-window -h vifm -c ':only'"
 
 G = "goto_file_end"
 D = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
-# # # "C" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
+# # # # "C" = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
 
-#quickfind:
-# https://github.com/helix-editor/helix/issues/1762
-# https://github.com/helix-editor/helix/pull/4322
-"*" = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded", "search_next"]
+# #quickfind:
+# # https://github.com/helix-editor/helix/issues/1762
+# # https://github.com/helix-editor/helix/pull/4322
+# "*" = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded", "search_next"]
 
-C-c = ":clipboard-yank"
-C-v = ":clipboard-paste-before"
-
-
-"{" = ["goto_prev_paragraph", "collapse_selection"]
-"}" = ["goto_next_paragraph", "collapse_selection"]
-0 = "goto_line_start"
-"^" = "goto_first_nonwhitespace"
-
-"$" = "goto_line_end"
-# "%" = "match_brackets"
-V = ["select_mode", "extend_to_line_bounds"]
-S = "surround_add" # Would be nice to be able to do something after this but it isn't chainable
-
-# # Some nice Helix stuff
-# # C-h = "select_prev_sibling"
-# # C-j = "shrink_selection"
-# # C-k = "expand_selection"
-# # C-l = "select_next_sibling"
-
-esc = ["collapse_selection", "keep_primary_selection"] # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+# C-c = ":clipboard-yank"
+# C-v = ":clipboard-paste-before"
 
 
-##########################################################################################################
-[keys.normal.g]
-# h = "goto_first_nonwhitespace"
+# "{" = ["goto_prev_paragraph", "collapse_selection"]
+# "}" = ["goto_next_paragraph", "collapse_selection"]
+# 0 = "goto_line_start"
+# "^" = "goto_first_nonwhitespace"
+
+# "$" = "goto_line_end"
+# # "%" = "match_brackets"
+# V = ["select_mode", "extend_to_line_bounds"]
+# S = "surround_add" # Would be nice to be able to do something after this but it isn't chainable
+
+# # # Some nice Helix stuff
+# # # C-h = "select_prev_sibling"
+# # # C-j = "shrink_selection"
+# # # C-k = "expand_selection"
+# # # C-l = "select_next_sibling"
+
+# esc = ["collapse_selection", "keep_primary_selection"] # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+
+
+# ##########################################################################################################
+# [keys.normal.g]
+# # h = "goto_first_nonwhitespace"
 
 
 ##########################################################################################################
 ##########################################################################################################
 [keys.insert]
 
-C-F5 = [ "normal_mode", ":config-reload" ]
 C-r = [ "normal_mode", ":config-reload" ]
 C-e = [ "normal_mode", "goto_last_accessed_file" ]
 C-s = [ "normal_mode", ":update" ]
-esc = ["collapse_selection", "normal_mode"] # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
-
-# ###################################################################
-# [keys.insert]
-# # # j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+# esc = ["collapse_selection", "normal_mode"] # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+# j = { k = "normal_mode" } # Maps `jk` to exit insert mode
 
 
 ##########################################################################################################
 ##########################################################################################################
 [keys.select]
 
-# C-s = ":update" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
-C-F5 = [ "normal_mode", ":config-reload" ]
 C-r = [ "normal_mode", ":config-reload" ]
 C-e = [ "normal_mode", "goto_last_accessed_file" ]
 C-s = [ "normal_mode", ":update" ]
 
-# "{" = ["extend_to_line_bounds", "goto_prev_paragraph"]
-# "}" = ["extend_to_line_bounds", "goto_next_paragraph"]
-# # 0 = "goto_line_start"
-# # "$" = "goto_line_end"
+# # "{" = ["extend_to_line_bounds", "goto_prev_paragraph"]
+# # "}" = ["extend_to_line_bounds", "goto_next_paragraph"]
+# # # 0 = "goto_line_start"
+# # # "$" = "goto_line_end"
 
-#quickfind
-"*" = ["search_selection", "normal_mode", "search_next"]
-# "*" = [ "search_selection", "keep_primary_selection", "search_next" ]
-# n = [ "keep_primary_selection", "search_next" ]
-# N = [ "keep_primary_selection", "search_prev" ]
+# #quickfind
+# "*" = ["search_selection", "normal_mode", "search_next"]
+# # "*" = [ "search_selection", "keep_primary_selection", "search_next" ]
+# # n = [ "keep_primary_selection", "search_next" ]
+# # N = [ "keep_primary_selection", "search_prev" ]
 
-# # "^" = "goto_first_nonwhitespace"
-G = "goto_file_end"
-# C = ["goto_line_start", "extend_to_line_bounds", "change_selection"]
-# # "%" = "match_brackets"
-# S = "surround_add" # Basically 99% of what I use vim-surround for
-# u = ["switch_to_lowercase", "collapse_selection", "normal_mode"]
-# U = ["switch_to_uppercase", "collapse_selection", "normal_mode"]
+# # # "^" = "goto_first_nonwhitespace"
+# G = "goto_file_end"
+# # C = ["goto_line_start", "extend_to_line_bounds", "change_selection"]
+# # # "%" = "match_brackets"
+# # S = "surround_add" # Basically 99% of what I use vim-surround for
+# # u = ["switch_to_lowercase", "collapse_selection", "normal_mode"]
+# # U = ["switch_to_uppercase", "collapse_selection", "normal_mode"]
 
-# # Visual-mode specific muscle memory
-# i = "select_textobject_inner"
-# a = "select_textobject_around"
+# # # Visual-mode specific muscle memory
+# # i = "select_textobject_inner"
+# # a = "select_textobject_around"
 
-# # Some extra binds to allow us to insert/append in select mode because it's nice with multiple cursors
-# # tab = ["insert_mode", "collapse_selection"] # tab is read by most terminal editors as "C-i"
-# # C-a = ["append_mode", "collapse_selection"]
+# # # Some extra binds to allow us to insert/append in select mode because it's nice with multiple cursors
+# # # tab = ["insert_mode", "collapse_selection"] # tab is read by most terminal editors as "C-i"
+# # # C-a = ["append_mode", "collapse_selection"]
 
-# # Make selecting lines in visual mode behave sensibly
-# k = ["extend_line_up", "extend_to_line_bounds"]
-# j = ["extend_line_down", "extend_to_line_bounds"]
+# # # Make selecting lines in visual mode behave sensibly
+# # k = ["extend_line_up", "extend_to_line_bounds"]
+# # j = ["extend_line_down", "extend_to_line_bounds"]
 
-# # Clipboards over registers ye ye
-# d = [":clipboard-yank", "delete_selection", "move_char_left"]
-# D = ["delete_selection", "move_char_left"]
-# x = ["delete_selection", "move_char_left"] #do not remember
-# y = [":clipboard-yank", "normal_mode", "flip_selections", "collapse_selection"]
-# C-c = [":clipboard-yank", "normal_mode", "flip_selections", "collapse_selection"]
-# Y = ["extend_to_line_bounds", ":clipboard-yank", "goto_line_start", "collapse_selection", "normal_mode"]
-# p = [ ":clipboard-paste-before", ":clipboard-yank", "delete_selection", "normal_mode", "move_char_left" ]
-# P = [ ":clipboard-paste-replace", "collapse_selection", "normal_mode" ] #do not remember
-# C-v = [ ":clipboard-paste-replace", "collapse_selection", "normal_mode" ] #do not remember
+# # # Clipboards over registers ye ye
+# # d = [":clipboard-yank", "delete_selection", "move_char_left"]
+# # D = ["delete_selection", "move_char_left"]
+# # x = ["delete_selection", "move_char_left"] #do not remember
+# # y = [":clipboard-yank", "normal_mode", "flip_selections", "collapse_selection"]
+# # C-c = [":clipboard-yank", "normal_mode", "flip_selections", "collapse_selection"]
+# # Y = ["extend_to_line_bounds", ":clipboard-yank", "goto_line_start", "collapse_selection", "normal_mode"]
+# # p = [ ":clipboard-paste-before", ":clipboard-yank", "delete_selection", "normal_mode", "move_char_left" ]
+# # P = [ ":clipboard-paste-replace", "collapse_selection", "normal_mode" ] #do not remember
+# # C-v = [ ":clipboard-paste-replace", "collapse_selection", "normal_mode" ] #do not remember
 
-esc = ["collapse_selection", "keep_primary_selection", "normal_mode"] # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+# esc = ["collapse_selection", "keep_primary_selection", "normal_mode"] # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
 
-##########################################################################################################
-##########################################################################################################
+# ##########################################################################################################
+# ##########################################################################################################
 
 [keys.normal.space.t]
 t = ":toggle-option soft-wrap.enable"
@@ -193,12 +236,12 @@ h = ":toggle-option lsp.display-inlay-hints"
 [keys.normal.space]
 c = "toggle_comments"
 
-# https://github.com/helix-editor/helix/issues/6478
-n = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded", "search_next"]
-";" = ["move_prev_word_start", "move_next_word_end", "search_selection", "global_search"]
+# # https://github.com/helix-editor/helix/issues/6478
+# n = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded", "search_next"]
+# ";" = ["move_prev_word_start", "move_next_word_end", "search_selection", "global_search"]
 
-###################################################################
-[keys.select.space]
-c = "toggle_comments"
-n = ["search_selection", "normal_mode", "search_next"]
-";" = ["search_selection", "global_search"]
+# ###################################################################
+# [keys.select.space]
+# c = "toggle_comments"
+# n = ["search_selection", "normal_mode", "search_next"]
+# ";" = ["search_selection", "global_search"]

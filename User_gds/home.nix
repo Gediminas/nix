@@ -38,7 +38,7 @@
 
     # Desktop env
     # mako # notifications (annoying)
-    dunst # notifications (customizable)
+    # dunst # notifications (customizable; invisible)
 
     # Hardware Tools
     ethtool
@@ -47,6 +47,7 @@
     lsof
     sysstat
     usbutils
+    nnn
 
     inxi
     glxinfo
@@ -78,23 +79,31 @@
     # Development
     gdb
     lldb
+    quilt
     valgrind
     cloc # Code line counter
-    marksman # LSP markdown
-    nil # LSP nix
-    # rnix-lsp # LSP nix
 
     # LSP
-    # lua_ls
-    rust-analyzer
-    gopls
-    clang-tools
-    # bashls
-    # "eslint", "gopls", "jsonls", "marksman", "pylsp",
-    # "rust_analyzer", "lua_ls", "terraformls", "tflint",
-    # "tsserver", "yamlls"
-    nodejs
-    nodePackages.bash-language-server
+    nodejs                            # only for LSP needed
+    ruby                              # only for LSP needed
+    lua-language-server               # LSP: lua
+    rust-analyzer                     # LSP: rust 
+    gopls                             # LSP: go
+    delve                             # LSP: go debugger (`gdlv` for GUI)
+    clang-tools                       # LSP: c/c++
+    nodePackages.bash-language-server # LSP: bash
+    marksman                          # LSP: markdown
+    nil                               # LSP: nix
+    taplo                             # LSP: toml
+    nodePackages.yaml-language-server # LSP: yaml
+    rubyPackages.solargraph           # LSP: vagrant (ruby)
+
+    # shell.nix:
+    #  python311Packages.python-lsp-server
+
+    # missing:
+    #   docker-langserver
+    #   vscode-json-language-server
 
     # TUI Apps
     htop
@@ -157,6 +166,9 @@
     # Flatpak
     #caprine-bin
     #viber
+
+    # unfree
+    ciscoPacketTracer8
   ];
 
   programs.home-manager.enable = true;
@@ -167,4 +179,22 @@
     "adobe-reader-9.5.5"
     # "qtwebkit-5.212.0-alpha4" #foxitreader
   ];
+
+  # xdg.mime.defaultApplications = {
+  #   # "application/pdf" = "firefox.desktop";
+  #   "image/png" = [
+  #     "swayimg.desktop"
+  #     "sxiv.desktop"
+  #     "gimp.desktop"
+  #   ];
+  # };
+  # xdg.mimeApps = {
+  #   enable = true;
+  #   associations.added = {
+  #     "application/pdf" = ["org.gnome.Evince.desktop"];
+  #   };
+  #   defaultApplications = {
+  #     "application/pdf" = ["org.gnome.Evince.desktop"];
+  #   };
+  # };
 }

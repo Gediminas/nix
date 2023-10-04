@@ -6,13 +6,13 @@
 set $mod Mod4
 set $term alacritty
 
-# set $lock_img ~/Downloads/Logo/nix_black2_blur.png
-# set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
-# set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
+set $lock_img ~/Downloads/Logo/nix_black2_blur.png
+set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
+set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
 
-set $lock_img ~/Downloads/Logo/night_sky.jpg
-set $mon_img  ~/Downloads/Logo/night_sky.jpg
-set $lapt_img ~/Downloads/Logo/night_sky.jpg
+#set $lock_img ~/Downloads/Logo/night_sky.jpg
+#set $mon_img  ~/Downloads/Logo/night_sky.jpg
+#set $lapt_img ~/Downloads/Logo/night_sky.jpg
 
 ###########################################################################
 # Monitors
@@ -297,8 +297,8 @@ input "type:keyboard" {
     set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s NOTES
     for_window [title="^Notes$"] {
         move scratchpad
-        #resize set 1024 768
-        border pixel 4
+        resize set 1000 800
+        border pixel 5
         border toggle
         scratchpad show
     }

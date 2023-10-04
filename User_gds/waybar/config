@@ -48,7 +48,7 @@
       "max-length": 30,
     },
     "memory": {
-      "format": "{percentage}%({avail:0.1f}G)",
+      "format": " {percentage}% F{avail:0.1f}G",
       "tooltip": true,
       "interval": 10,
       "states": {

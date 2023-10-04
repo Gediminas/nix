@@ -1,0 +1,27 @@
+[[language]]
+name = "c"
+auto-format = false
+#language-server.command = ""
+
+[[language]]
+name = "cpp"
+auto-format = false
+indent = { tab-width = 4, unit = "  " }
+#language-server.command = ""
+
+[[language]]
+name = "markdown"
+indent = { tab-width = 2, unit = "    " }
+
+[[language]]
+name = "rust"
+diagnostic-severity = "Hint"
+
+#https://github.com/helix-editor/helix/issues/6686
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'shfmt', args = ["-i", "4"] }
+
+#expected one of `name`, `scope`, `file-types`, `shebangs`, `roots`, `comment-token`, `text-width`, `soft-wrap`, `config`, `auto-format`, `formatter`, `diagnostic-severity`, `grammar`, `injection-regex`, `language-server`, `indent`, `debugger`, `auto-pairs`, `rulers`, `workspace-lsp-roots`
+#`in `language`
