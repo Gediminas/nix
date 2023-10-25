@@ -39,8 +39,8 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
   # boot.kernelPackages = pkgs.linuxPackages_5_15;
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -74,6 +74,7 @@
   #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
   # hardware.ipu6.enable = true;
   # hardware.ipu6.platform = "ipu6ep";
+  ### hardware.ipu6.platform = "ipu6";
 
   # Flatpak desktop extensions
   xdg.portal = {

@@ -38,7 +38,7 @@
 
     # Desktop env
     # mako # notifications (annoying)
-    # dunst # notifications (customizable; invisible)
+    dunst # notifications (customizable; invisible)
 
     # Hardware Tools
     ethtool
@@ -162,6 +162,7 @@
     obsidian
     joplin
     joplin-desktop
+    discord
 
     # Flatpak
     #caprine-bin
