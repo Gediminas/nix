@@ -19,6 +19,7 @@ auto-save = true
 rulers = [80, 120]
 #statusline = true
 color-modes = true
+# bufferline = "multiple" #always|multiple|never"
 
 
 [editor.cursor-shape]
@@ -55,9 +56,10 @@ tabpad = "→"
 # # parents = false
 # # git-ignore = false
 
-#[editor.indent-guides]
-#render = false
-# # character = "╎"
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
 
 # # [editor.soft-wrap]
 # # enable = true
@@ -89,7 +91,7 @@ mode.select = ""
 
 
 [editor.lsp]
-enable = true
+# enable = true
 # display-messages = true
 # auto-signature-help = true
 # display-signature-help-docs = true
