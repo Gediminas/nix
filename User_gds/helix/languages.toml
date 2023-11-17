@@ -24,5 +24,5 @@ name = "bash"
 indent = { tab-width = 4, unit = "    " }
 formatter = { command = 'shfmt', args = ["-i", "4"] }
 
-#expected one of `name`, `scope`, `file-types`, `shebangs`, `roots`, `comment-token`, `text-width`, `soft-wrap`, `config`, `auto-format`, `formatter`, `diagnostic-severity`, `grammar`, `injection-regex`, `language-server`, `indent`, `debugger`, `auto-pairs`, `rulers`, `workspace-lsp-roots`
+# expected one of `name`, `scope`, `file-types`, `shebangs`, `roots`, `comment-token`, `text-width`, `soft-wrap`, `config`, `auto-format`, `formatter`, `diagnostic-severity`, `grammar`, `injection-regex`, `language-server`, `indent`, `debugger`, `auto-pairs`, `rulers`, `workspace-lsp-roots`
 #`in `language`

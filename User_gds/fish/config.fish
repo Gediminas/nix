@@ -7,8 +7,13 @@ if status is-interactive
     # set -gx TERM screen-256color-bce; #Enable tmux Home/End keys
     # set -gx TERM screen-256color;
 
+    set -x DIRENV_LOG_FORMAT ""
+    # set -g fish_key_timeout 500  # Set the timeout to 15.000 milliseconds (adjust as needed)
+    # set -gx DIRENV_DELAY 25  # Set the delay to 5 seconds (adjust as needed)
+
     # Keybindings
-    bind \c\af 'clear; commandline -f repaint; source ~/.config/fish/config.fish'
+    # bind \c\af 'clear; commandline -f repaint; source ~/.config/fish/config.fish'
+    bind \c\af 'exec fish --login; clear'
     bind \cf 'clear; commandline -f repaint'
 
     # Aliases

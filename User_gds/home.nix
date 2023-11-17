@@ -89,7 +89,7 @@
     lua-language-server               # LSP: lua
     rust-analyzer                     # LSP: rust 
     gopls                             # LSP: go
-    delve                             # LSP: go debugger (`gdlv` for GUI)
+    go-tools delve gdlv               # LSP: go tools (`gdlv` for GUI)
     clang-tools                       # LSP: c/c++
     nodePackages.bash-language-server # LSP: bash
     marksman                          # LSP: markdown
@@ -126,11 +126,13 @@
     #skypeforlinux
     slack
     spotify
+    vscode
     wireshark
     # remmina #RDC
 
     ############################
     # Experimental
+    albert
     kitty
     viu
     xfce.ristretto
@@ -159,9 +161,9 @@
     anki-bin
     flameshot
 
-    obsidian
-    joplin
-    joplin-desktop
+    # obsidian
+    # joplin
+    # joplin-desktop
     discord
 
     # Flatpak
