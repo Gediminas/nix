@@ -79,19 +79,23 @@
 
 #battery {
     color: yellow;
+    background-color: #000000;
     /*margin-top: -10px;*/
     /*margin-bottom: -10px;*/
 }
 #battery.full:not(.charging) {
     color: #0077FF; /*blue*/
+    background-color: #000000;
 }
 #battery:not(.full).charging {
     color: orange;
+    background-color: #000000;
 }
-
 #battery.full.charging {
     color: orange;
+    background-color: #000000;
 }
+
 /*
 #battery:not(.full):not(.charging) {
     color: yellow;
@@ -143,7 +147,23 @@
   background: #222222;
 }
 
-#pulseaudio.warning:not(.bluetooth):not(.muted) {
+#pulseaudio:not(.bluetooth) {
+    background-color: red;
+    color: black;
+}
+#pulseaudio.normal:not(.bluetooth):not(.muted) {
     background-color: yellow;
     color: black;
+}
+#pulseaudio.normal:not(.bluetooth) {
+    background-color: yellow;
+    color: black;
+}
+#pulseaudio.silent:not(.bluetooth):not(.muted) {
+    background-color: yellow;
+    color: black;
+}
+#pulseaudio.silent:not(.bluetooth).muted {
+    color: #00AAFF;
+    background: #000000;
 }

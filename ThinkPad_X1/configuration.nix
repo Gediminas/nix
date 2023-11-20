@@ -55,8 +55,6 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.wireless.userControlled.enable = true;
 
-  # networking.nftables.enable = true;
-
   time.timeZone = "Europe/Vilnius";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -219,6 +217,12 @@
     defaultEditor = true;
   };
 
+  #http://localhost:631/
+  services.printing.enable = true;
+  services.system-config-printer.enable = true;
+  programs.system-config-printer.enable = true;
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -311,6 +315,12 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true; //xz - https://nixos.wiki/wiki/Polkit
 
+
+  # Firewall
+  # networking.nftables.enable = true;
+  networking.firewall.enable = true;
+  networking.firewall.extraPackages = [ pkgs.conntrack-tools ];
+  
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

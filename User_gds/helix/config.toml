@@ -235,6 +235,14 @@ C-s = [ "normal_mode", ":update" ]
 t = ":toggle-option soft-wrap.enable"
 h = ":toggle-option lsp.display-inlay-hints"
 
+[keys.normal.space.m.d]
+d = ":insert-output date +'%Y-%m-%d'"
+D = ":insert-output date +'%Y-%m-%d %w '"
+w = ":insert-output date +'%Y-w%W'"
+W = ":insert-output date +'%yw%W'"
+q = ":insert-output date +'%Y-q'"
+Q = ":insert-output date +'%yq'"
+
 [keys.normal.space]
 c = "toggle_comments"
 

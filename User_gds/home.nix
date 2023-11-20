@@ -172,6 +172,9 @@
 
     # unfree
     ciscoPacketTracer8
+
+    #experimental
+    zellij
   ];
 
   programs.home-manager.enable = true;

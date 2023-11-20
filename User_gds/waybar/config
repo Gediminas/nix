@@ -140,7 +140,8 @@
         "default": ["", "", ""],
       },
       "states": {
-        "warning": 5,
+        "normal": 50,
+        "silent": 1,
       },
       "on-click": "pavucontrol",
       "on-click-right": "pavucontrol"
