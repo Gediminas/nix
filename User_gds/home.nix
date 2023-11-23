@@ -28,8 +28,10 @@
   };
 
   home.packages = with pkgs; [
+    zsh
     fish
-    fishPlugins.tide
+    # fishPlugins.tide
+    fishPlugins.hydro
     nixfmt
     direnv
     xdg-utils
@@ -172,9 +174,6 @@
 
     # unfree
     ciscoPacketTracer8
-
-    #experimental
-    zellij
   ];
 
   programs.home-manager.enable = true;

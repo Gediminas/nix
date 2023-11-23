@@ -244,6 +244,11 @@
     vim
     # neovim
     unstable.helix
+
+    # unstable.zellij
+    # zellij
+    # use compiled
+
     tree
     vifm
     mc

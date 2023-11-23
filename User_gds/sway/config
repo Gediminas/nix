@@ -487,13 +487,13 @@ include /etc/sway/config.d/*
 ###########################################################################
 
 # exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec (sleep 5s && blueman-applet) &
+exec (sleep 1s && albert) &
 exec (sleep 4s && nm-applet --indicator) &
+exec (sleep 5s && blueman-applet) &
 
 exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
 
 # bindsym $mod+period exec dunstctl close #- panguin + backspace
 # bindsym $mod+comma exec dunstctl history-pop ###- penguing + dot
-
 
 
