@@ -29,9 +29,9 @@
 
   home.packages = with pkgs; [
     zsh
-    fish
+    # fish
     # fishPlugins.tide
-    fishPlugins.hydro
+    # fishPlugins.hydro
     nixfmt
     direnv
     xdg-utils

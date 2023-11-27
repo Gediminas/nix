@@ -11,16 +11,101 @@ if status is-interactive
     # set -gx TERM screen-256color-bce; #Enable tmux Home/End keys
     # set -gx TERM screen-256color;
 
-    set --global fish_prompt_pwd_dir_length 0
-    set --global hydro_multiline      true
-    set --global hydro_color_pwd      "00FF00"
-    set --global hydro_color_git      "777777"
-    set --global hydro_color_error    "FF0000"
-    set --global hydro_color_prompt   "FFFF00"
-    set --global hydro_color_duration "444444"
+    # set --global fish_prompt_pwd_dir_length 0
+    # set --global hydro_multiline      true
+    # set --global hydro_color_pwd      "00FF00"
+    # set --global hydro_color_prompt   "00FF00"
+    # set --global hydro_color_git      "5555FF"
+    # set --global hydro_color_error    "FF5555"
+    # set --global hydro_color_duration "555555"
+    # set --global hydro_cmd_duration_threshold "1000000000"
+    # set --global hydro_fetch          false
+    
+    # set -g __fish_git_prompt_show_informative_status 1
+    # # set -g __fish_git_prompt_hide_untrackedfiles 1
+
+    # set -g __fish_git_prompt_color_branch magenta bold
+    # set -g __fish_git_prompt_showupstream "informative"
+    # set -g __fish_git_prompt_char_upstream_ahead "↑"
+    # set -g __fish_git_prompt_char_upstream_behind "↓"
+    # set -g __fish_git_prompt_char_upstream_prefix ""
+
+    # set -g __fish_git_prompt_char_stagedstate "●"
+    # set -g __fish_git_prompt_char_dirtystate "✚"
+    # set -g __fish_git_prompt_char_untrackedfiles "…"
+    # set -g __fish_git_prompt_char_conflictedstate "✖"
+    # set -g __fish_git_prompt_char_cleanstate "✔"
+
+    # set -g __fish_git_prompt_color_dirtystate blue
+    # set -g __fish_git_prompt_color_stagedstate yellow
+    # set -g __fish_git_prompt_color_invalidstate red
+    # set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
+    # set -g __fish_git_prompt_color_cleanstate green bold
+
+    set -gx fish_prompt_pwd_dir_length 0
+    set -g __fish_git_prompt_show_informative_status 1
+    set -g __fish_git_prompt_showupstream informative
+    # set -g __fish_git_prompt_hide_untrackedfiles 0
+    set -g __fish_git_prompt_color_branch "#5555FF" --bold
+    set -g __fish_git_prompt_color_stagedstate green
+    set -g __fish_git_prompt_color_dirtystate yellow
+    set -g __fish_git_prompt_color_invalidstate red
+    set -g __fish_git_prompt_color_untrackedfiles white
+    set -g __fish_git_prompt_color_cleanstate green --bold
+
+    function humantime --argument-names ms --description "Turn milliseconds into a human-readable string"
+        set --query ms[1] || return
+
+        set --local secs (math --scale=1 $ms/1000 % 60)
+        set --local mins (math --scale=0 $ms/60000 % 60)
+        set --local hours (math --scale=0 $ms/3600000 % 24)
+        set --local days (math --scale=0 $ms/86400000)
+
+        test $days -gt 0 && set --local --append out $days"d"
+        test $hours -gt 0 && set --local --append out $hours"h"
+        test $mins -gt 0 && set --local --append out $mins"m"
+        test $secs -gt 0 && set --local --append out $secs"s"
+
+        set --query $out && echo $out || echo $ms"ms"
+    end
+    
+    function fish_prompt --description 'Write out the prompt'
+        set -l last_pipestatus $pipestatus
+        set -lx __fish_last_status $status # Export for __fish_print_pipestatus.
+
+        # PWD
+        set_color "#00FF00" --bold
+        echo -n (prompt_pwd)
+
+        # GIT
+        set_color normal
+        echo -n (fish_vcs_prompt)
+
+        # STATUS
+        if [ -n "$last_pipestatus" ]
+            set -l status_color (set_color $fish_color_status)
+            set -l statusb_color (set_color --bold $fish_color_status)
+            set -l prompt_status (__fish_print_pipestatus "[" "]" "|" "$status_color" "$statusb_color" $last_pipestatus)
+            echo -n " "$prompt_status
+        end
+
+        # DURATION
+        if test $CMD_DURATION -gt 0
+            set_color "#555555"
+            # echo -n " " (math $CMD_DURATION / 1000)s
+            echo -n " "$(humantime $CMD_DURATION)
+        end
+
+        # PREFIX
+        set_color "#FFFF00" --bold
+        echo -en "\n❱ "
+        set_color normal
+    end
+
     
 
     set -x DIRENV_LOG_FORMAT ""
+    set -g fish_key_timeout 5000
     # set -g fish_key_timeout 500  # Set the timeout to 15.000 milliseconds (adjust as needed)
     # set -gx DIRENV_DELAY 25  # Set the delay to 5 seconds (adjust as needed)
 
@@ -28,8 +113,8 @@ if status is-interactive
 
     # FIXME zellij
     # OK:
-    bind \cf 'exec fish --login; clear'
-    bind \ef 'clear; commandline -f repaint'
+    bind \ef 'exec fish --login; clear'
+    bind \cf 'clear; commandline -f repaint'
 
     # experimental:
     # bind \c\af 'clear; commandline -f repaint; source ~/.config/fish/config.fish'
