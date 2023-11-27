@@ -222,7 +222,6 @@
   services.system-config-printer.enable = true;
   programs.system-config-printer.enable = true;
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -234,6 +233,8 @@
     man-pages-posix
     home-manager
     hack-font
+
+    # keyd
     git
     curl
     wget
@@ -243,6 +244,10 @@
     tmux
     vim
     # neovim
+
+    fish
+    # fishPlugins.hydro
+    # unstable.fishPlugins.hydro
     unstable.helix
 
     # unstable.zellij
@@ -299,15 +304,112 @@
     hack-font
   ];
 
-  systemd.services.spacefn = {
+  # Migrated to `keyd`
+  # systemd.services.spacefn = {
+  #   enable = true;
+  #   description = "SpaceFn";
+  #   unitConfig = { Type = "simple"; };
+  #   serviceConfig = {
+  #     ExecStart = "/bin/sh /home/gds/sub/spacefn-evdev/space";
+  #   };
+  #   wantedBy = [ "multi-user.target" ];
+  # };
+  services.keyd = {
     enable = true;
-    description = "SpaceFn";
-    unitConfig = { Type = "simple"; };
-    serviceConfig = {
-      ExecStart = "/bin/sh /home/gds/sub/spacefn-evdev/space";
+    settings = {
+      main = {
+        leftcontrol = "layer(meta)";              # sway key
+        leftmeta    = "layer(alt)";               # as in MacOS (command)
+        leftalt     = "layer(control)";           # as in MacOS (command) copy/paste
+        rightalt    = "layer(shift)";             # easier, no need for capslock
+        sysrq       = "layer(altgr)";
+        capslock    = "overload(control, esc)";
+        space       = "overload(spaceFn, space)";
+        semicolon   = "overload(semiFn,  semicolon)";
+        dot         = "overload(dotFn,   dot)";
+
+        # meta = oneshot(meta)
+        # control = oneshot(control)
+      };
+
+      spaceFn = {
+        # Navigation
+        "y" = "space";
+        "u" = "home";
+        "i" = "C-left";
+        "o" = "C-right";
+        "p" = "end";
+        "backspace" = "delete";
+
+        "h" = "left";
+        "j" = "down";
+        "k" = "up";
+        "l" = "right";
+        ";" = "enter";
+
+        "m" = "escape";
+        "," = "backspace";
+        "." = "C-backspace";
+
+        # Sway workspaces
+        "1" = "M-1";
+        "2" = "M-2";
+        "3" = "M-3";
+        "4" = "M-4";
+        "5" = "M-5";
+        "6" = "M-6";
+        "7" = "M-7";
+        "8" = "M-8";
+        "9" = "M-9";
+        "0" = "M-0";
+        "-" = "M-minus";
+        "=" = "M-equal";
+
+        "e" = "M-e";
+        "r" = "M-r";
+        "t" = "M-t";
+
+        "a" = "M-a";
+        "s" = "M-s";
+        "d" = "M-d";
+        "f" = "M-f";
+        "g" = "M-g";
+
+        # copy/paste
+        "c" = "C-c";
+        "v" = "C-v";
+        "x" = "C-x";
+      };
+
+      dot = {
+        "d" = "(";
+        "f" = ")";
+        "," = "backspace";
+      };
+
+      semiFn = {
+        "q" = "G-e";
+        "w" = "G-4";     # Ė
+        "e" = "G-3";     # Ę
+
+        "a" = "G-1";     # Ą
+        "s" = "G-6";     # Š
+        "d" = "G-7";     # Ų
+        "f" = "G-5";     # Į
+
+        "z" = "G-equal"; # Ž
+        "x" = "G-8";     # Ū
+        "c" = "G-2";     # Č
+
+        "y" = "semicolon";
+        "m" = "escape";
+        "," = "backspace";
+        "." = "C-backspace";
+      };
+
     };
-    wantedBy = [ "multi-user.target" ];
   };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
