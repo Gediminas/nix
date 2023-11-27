@@ -10,73 +10,22 @@ set $lock_img ~/Downloads/Logo/nix_black2_blur.png
 set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
 set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
 
-#set $lock_img ~/Downloads/Logo/night_sky.jpg
-#set $mon_img  ~/Downloads/Logo/night_sky.jpg
-#set $lapt_img ~/Downloads/Logo/night_sky.jpg
-
 ###########################################################################
 # Monitors
 # (swaymsg -t get_outputs)
 
-#set $mon_laptop eDP-1
 set $mon_laptop eDP-1
-               #"Unknown 0x4152 0x00000000"
-               #"Samsung Display Corp. 0x4152 Unknown"
-
 set $mon_asus  "Unknown ASUS MB169C+ HBLMTF011738"
 set $mon_work1 "Dell Inc. DELL P2419HC F41RC53"
 set $mon_work2 "Dell Inc. DELL P2419HC BJTLK03"
 set $mon_home  "Lenovo Group Limited T27hv-20 V308W93L"
-#set $mon_home "Dell Inc. DELL SE2719H F4HK8V2"
-
-#set $mon_asus    DP-1
-#set $mon_extern  DP-2
-#set $mon_exter2  DP-3
-#set $mon_lap1 "Unknown 0x573D 0x00000000"
-#set $mon_work2 "Dell Inc. DELL P2419HC BJTLK03" #DP-3
 
 ###########################################################################
 ### Output configuration
 
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# swaymsg -t get_outputs
-# xrandr --current
-
-# MacBook
-# output $mon_home   pos     0     0 res 1920x1080 scale 1.0
-# output $mon_laptop pos     0  1080 res 2560x1600 scale 1.6
-
-# Thinkpad X1 OLED 2880x1800
-#output $mon_home   pos     0     0 res 1920x1080 scale 1.0
-#output $mon_laptop pos  1920  0 res 2880x1800 scale 1.5
-#output $mon_laptop pos     0  0 res 2880x1800 scale 1.5
-#output $mon_asus  pos  0  0    res 1920x1080 scale 1.0
-
-
-
-# HOME
-# output $mon_home   pos     0     0 res 2560x1440 scale 1.0
-# output $mon_home   pos     0     0 res 2560x1440
-
-# output $mon_work1  pos     0     0 res 1920x1080 scale 0.75
-# output $mon_laptop pos     0  1440 res 2880x1800 scale 1.5
-
-# output $mon_work1  pos     0     0 res 1920x1080
-# output $mon_laptop pos     0  1080 res 2880x1800 scale 1.5
-
 output $mon_home   pos     0     0 res 1920x1080
 output $mon_work1  pos     0     0 res 1920x1080
 output $mon_laptop pos     0  1080 res 1920x1200
-
-
-# WORK
-# output $mon_work1  pos     0     0 res 1920x1080 scale 0.75
-# output $mon_laptop pos     0  1350 res 2880x1800 scale 1.5
-
-
-# FullHD laptop
-#output $mon_home   pos     0     0 res 1920x1080 scale 1
-#output $mon_laptop pos     0  1080 res 1920x1080 scale 1
 
 focus_follows_mouse yes
 focus output $mon_home
@@ -447,39 +396,11 @@ default_border pixel 2
 default_floating_border pixel 5
 
 
-
 ###########################################################################
 ### Status Bar:
 
-# Read `man 5 sway-bar` for more information about this section.
 bar {
-    # position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %H:%M:%S'; do sleep 1; done
-
-    # Keep in mind that the current directory of this config file is $HOME
-    #status_command while ~/.config/sway/status.sh; do sleep 1; done
-
     swaybar_command waybar
-
-
-    #colors {
-    #    statusline #ffffff
-    #    background #323232
-    #    # inactive_workspace #32323200 #32323200 #5c5c5c
-    #}
-
-  #  status_command i3blocks
-
-#  font pango:DejaVu Sans Mono 10
-
-# Guess the weather hourly
-#      [weather]
-#      command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
-#        interval=3600
-#        color=#A4C2F4
 }
 
 ###########################################################################
