@@ -325,8 +325,10 @@
         sysrq       = "layer(altgr)";
         capslock    = "overload(control, esc)";
         space       = "overload(spaceFn, space)";
-        semicolon   = "overload(semiFn,  semicolon)";
-        dot         = "overload(dotFn,   dot)";
+        semicolon   = "overload(diacritic, semicolon)";
+        dot         = "overload(diacritic, dot)";
+
+        leftshift = "oneshot(shift)";
 
         # meta = oneshot(meta)
         # control = oneshot(control)
@@ -334,18 +336,19 @@
 
       spaceFn = {
         # Navigation
-        "y" = "space";
-        "u" = "home";
-        "i" = "C-left";
-        "o" = "C-right";
-        "p" = "end";
+        "y"         = "space";
+        "u"         = "home";
+        "i"         = "C-left";
+        "o"         = "C-right";
+        "p"         = "end";
         "backspace" = "delete";
 
-        "h" = "left";
-        "j" = "down";
-        "k" = "up";
-        "l" = "right";
-        ";" = "enter";
+        "h"     = "left";
+        "j"     = "down";
+        "k"     = "up";
+        "l"     = "right";
+        ";"     = "enter";
+        "enter" = "M-enter";
 
         "m" = "escape";
         "," = "backspace";
@@ -364,11 +367,14 @@
         "0" = "M-0";
         "-" = "M-minus";
         "=" = "M-equal";
+        "delete" = "M-delete";
 
+        "tab" = "M-tab";
         "e" = "M-e";
         "r" = "M-r";
         "t" = "M-t";
 
+        "capslock" = "M-escape";
         "a" = "M-a";
         "s" = "M-s";
         "d" = "M-d";
@@ -381,13 +387,13 @@
         "x" = "C-x";
       };
 
-      dot = {
-        "d" = "(";
-        "f" = ")";
-        "," = "backspace";
-      };
+      # symbols = {
+      #   "d" = "(";
+      #   "f" = ")";
+      #   "," = "backspace";
+      # };
 
-      semiFn = {
+      diacritic = {
         "q" = "G-e";
         "w" = "G-4";     # Ė
         "e" = "G-3";     # Ę
@@ -424,13 +430,11 @@
 
 
   # Firewall
-  # networking.nftables.enable = true;
+  networking.nftables.enable = true;
   networking.firewall.enable = true;
   networking.firewall.extraPackages = [ pkgs.conntrack-tools ];
   
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }
