@@ -11,7 +11,7 @@ cursorline = true
 # cursorcolumn = false
 true-color = true
 # color-modes = true
-# auto-pairs = false
+auto-pairs = false
 # auto-completion = true
 # auto-format = true
 # auto-info = true
@@ -84,7 +84,8 @@ right = ["primary-selection-length", "file-type", "selections", "position", "tot
 # `position`, `separator`, `position-percentage`, `total-line-numbers`, `spacer`, `version-control`
 
 # separator = "│"
-separator = "/"
+# separator = "/"
+separator = ""
 mode.normal = "NOR"
 mode.insert = "INS"
 mode.select = "SEL"
@@ -104,6 +105,10 @@ mode.select = "SEL"
 ##########################################################################################################
 ##########################################################################################################
 [keys.normal]
+
+
+# ";" = "command_mode"
+# ":" = "collapse_selection"
 
 C-r = ":config-reload"
 C-e = "goto_last_accessed_file"
@@ -229,8 +234,8 @@ C-s = [ "normal_mode", ":update" ]
 # ##########################################################################################################
 
 [keys.normal.space.t]
-t = ":toggle-option soft-wrap.enable"
 h = ":toggle-option lsp.display-inlay-hints"
+t = ":toggle-option soft-wrap.enable"
 
 [keys.normal.space.m.d]
 d = ":insert-output date +'%Y-%m-%d'"
@@ -242,13 +247,10 @@ Q = ":insert-output date +'%yq'"
 
 [keys.normal.space]
 c = "toggle_comments"
-
-# # https://github.com/helix-editor/helix/issues/6478
-# n = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded", "search_next"]
+n = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded"] #search_next #https://github.com/helix-editor/helix/issues/6478
 ";" = ["move_prev_word_start", "move_next_word_end", "search_selection", "global_search"]
 
-# ###################################################################
-# [keys.select.space]
-# c = "toggle_comments"
-# n = ["search_selection", "normal_mode", "search_next"]
-# ";" = ["search_selection", "global_search"]
+[keys.select.space]
+c = "toggle_comments"
+n = ["search_selection", "normal_mode"] #, "search_next"
+";" = ["search_selection", "global_search"]

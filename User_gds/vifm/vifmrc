@@ -12,7 +12,7 @@
 " you will need to change this setting.
 
 set vicmd=hx
-" set vicmd=nvim
+" set vicmd=hx
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -135,7 +135,7 @@ mark h ~/
 " %m run the command in a menu window
 
 command! df df -h %m 2> /dev/null
-command! diff nvim -d %f %F
+command! diff hx -d %f %F
 command! zip zip -r %c.zip %f
 command! run !! ./%f
 command! make !!make %a
@@ -514,7 +514,7 @@ nnoremap <c-u> <c-w>x
 " let $VIFM_SERVER_NAME = v:servername
 " ----------------------------------------------------------
 
-" nnoremap ,, :write | execute ':!%n${EDITOR:-nvim} $MYVIFMRC' | restart<cr>
+" nnoremap ,, :write | execute ':!%n${EDITOR:-hx} $MYVIFMRC' | restart<cr>
 
 
 " GDSX
