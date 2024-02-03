@@ -1,14 +1,20 @@
+*. {
+  /* color: #FFFFFF; */
+  background: black;
+}
+
 * {
   border: none;
   border-radius: 0;
-  /*font-family: "Ubuntu Nerd Font";*/
   font-family: "Hack";
   font-size: 12px;
-  min-height: 0;
   margin-top: -4;
   margin-bottom: -4;
-  background: transparent;
-}
+  /*
+  font-family: "Ubuntu Nerd Font";
+  min-height: 0;
+  */
+  }
 
 #workspaces button {
   font-weight: bold;
@@ -24,8 +30,8 @@
 }
 
 #workspaces button.urgent {
-  color: #0033FF;
-  background: red;
+  color: #444444;
+  background: #FF00FF;
 }
 
 #tray,

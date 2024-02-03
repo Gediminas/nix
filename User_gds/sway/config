@@ -4,11 +4,14 @@
  
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+# set $term kitty
+# set $term wezterm
 set $term alacritty
 
 set $lock_img ~/Downloads/Logo/nix_black2_blur.png
 set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
 set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
+
 
 ###########################################################################
 # Monitors
@@ -96,7 +99,10 @@ input "type:keyboard" {
     #                      exec 'swaylock -f -c 222222 -K -i $lock_img'
 
     # Start a terminal
-    bindsym $mod+Return exec $term
+    # bindsym $mod+Return exec kitty -e tmux attach \; choose-tree -Zs
+    # bindsym $mod+Return exec wezterm start tmux attach \; choose-tree -Zs
+    bindsym $mod+Return exec alacritty --command tmux attach \; choose-tree -Zs
+    bindsym $mod+ctrl+Return exec $term
 
     # Kill focused window
     # bindsym $mod+Shift+q kill
@@ -104,8 +110,8 @@ input "type:keyboard" {
     # bindsym $mod+Alt+Ctrl+Shift+q [workspace=__focused__] kill
 
     # Start your launcher
-    bindsym $mod+Escape                exec albert toggle
-    bindsym $mod+Alt+Escape            exec wofi --show=drun --lines=5 --prompt=""
+    bindsym $mod+Alt+Escape                exec albert toggle
+    bindsym $mod+Escape            exec wofi --show=drun --lines=10 --prompt=""
     bindsym $mod+Shift+Escape          kill
     bindsym $mod+Alt+Shift+Escape      [workspace=__focused__] kill
     # bindsym $mod+Ctrl+Shift+Escape     kill
@@ -173,8 +179,8 @@ input "type:keyboard" {
     bindsym $mod+d workspace D
     bindsym $mod+f workspace F
 
-    # bindsym $mod+q workspace Q
-    # bindsym $mod+w workspace W
+    bindsym $mod+q workspace Q
+    bindsym $mod+w workspace W
     bindsym $mod+e workspace E
     bindsym $mod+r workspace R
 
@@ -197,8 +203,8 @@ input "type:keyboard" {
     bindsym $mod+Shift+d move container to workspace D
     bindsym $mod+Shift+f move container to workspace F
 
-    # bindsym $mod+Shift+q move container to workspace Q
-    # bindsym $mod+Shift+w move container to workspace W
+    bindsym $mod+Shift+q move container to workspace Q
+    bindsym $mod+Shift+w move container to workspace W
     bindsym $mod+Shift+e move container to workspace E
     bindsym $mod+Shift+r move container to workspace R
 
@@ -231,67 +237,6 @@ input "type:keyboard" {
 
     # Move focus to the parent container
     bindsym $mod+Alt+a focus parent
-
-###########################################################################
-### Scratchpad
-
-
-    # Your preferred application launcher
-    # Note: pass the final command to swaymsg so that the resulting window can be opened
-    # on the original workspace that the command was r
-
-    #swaymsg -t get_tree | grep app_id
-    #swaymsg -t get_tree | grep class
-
-    ###########################################
-    ## Notes - Simplenote
-    #
-    # for_window [class="Simplenote"] {
-    #     move scratchpad
-    #     #resize set 1024 768
-    #     border pixel 4
-    #     border toggle
-    #     scratchpad show
-    # }
-    # bindsym $mod+minus exec swaymsg [class="Simplenote"] scratchpad show || exec Simplenote
-
-    ###########################################
-    # ## Notes tmux+nvim/hx - Disabled
-    #
-    set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s NOTES
-    for_window [title="^Notes$"] {
-        move scratchpad
-        resize set 1000 800
-        border pixel 5
-        border toggle
-        scratchpad show
-    }
-    bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
-
-    ###########################################
-    # ## Notes wine+Resophnotes - Disabled
-    #
-    # set $notes ~/apps/resophnotes.sh 
-    # for_window [class="resophnotes.exe"] {
-    # bindsym $mod+minus exec swaymsg [class="resophnotes.exe"] scratchpad show || exec $notes
-
-    ###########################################
-    ## Spotify
-
-    #for_window [class="Spotify"] {
-    #    move scratchpad
-    #    resize set 1024 768
-    #    border pixel 4
-    #    border toggle
-    #    scratchpad show
-    #}
-    #bindsym $mod+equal exec swaymsg [class="Spotify"] scratchpad show
-    #bindsym $mod+Ctrl+equal exec swaymsg [class="Spotify"] scratchpad show || exec spotify
-
-
-
-    #bindsym $mod+Shift+minus move scratchpad
-    #bindsym $mod+minus scratchpad show
 
 ###########################################################################
 ### Resizing containers:
@@ -366,7 +311,7 @@ bindsym $mod+Shift+p exec flameshot full
 # capture the focused monitor to clipboard
 # bindsym Shift+Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
 
-bindsym $mod+Backslash exec playerctl play-pause
+# bindsym $mod+Backslash exec playerctl play-pause
 
 # XF86 keys
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -393,8 +338,72 @@ bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id "brightnessctl s 1%+"
 
 hide_edge_borders smart
 default_border pixel 2
-default_floating_border pixel 5
+default_floating_border pixel 1
 
+#              ttl-bord   ttl-bg    ttl-fg    new-view  the-border
+client.focused "#444444" "#444444" "#ffff00" "#0000ff" "#ffff00"
+
+
+###########################################################################
+### Scratchpad
+
+
+    # Your preferred application launcher
+    # Note: pass the final command to swaymsg so that the resulting window can be opened
+    # on the original workspace that the command was r
+
+    #swaymsg -t get_tree | grep app_id
+    #swaymsg -t get_tree | grep class
+
+    ###########################################
+    ## Notes - Simplenote
+    #
+    # for_window [class="Simplenote"] {
+    #     move scratchpad
+    #     #resize set 1024 768
+    #     border pixel 4
+    #     border toggle
+    #     scratchpad show
+    # }
+    # bindsym $mod+minus exec swaymsg [class="Simplenote"] scratchpad show || exec Simplenote
+
+    ###########################################
+    # ## Notes tmux+nvim/hx - Disabled
+    #
+    set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s NOTES
+    for_window [title="^Notes$"] {
+        move scratchpad
+        resize set 1000 800
+        border pixel 1
+        border toggle
+        scratchpad show
+    }
+    bindsym $mod+minus exec swaymsg [title="Notes"] scratchpad show || exec $notes
+
+    ###########################################
+    # ## Notes wine+Resophnotes - Disabled
+    #
+    # set $notes ~/apps/resophnotes.sh 
+    # for_window [class="resophnotes.exe"] {
+    # bindsym $mod+minus exec swaymsg [class="resophnotes.exe"] scratchpad show || exec $notes
+
+    ###########################################
+    ## Spotify
+
+    #for_window [class="Spotify"] {
+    #    move scratchpad
+    #    resize set 1024 768
+    #    border pixel 4
+    #    border toggle
+    #    scratchpad show
+    #}
+    #bindsym $mod+equal exec swaymsg [class="Spotify"] scratchpad show
+    #bindsym $mod+Ctrl+equal exec swaymsg [class="Spotify"] scratchpad show || exec spotify
+
+
+
+    #bindsym $mod+Shift+minus move scratchpad
+    #bindsym $mod+minus scratchpad show
 
 ###########################################################################
 ### Status Bar:
@@ -413,8 +422,8 @@ exec (sleep 4s && nm-applet --indicator) &
 exec (sleep 5s && blueman-applet) &
 
 exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
+# exec swaymsg "workspace 7; exec kitty -e tmux -u new -A -s SYSTEM; workspace S; exec brave"
 
 # bindsym $mod+period exec dunstctl close #- panguin + backspace
 # bindsym $mod+comma exec dunstctl history-pop ###- penguing + dot
-
 
