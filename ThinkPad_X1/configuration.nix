@@ -32,7 +32,7 @@
 # echo  'ACTION=="add",SUBSYSTEM=="input",ATTR{name}=="TPPS/2 IBM TrackPoint",ATTR{device/drift_time}="25"'  > /etc/udev/rules.d/10-trackpoint.rules
 
 { pkgs, ... }: {
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -72,8 +72,8 @@
   };
 
   #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-  # hardware.ipu6.enable = true;
-  # hardware.ipu6.platform = "ipu6ep";
+  hardware.ipu6.enable = true;
+  hardware.ipu6.platform = "ipu6"; # ipu6 Tiger (this?), ipu6ep Alder/Raptor, ipu6epmtl Meteor Lake.
   ### hardware.ipu6.platform = "ipu6";
 
   # Flatpak desktop extensions
@@ -117,6 +117,16 @@
   services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
 
   services.transmission.enable = true;
+
+  services.resilio = {
+    enable = true;
+    enableWebUI = true;
+    httpListenAddr = "127.0.0.1";
+    httpListenPort = 28888;
+    directoryRoot = "/home/gds/sync/";
+    # storagePath = "/home/gds/sync/"; #/var/lib/resilio-sync/
+    deviceName = "x1";
+  };
 
   # services.getty.autologinUser = "gds";
   # systemd.services."autovt@tty1".description = "Autologin at the TTY1";
@@ -222,12 +232,16 @@
   services.system-config-printer.enable = true;
   programs.system-config-printer.enable = true;
 
+  # programs.thunar.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-    # gst_all_1.icamerasrc-ipu6ep
+    ipu6-camera-bins ipu6-camera-hal libdrm.dev
+    gst_all_1.icamerasrc-ipu6
     # linuxKernel.packages.linux_5_15.rtw89
+
     linuxHeaders
     man-pages
     man-pages-posix
@@ -299,7 +313,7 @@
     dig
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "UbuntuMono" ]; })
     hack-font
   ];
@@ -316,106 +330,119 @@
   # };
   services.keyd = {
     enable = true;
-    settings = {
-      main = {
-        leftcontrol = "layer(meta)";              # sway key
-        leftmeta    = "layer(alt)";               # as in MacOS (command)
-        leftalt     = "layer(control)";           # as in MacOS (command) copy/paste
-        rightalt    = "layer(shift)";             # easier, no need for capslock
-        sysrq       = "layer(altgr)";
-        capslock    = "overload(control, esc)";
-        space       = "overload(spaceFn, space)";
-        semicolon   = "overload(diacritic, semicolon)";
-        dot         = "overload(diacritic, dot)";
+    keyboards = {
+      default = {
+        settings = {
+          main = {
+            leftcontrol = "layer(meta)";              # Win
+            leftmeta    = "layer(alt)";               # Alt
+            leftalt     = "layer(control)";           # Ctrl (like MacOS command copy/paste)
 
-        leftshift = "oneshot(shift)";
+            rightalt    = "layer(shift)";             # Shift easier, and makes no need for capslock
+            sysrq       = "layer(altgr)";             # AltGr
 
-        # meta = oneshot(meta)
-        # control = oneshot(control)
+            capslock    = "overload(meta, esc)";      # Esc/Win capslock
+            space       = "overload(spaceFn, space)"; # SpaceFn
+            tab         = "overload(tabFn, tab)";     # 
+            # comma       = "overload(diacritic, comma)";
+            semicolon   = "overload(diacritic, semicolon)";
+            # dot         = "overload(diacritic, dot)";
+
+            # leftshift = "oneshot(shift)";
+
+            # meta = oneshot(meta)
+            # control = oneshot(control)
+          };
+
+           tabFn = {
+             "j"     = "pagedown";
+             "k"     = "pageup";
+           };
+
+          spaceFn = {
+            # Navigation
+            "y"         = "space";
+            "u"         = "home";
+            "i"         = "C-left";
+            "o"         = "C-right";
+            "p"         = "end";
+            "backspace" = "delete";
+
+            "h"     = "left";
+            "j"     = "down";
+            "k"     = "up";
+            "l"     = "right";
+            ";"     = "enter";
+            "enter" = "M-enter";
+
+            "m" = "escape";
+            "," = "backspace";
+            "." = "C-backspace";
+
+            # Sway workspaces
+            "1" = "M-1";
+            "2" = "M-2";
+            "3" = "M-3";
+            "4" = "M-4";
+            "5" = "M-5";
+            "6" = "M-6";
+            "7" = "M-7";
+            "8" = "M-8";
+            "9" = "M-9";
+            "0" = "M-0";
+            "minus" = "M-minus";
+            "equal" = "M-equal";
+            "delete" = "M-delete";
+
+            "tab" = "M-tab";
+            "q" = "M-q";
+            "w" = "M-w";
+            "e" = "M-e";
+            "r" = "M-r";
+            "t" = "M-t";
+
+            "capslock" = "M-escape";
+            "a" = "M-a";
+            "s" = "M-s";
+            "d" = "M-d";
+            "f" = "M-f";
+            "g" = "M-g";
+
+            # copy/paste
+            "c" = "C-c";
+            "v" = "C-v";
+            "x" = "C-x";
+          };
+
+          # symbols = {
+          #   "d" = "(";
+          #   "f" = ")";
+          #   "," = "backspace";
+          # };
+
+          diacritic = {
+            "q" = "G-e";
+            "w" = "G-4";     # Ė
+            "e" = "G-3";     # Ę
+
+            "a" = "G-1";     # Ą
+            "s" = "G-6";     # Š
+            "d" = "G-7";     # Ų
+            "f" = "G-5";     # Į
+
+            "z" = "G-equal"; # Ž
+            "x" = "G-8";     # Ū
+            "c" = "G-2";     # Č
+
+            "y" = "semicolon";
+            "m" = "escape";
+            "," = "backspace";
+            "." = "C-backspace";
+          };
+        };
       };
-
-      spaceFn = {
-        # Navigation
-        "y"         = "space";
-        "u"         = "home";
-        "i"         = "C-left";
-        "o"         = "C-right";
-        "p"         = "end";
-        "backspace" = "delete";
-
-        "h"     = "left";
-        "j"     = "down";
-        "k"     = "up";
-        "l"     = "right";
-        ";"     = "enter";
-        "enter" = "M-enter";
-
-        "m" = "escape";
-        "," = "backspace";
-        "." = "C-backspace";
-
-        # Sway workspaces
-        "1" = "M-1";
-        "2" = "M-2";
-        "3" = "M-3";
-        "4" = "M-4";
-        "5" = "M-5";
-        "6" = "M-6";
-        "7" = "M-7";
-        "8" = "M-8";
-        "9" = "M-9";
-        "0" = "M-0";
-        "-" = "M-minus";
-        "=" = "M-equal";
-        "delete" = "M-delete";
-
-        "tab" = "M-tab";
-        "e" = "M-e";
-        "r" = "M-r";
-        "t" = "M-t";
-
-        "capslock" = "M-escape";
-        "a" = "M-a";
-        "s" = "M-s";
-        "d" = "M-d";
-        "f" = "M-f";
-        "g" = "M-g";
-
-        # copy/paste
-        "c" = "C-c";
-        "v" = "C-v";
-        "x" = "C-x";
-      };
-
-      # symbols = {
-      #   "d" = "(";
-      #   "f" = ")";
-      #   "," = "backspace";
-      # };
-
-      diacritic = {
-        "q" = "G-e";
-        "w" = "G-4";     # Ė
-        "e" = "G-3";     # Ę
-
-        "a" = "G-1";     # Ą
-        "s" = "G-6";     # Š
-        "d" = "G-7";     # Ų
-        "f" = "G-5";     # Į
-
-        "z" = "G-equal"; # Ž
-        "x" = "G-8";     # Ū
-        "c" = "G-2";     # Č
-
-        "y" = "semicolon";
-        "m" = "escape";
-        "," = "backspace";
-        "." = "C-backspace";
-      };
-
     };
   };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

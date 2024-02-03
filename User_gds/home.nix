@@ -1,15 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 
   home.username = "gds";
   home.homeDirectory = "/home/gds";
 
   home.file = {
-    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/.tmux.conf";
-    ".tmux/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/themes";
-    ".tmux/post_save.sh".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/post_save.sh";
+    # ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/.tmux.conf";
+    # ".tmux/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/themes";
+    # ".tmux/post_save.sh".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux/post_save.sh";
+    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/tmux";
+
     ".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/autoload";
     ".vim/colors".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/colors";
     ".vim/vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/User_gds/vim/vimrc";
@@ -51,6 +53,12 @@
     usbutils
     nnn
 
+    ranger
+    w3m #png/photo
+
+    felix-fm chafa zoxide bat
+
+
     inxi
     glxinfo
     xorg.xdpyinfo
@@ -68,6 +76,7 @@
     ansible
     nmap
     netcat
+    hping
 
     # Tools
     bc
@@ -97,7 +106,8 @@
     marksman                          # LSP: markdown
     nil                               # LSP: nix
     taplo                             # LSP: toml
-    nodePackages.yaml-language-server # LSP: yaml
+    # nodePackages.yaml-language-server # LSP: yaml1
+    ansible-language-server           # LSP: yaml2
     rubyPackages.solargraph           # LSP: vagrant (ruby)
 
     # shell.nix:
@@ -116,14 +126,19 @@
     brave
     chromium
     firefox
+    tor-browser-bundle-bin
+    transmission
+    # transmission-gtk
 
     dropbox
     drive
+    # resilio-sync
 
     bitwarden
     gimp
     imagemagick
-    simplenote
+    nb
+    # simplenote
     standardnotes
     #skypeforlinux
     slack
@@ -136,6 +151,9 @@
     # Experimental
     albert
     kitty
+    wezterm
+    foot
+    broot
     viu
     xfce.ristretto
     poppler_utils
@@ -153,7 +171,7 @@
     sxiv
     gpicview
     shotwell
-    xfce.thunar
+    # xfce.thunar #service
     ntfs3g
     nfs-utils
     libreoffice-qt
@@ -164,16 +182,18 @@
     flameshot
 
     # obsidian
-    # joplin
-    # joplin-desktop
+    joplin
+    joplin-desktop
     discord
+    nextcloud-client
+    synology-drive-client
 
     # Flatpak
     #caprine-bin
     #viber
 
     # unfree
-    ciscoPacketTracer8
+    # ciscoPacketTracer8
   ];
 
   programs.home-manager.enable = true;
@@ -182,6 +202,8 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
+    # "electron-24.8.6" #obsidian
+    # "electron-25.9.0" #obsidian
     # "qtwebkit-5.212.0-alpha4" #foxitreader
   ];
 
