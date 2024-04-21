@@ -38,9 +38,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
+
   # boot.kernelPackages = pkgs.linuxPackages_5_15;
   # boot.kernelPackages = pkgs.linuxPackages_6_1;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -72,8 +74,8 @@
   };
 
   #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-  hardware.ipu6.enable = true;
-  hardware.ipu6.platform = "ipu6"; # ipu6 Tiger (this?), ipu6ep Alder/Raptor, ipu6epmtl Meteor Lake.
+  # hardware.ipu6.enable = true;
+  # hardware.ipu6.platform = "ipu6ep"; # ipu6 Tiger (this?), ipu6ep Alder/Raptor, ipu6epmtl Meteor Lake.
   ### hardware.ipu6.platform = "ipu6";
 
   # Flatpak desktop extensions
@@ -98,35 +100,50 @@
     };
     flatpak.enable = true;
     blueman.enable = true;
-    tlp.enable = true;
+
+      # DISABLED: Meybe causes hangs after sleep
+    thermald.enable = true; # should improve thermals, in some cases INCREASE performance and reduce power draw.
+
+    tlp = {
+      enable = true;
+      # DISABLED: Meybe causes hangs after sleep
+      # settings = {
+      #   # https://github.com/NixOS/nixpkgs/issues/211345
+      #   # tlp has mostly good config by default, try changing its governor and turbo boost settings.
+      #   CPU_BOOST_ON_AC = 1;
+      #   CPU_BOOST_ON_BAT = 0;
+      #   CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      #   CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      # };
+    };
 
     fprintd = {
       enable = true;
-      tod = {
-        enable = true;
-        driver = pkgs.libfprint-2-tod1-vfs0090;# (If the vfs0090 Driver does not work, use the following driver)
-        #driver = pkgs.libfprint-2-tod1-goodix; (On my device it only worked with this driver)
-      };
+      # tod = {
+      #   enable = true;
+      #   driver = pkgs.libfprint-2-tod1-vfs0090;# (If the vfs0090 Driver does not work, use the following driver)
+      #   #driver = pkgs.libfprint-2-tod1-goodix; (On my device it only worked with this driver)
+      # };
     };
   };
   security.pam.services.login.fprintAuth = true;
   security.pam.services.xscreensaver.fprintAuth = true;
   security.pam.services.xlock.fprintAuth = true;
+  security.pam.services.swaylock.fprintAuth = true;
   # TEMP
   services.uvcvideo.dynctrl.enable = true;
   services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
 
   services.transmission.enable = true;
 
-  services.resilio = {
-    enable = true;
-    enableWebUI = true;
-    httpListenAddr = "127.0.0.1";
-    httpListenPort = 28888;
-    directoryRoot = "/home/gds/sync/";
-    # storagePath = "/home/gds/sync/"; #/var/lib/resilio-sync/
-    deviceName = "x1";
-  };
+  # services.resilio = {
+  #   enable = true;
+  #   enableWebUI = true;
+  #   httpListenAddr = "127.0.0.1";
+  #   httpListenPort = 28888;
+  #   directoryRoot = "/home/gds/sync/";
+  #   deviceName = "x1";
+  # };
 
   # services.getty.autologinUser = "gds";
   # systemd.services."autovt@tty1".description = "Autologin at the TTY1";
@@ -142,6 +159,62 @@
   #   };
 
   # END TEMP
+
+  # services.autorandr = {
+  #   enable = true;
+  #   profiles = {
+  #     "home" = {
+  #       fingerprint = {
+  #         eDP3 = "Lenovo Group Limited T27hv-20 V308W93L";
+  #       };
+  #       config = {
+  #         # eDP1.enable = false;
+  #         DP1 = {
+  #           enable = true;
+  #           # crtc = 0;
+  #           primary = true;
+  #           position = "0x0";
+  #           # mode = "2560x1440";
+  #           mode = "1920x1080";
+  #           # gamma = "1.0:0.909:0.833";
+  #           # rate = "60.00";
+  #           # rotate = "left";
+  #         };
+  #         eDP1 = {
+  #           enable = false;
+  #           # crtc = 0;
+  #           # primary = false;
+  #           position = "0x1080";
+  #           # mode = "2560x1440";
+  #           # gamma = "1.0:0.909:0.833";
+  #           # rate = "60.00";
+  #           # rotate = "left";
+  #         };
+  #       };
+  #       # hooks.postswitch = readFile ./work-postswitch.sh;
+  #     };
+  #     # "work" = {
+  #     #   fingerprint = {
+  #     #     eDP1 = "<EDID>";
+  #     #     DP1 = "<EDID>";
+  #     #   };
+  #     #   config = {
+  #     #     eDP1.enable = false;
+  #     #     DP1 = {
+  #     #       enable = true;
+  #     #       crtc = 0;
+  #     #       primary = true;
+  #     #       position = "0x0";
+  #     #       mode = "3840x2160";
+  #     #       gamma = "1.0:0.909:0.833";
+  #     #       rate = "60.00";
+  #     #       rotate = "left";
+  #     #     };
+  #     #   };
+  #     #   hooks.postswitch = readFile ./work-postswitch.sh;
+  #     # };
+  #   };
+  # };
 
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;
@@ -202,6 +275,7 @@
     # wrapperFeatures.gtk = true; # so that gtk works properly
     # extraSessionCommands = "export MOZ_ENABLE_WAYLAND=1";
     extraPackages = with pkgs; [
+      networkmanagerapplet
       alacritty
       dmenu
       grim
@@ -209,11 +283,12 @@
       swappy
       swayidle
       swayimg
-      swaylock
+      swaylock-effects
       waybar
       wl-clipboard
       wofi
       xwayland
+      sway-audio-idle-inhibit
     ];
   };
 
@@ -238,8 +313,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-    ipu6-camera-bins ipu6-camera-hal libdrm.dev
-    gst_all_1.icamerasrc-ipu6
+    # ipu6-camera-bins ipu6-camera-hal libdrm.dev
+    # gst_all_1.icamerasrc-ipu6ep
     # linuxKernel.packages.linux_5_15.rtw89
 
     linuxHeaders
@@ -263,6 +338,10 @@
     # fishPlugins.hydro
     # unstable.fishPlugins.hydro
     unstable.helix
+    unstable.zed-editor
+
+    unstable.joplin-desktop
+    unstable.bpftop
 
     # unstable.zellij
     # zellij
@@ -294,20 +373,7 @@
     brightnessctl
     playerctl
 
-    #=== sway ===
-    # sway
-    # swaylock
-    # swayidle
-    # waybar
-    # wofi
-    # dmenu
-    # wl-clipboard
-    # grim
-    # slurp
-    # alacritty
-    networkmanagerapplet
-
-    fprintd
+    # fprintd
 
     #for wg script
     dig
@@ -345,7 +411,7 @@
             space       = "overload(spaceFn, space)"; # SpaceFn
             tab         = "overload(tabFn, tab)";     # 
             # comma       = "overload(diacritic, comma)";
-            semicolon   = "overload(diacritic, semicolon)";
+            # semicolon   = "overloadt2(diacritic, semicolon, 200)";
             # dot         = "overload(diacritic, dot)";
 
             # leftshift = "oneshot(shift)";

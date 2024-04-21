@@ -71,7 +71,7 @@
     openssl
     openvpn
     tcpdump
-    teleport
+    teleport_11
     wireguard-tools
     ansible
     nmap
@@ -91,6 +91,7 @@
     gdb
     lldb
     quilt
+    meld
     valgrind
     cloc # Code line counter
 
@@ -100,7 +101,8 @@
     lua-language-server               # LSP: lua
     rust-analyzer                     # LSP: rust 
     gopls                             # LSP: go
-    go-tools delve gdlv               # LSP: go tools (`gdlv` for GUI)
+    golangci-lint-langserver          # LSP: go cli
+    # go-tools delve gdlv             # LSP: go tools (`gdlv` for GUI)
     clang-tools                       # LSP: c/c++
     nodePackages.bash-language-server # LSP: bash
     marksman                          # LSP: markdown
@@ -127,7 +129,7 @@
     chromium
     firefox
     tor-browser-bundle-bin
-    transmission
+    # transmission
     # transmission-gtk
 
     dropbox
@@ -149,9 +151,9 @@
 
     ############################
     # Experimental
-    albert
+    # albert
     kitty
-    wezterm
+    # wezterm
     foot
     broot
     viu
@@ -182,18 +184,21 @@
     flameshot
 
     # obsidian
-    joplin
-    joplin-desktop
-    discord
-    nextcloud-client
-    synology-drive-client
+    # discord
+    # nextcloud-client
+    # synology-drive-client
 
     # Flatpak
     #caprine-bin
-    #viber
+    viber
+    # joplin-desktop => Joplin
+    # joplin         => not
 
     # unfree
     # ciscoPacketTracer8
+
+    # experimental
+    # kanshi
   ];
 
   programs.home-manager.enable = true;
@@ -202,6 +207,8 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
+    "teleport-11.3.27"
+    "openssl-1.1.1w" #for viber
     # "electron-24.8.6" #obsidian
     # "electron-25.9.0" #obsidian
     # "qtwebkit-5.212.0-alpha4" #foxitreader

@@ -20,6 +20,7 @@ rulers = [80, 120]
 #statusline = true
 color-modes = true
 # bufferline = "multiple" #always|multiple|never"
+insert-final-newline = false
 
 
 [editor.cursor-shape]
@@ -112,7 +113,9 @@ mode.select = "SEL"
 
 C-r = ":config-reload"
 C-e = "goto_last_accessed_file"
-C-s = ":update" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
+# C-s = ":update"
+C-s = ":w"
+C-S-s = ":wa" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
 C-n = "goto_next_diag"
 C-p = "goto_prev_diag"
 
@@ -176,8 +179,9 @@ D = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
 
 C-r = [ "normal_mode", ":config-reload" ]
 C-e = [ "normal_mode", "goto_last_accessed_file" ]
-C-s = [ "normal_mode", ":update" ]
-j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+C-s = [ "normal_mode", ":w" ]
+C-S-s = [ "normal_mode", ":wa" ]
+# j = { k = "normal_mode" } # Maps `jk` to exit insert mode
 
 
 ##########################################################################################################
@@ -186,7 +190,9 @@ j = { k = "normal_mode" } # Maps `jk` to exit insert mode
 
 C-r = [ "normal_mode", ":config-reload" ]
 C-e = [ "normal_mode", "goto_last_accessed_file" ]
-C-s = [ "normal_mode", ":update" ]
+# C-s = [ "normal_mode", ":update" ]
+C-s = [ "normal_mode", ":w" ]
+C-S-s = [ "normal_mode", ":wa" ]
 
 # # "{" = ["extend_to_line_bounds", "goto_prev_paragraph"]
 # # "}" = ["extend_to_line_bounds", "goto_next_paragraph"]

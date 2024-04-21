@@ -8,9 +8,11 @@ set $mod Mod4
 # set $term wezterm
 set $term alacritty
 
-set $lock_img ~/Downloads/Logo/nix_black2_blur.png
-set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
-set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
+# set $lock_img ~/Downloads/Logo/nix_black2_blur.png
+# set $mon_img  ~/Downloads/Logo/nix_black_eroded.png
+# set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
+set $lapt_img ~/Downloads/Logo/nix_black2_blur.png
+set $mon_img ~/Downloads/Logo/nix_black2_blur.png
 
 
 ###########################################################################
@@ -19,51 +21,57 @@ set $lapt_img ~/Downloads/Logo/nix_black_eroded.png
 
 set $mon_laptop eDP-1
 set $mon_asus  "Unknown ASUS MB169C+ HBLMTF011738"
-set $mon_work1 "Dell Inc. DELL P2419HC F41RC53"
-set $mon_work2 "Dell Inc. DELL P2419HC BJTLK03"
-set $mon_home  "Lenovo Group Limited T27hv-20 V308W93L"
+set $mon_work "Dell Inc. DELL P2419HC F41RC53"
+set $mon_home "Lenovo Group Limited T27hv-20 V308W93L"
 
-###########################################################################
-### Output configuration
+output $mon_home   pos     0     0 res 2560x1440@75Hz scale 1.333
+output $mon_work   pos     0     0 res 1920x1080@60Hz scale 1.0
+output $mon_laptop pos   200  1080 res 2880x1800@90Hz scale 2.0
 
-output $mon_home   pos     0     0 res 1920x1080
-output $mon_work1  pos     0     0 res 1920x1080
-output $mon_laptop pos     0  1080 res 1920x1200
-
-focus_follows_mouse yes
-focus output $mon_home
-workspace * output $mon_home
-
-###########################################################################
-### Output configuration
+# this worked ok also
+# output $mon_home   pos     0     0 res 1920x1080
+# output $mon_work   pos     0     0 res 1920x1080
+# output $mon_laptop pos     0  1080 res 1920x1200
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# swaymsg -t get_outputs
+output * bg $mon_img  fill
 output $mon_asus   bg $mon_img  fill
-output $mon_work1  bg $mon_img  fill
-output $mon_work2  bg $mon_img  fill
+output $mon_work   bg $mon_img  fill
 output $mon_home   bg $mon_img  fill
 output $mon_laptop bg $lapt_img fill
 
+focus_follows_mouse yes
+# focus output $mon_home
+# workspace * output $mon_home
+
+
 ###########################################################################
-### Idle configuration
+### Lock / idle configuration
 
 # This will lock screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-set $lock 'swaylock --daemonize --image $lock_img --show-failed-attempts'
-
-#exec swayidle -w \
-         #timeout 900  $lock \
-         #timeout 1800 'swaymsg "output * dpms off"' \
-         #resume       'swaymsg "output * dpms on"' \
-         #before-sleep $lock \
-         #before-sleep 'playerctl pause' \
-         #lock         $lock
+# set $lock 'swaylock --daemonize --image $lock_img --show-failed-attempts --clock'
+# set $lock 'swaylock --daemonize -c "#000000" --show-failed-attempts --clock --indicator'
+set $lock 'swaylock --daemonize -c 000000 --show-failed-attempts --clock --indicator --datestr %Y-%m-%d'
 
 # Lock on close lid (works with suspend)
 bindswitch --reload --locked lid:on exec $lock
+
+exec swayidle -w \
+         timeout 300  $lock \
+         timeout 600  'swaymsg "output * dpms off"' \
+         resume       'swaymsg "output * dpms on"' \
+         before-sleep $lock \
+         before-sleep 'playerctl pause' \
+         lock         $lock
+
+ #If some window in fullscreen mode, stop swayidle
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
+
+ # also sway-audio-idle-inhibit
 
 ###########################################################################
 ### Keyboard -> Input configuration
@@ -92,8 +100,9 @@ input "type:keyboard" {
 
 # Basics:
 
-    bindsym $mod+Delete exec 'playerctl pause';\
-                        exec 'swaylock -f -c 222222 -K -i $lock_img'
+    # bindsym $mod+Delete exec 'playerctl pause';\
+    #                     exec 'swaylock -f -c 222222 -K -i $lock_img'
+    bindsym $mod+Delete exec $lock
 
     # bindsym $mod+Shift+z exec 'playerctl pause';\
     #                      exec 'swaylock -f -c 222222 -K -i $lock_img'
@@ -144,10 +153,10 @@ input "type:keyboard" {
     bindsym $mod+k     focus up
     bindsym $mod+l     focus right
     bindsym $mod+Left  focus left
+    bindsym $mod+Right focus right
     bindsym $mod+Down  focus down
     bindsym $mod+Up    focus up
-    bindsym $mod+Right focus right
-    bindsym $mod+semicolon  focus left
+    # bindsym $mod+semicolon  focus left
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+h     move left
@@ -155,9 +164,20 @@ input "type:keyboard" {
     bindsym $mod+Shift+k     move up
     bindsym $mod+Shift+l     move right
     bindsym $mod+Shift+Left  move left
+    bindsym $mod+Shift+Right move right
     bindsym $mod+Shift+Down  move down
     bindsym $mod+Shift+Up    move up
-    bindsym $mod+Shift+Right move right
+
+    bindsym $mod+Alt+Up        focus output DP-3
+    bindsym $mod+Alt+Down      focus output eDP-1
+    bindsym $mod+Alt+Ctrl+Up   focus output eDP-1; move workspace to output  DP-3; focus output eDP-1
+    bindsym $mod+Alt+Ctrl+Down focus output  DP-3; move workspace to output eDP-1; focus output  DP-3
+    # bindsym $mod++Up           move workspace to output DP-3
+    # bindsym $mod++Down         move workspace to output eDP-1
+
+    # Focusing/Moving workspaces between screens
+    bindsym $mod+Shift+Tab     move workspace to output primary
+    bindsym $mod+Tab           focus output up
 
 ###########################################################################
 ### Keyboard -> Workspaces:
@@ -207,10 +227,6 @@ input "type:keyboard" {
     bindsym $mod+Shift+w move container to workspace W
     bindsym $mod+Shift+e move container to workspace E
     bindsym $mod+Shift+r move container to workspace R
-
-    # Focusing/Moving workspaces between screens
-    bindsym $mod+Tab focus output up
-    bindsym $mod+Shift+Tab move workspace to output up
 
 ###########################################################################
 ### Keyboard -> Layout:
@@ -341,8 +357,14 @@ default_border pixel 2
 default_floating_border pixel 1
 
 #              ttl-bord   ttl-bg    ttl-fg    new-view  the-border
-client.focused "#444444" "#444444" "#ffff00" "#0000ff" "#ffff00"
+client.focused "#444444" "#444444" "#00aaff" "#0000ff" "#00aaff"
 
+
+###########################################################################
+### Specifics
+
+for_window [app_id="ffnotes"] resize set width 30 ppt
+for_window [app_id="ffnotes"] resize set height 30 ppt
 
 ###########################################################################
 ### Scratchpad
@@ -416,14 +438,20 @@ bar {
 include /etc/sway/config.d/*
 ###########################################################################
 
+
 # exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec (sleep 1s && albert) &
-exec (sleep 4s && nm-applet --indicator) &
-exec (sleep 5s && blueman-applet) &
+
+
+# DISABLED: Unlikely, but could cause hangs after sleep
+# exec_always (pkill kanshi; sleep 2s; kanshi) &
+
+exec (sleep 2s && nm-applet --indicator) &
+exec (sleep 4s && blueman-applet) &
+exec (sleep 10s && $HOME/dev/inhibit-bridge/bin/inhibit-bridge -manual_inhibit_timeout 360m) &
 
 exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
-# exec swaymsg "workspace 7; exec kitty -e tmux -u new -A -s SYSTEM; workspace S; exec brave"
 
 # bindsym $mod+period exec dunstctl close #- panguin + backspace
 # bindsym $mod+comma exec dunstctl history-pop ###- penguing + dot
+
 

@@ -1,0 +1,37 @@
+# language-id: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocumentItem
+
+[[language]]
+name = "c"
+# language-id = "c"
+indent = { unit = "    ", tab-width = 4 }
+diagnostic-severity = "Hint"
+auto-format = false
+
+
+# [[language]]
+# name = "cpp"
+# language-id = "cpp"
+# indent = { tab-width = 4, unit = "    " }
+# auto-format = false
+# #language-server.command = ""
+
+[[language]]
+name = "markdown"
+# language-id = ""
+indent = { tab-width = 2, unit = "    " }
+soft-wrap.enable = true
+
+[[language]]
+name = "rust"
+# language-id = ""
+diagnostic-severity = "Hint"
+
+# disable LSP - https://github.com/helix-editor/helix/issues/6686
+[[language]]
+name = "bash"
+# language-id = ""
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'shfmt', args = ["-i", "4"] }
+
+# # expected one of `name`, `scope`, `file-types`, `shebangs`, `roots`, `comment-token`, `text-width`, `soft-wrap`, `config`, `auto-format`, `formatter`, `diagnostic-severity`, `grammar`, `injection-regex`, `language-server`, `indent`, `debugger`, `auto-pairs`, `rulers`, `workspace-lsp-roots`
+# #`in `language`
