@@ -363,8 +363,8 @@ client.focused "#444444" "#444444" "#00aaff" "#0000ff" "#00aaff"
 ###########################################################################
 ### Specifics
 
-for_window [app_id="ffnotes"] resize set width 30 ppt
-for_window [app_id="ffnotes"] resize set height 30 ppt
+for_window [app_id="ffnotes"] resize set width 25 ppt
+for_window [app_id="ffnotes"] resize set height 25 ppt
 
 ###########################################################################
 ### Scratchpad

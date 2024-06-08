@@ -26,6 +26,14 @@
 # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 # flatpak install viber
 #
+# Add Snap  # TAG: snap
+# FAILS
+# sudo nix-channel --add https://github.com/io12/nix-snapd/archive/main.tar.gz nix-snapd
+# sudo nix-channel --update
+# FAILS
+# nix flake show "https://flakehub.com/f/io12/nix-snapd/0.1.42.tar.gz"
+# fh add "io12/nix-snapd/0.1.42"
+
 # brave://flags/ # enable-webrtc-pipewire-capturer
 
 # TODO
@@ -34,15 +42,15 @@
 { pkgs, ... }: {
   system.stateVersion = "23.11";
 
+  # imports = [ (import <nix-snapd>).nixosModules.default ];  # TAG: snap
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
 
-  # boot.kernelPackages = pkgs.linuxPackages_5_15;
-  # boot.kernelPackages = pkgs.linuxPackages_6_1;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_6_6;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -98,6 +106,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    # snap.enable = true;  # TAG: snap
     flatpak.enable = true;
     blueman.enable = true;
 
@@ -134,14 +143,18 @@
   services.uvcvideo.dynctrl.enable = true;
   services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
 
-  services.transmission.enable = true;
+  # FIX added to test 4G/LTE
+  # services.modemmanager.enable = true;
+
+  # services.transmission.enable = true;
 
   # services.resilio = {
   #   enable = true;
   #   enableWebUI = true;
   #   httpListenAddr = "127.0.0.1";
-  #   httpListenPort = 28888;
-  #   directoryRoot = "/home/gds/sync/";
+  #   httpListenPort = 57788;
+  #   directoryRoot = "/home/gds/sync";
+  #   storagePath = "/home/gds/_db/";
   #   deviceName = "x1";
   # };
 
@@ -217,12 +230,15 @@
   # };
 
   virtualisation.docker.enable = true;
+
   virtualisation.virtualbox.host.enable = true;
-  # virtualisation.libvirtd.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true; #USB support
   # virtualisation.virtualbox.host.package = pkgs.unstable.virtualbox;
-  # with these fails vagrant up
-  # virtualisation.virtualbox.host.enableExtensionPack = true; #USB support
   users.extraGroups.vboxusers.members = [ "gds" ];
+
+  # virtualisation.libvirtd.enable = true;
+  # with these fails vagrant up
+
 
   #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
   environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
@@ -262,6 +278,7 @@
     };
 
     # starship.enable = true;
+    nm-applet.enable = true;
     nm-applet.indicator = true;
     git = {
       enable = true;
@@ -340,8 +357,11 @@
     unstable.helix
     unstable.zed-editor
 
-    unstable.joplin-desktop
+    # unstable.joplin-desktop
     unstable.bpftop
+
+    # unstable.drive
+    
 
     # unstable.zellij
     # zellij
@@ -357,6 +377,7 @@
     fd
     ripgrep
     silver-searcher
+    autojump
     neofetch
     htop
     powertop
@@ -366,6 +387,8 @@
     # vagrant
 
     # bash
+    modemmanager
+    modem-manager-gui
 
     #=== controls ===
     pavucontrol
@@ -377,6 +400,8 @@
 
     #for wg script
     dig
+    pciutils  #lspci
+    linux-firmware 
   ];
 
   fonts.packages = with pkgs; [
@@ -405,16 +430,21 @@
             leftalt     = "layer(control)";           # Ctrl (like MacOS command copy/paste)
 
             rightalt    = "layer(shift)";             # Shift easier, and makes no need for capslock
-            sysrq       = "layer(altgr)";             # AltGr
+            # sysrq       = "layer(altgr)";             # AltGr
 
             capslock    = "overload(meta, esc)";      # Esc/Win capslock
-            space       = "overload(spaceFn, space)"; # SpaceFn
-            tab         = "overload(tabFn, tab)";     # 
-            # comma       = "overload(diacritic, comma)";
-            # semicolon   = "overloadt2(diacritic, semicolon, 200)";
-            # dot         = "overload(diacritic, dot)";
 
-            # leftshift = "oneshot(shift)";
+            # space       = "overload(spaceFn, space)"; # SpaceFn
+            space       = "overloadt2(spaceFn, space, 200)"; # SpaceFn
+
+            tab         = "overload(tabFn, tab)";     # 
+            semicolon   = "overloadt2(diacritic, semicolon, 200)";
+            comma   = "overloadt2(diacritic, comma, 300)";
+            # comma       = "overload(diacritic, comma)";
+            # dot         = "overload(diacritic, dot)";
+            sysrq       = "layer(diacritic)";             # AltGr
+
+            leftshift = "oneshot(shift)";
 
             # meta = oneshot(meta)
             # control = oneshot(control)

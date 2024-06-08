@@ -2,8 +2,8 @@ if status is-interactive
     # function fish_right_prompt
     #     #intentionally left blank
     # end
- 
-    fish_add_path "/home/gds/scripts"
+
+    fish_add_path /home/gds/scripts
     # Variables
     set -gx fish_greeting
     set -gx fish_prompt_pwd_dir_length 0
@@ -20,7 +20,7 @@ if status is-interactive
     # set --global hydro_color_duration "555555"
     # set --global hydro_cmd_duration_threshold "1000000000"
     # set --global hydro_fetch          false
-    
+
     # set -g __fish_git_prompt_show_informative_status 1
     # # set -g __fish_git_prompt_hide_untrackedfiles 1
 
@@ -68,7 +68,7 @@ if status is-interactive
 
         set --query $out && echo $out || echo $ms"ms"
     end
-    
+
     function fish_prompt --description 'Write out the prompt'
         set -l last_pipestatus $pipestatus
         set -lx __fish_last_status $status # Export for __fish_print_pipestatus.
@@ -96,13 +96,24 @@ if status is-interactive
             echo -n " "$(humantime $CMD_DURATION)
         end
 
-        # PREFIX
-        set_color "#FFFF00" --bold
-        echo -en "\n❱ "
-        set_color normal
+        # # PREFIX
+        # set_color "#FFFF00" --bold
+        # echo -en "\n❱ "
+        # set_color normal
+
+        if whoami | grep -q vagrant
+            set_color "#00FF00" --bold
+            echo -en "\n❱❱ "
+            set_color normal
+        else
+            set_color "#FFFF00" --bold
+            echo -en "\n❱ "
+            set_color normal
+        end
+
     end
 
-    
+
 
     set -x DIRENV_LOG_FORMAT ""
     set -g fish_key_timeout 5000
@@ -163,7 +174,7 @@ if status is-interactive
     # alias zellij="/home/gds/dev/zellij/target/release/zellij"
     # alias zn="/home/gds/dev/zellij/target/release/zellij -s"
     alias zz="/home/gds/dev/zellij/target/release/zellij"
-    
+
 
     # alias e="nvim"
     alias e="hx"

@@ -39,6 +39,8 @@
     xdg-utils
     vagrant
     # virtualbox
+    minikube
+    kubectl
 
     # Desktop env
     # mako # notifications (annoying)
@@ -51,10 +53,11 @@
     lsof
     sysstat
     usbutils
-    nnn
-
+    # nnn
+    (nnn.override { withNerdIcons = true; })
     ranger
     w3m #png/photo
+    ncdu  #cleanup storage
 
     felix-fm chafa zoxide bat
 
@@ -128,13 +131,14 @@
     brave
     chromium
     firefox
-    tor-browser-bundle-bin
+    # tor-browser-bundle-bin
     # transmission
     # transmission-gtk
 
     dropbox
-    drive
+    # drive
     # resilio-sync
+    rclone
 
     bitwarden
     gimp
@@ -178,15 +182,15 @@
     nfs-utils
     libreoffice-qt
 
-    transmission
+    # transmission
     xfce.xfce4-taskmanager
     anki-bin
     flameshot
 
-    # obsidian
+    obsidian
     # discord
     # nextcloud-client
-    # synology-drive-client
+    synology-drive-client
 
     # Flatpak
     #caprine-bin
@@ -199,6 +203,14 @@
 
     # experimental
     # kanshi
+
+    pcmanfm
+    lf
+    krusader
+    krename
+
+    zim
+    cherrytree
   ];
 
   programs.home-manager.enable = true;
@@ -209,8 +221,7 @@
     "adobe-reader-9.5.5"
     "teleport-11.3.27"
     "openssl-1.1.1w" #for viber
-    # "electron-24.8.6" #obsidian
-    # "electron-25.9.0" #obsidian
+    "electron-25.9.0" #obsidian
     # "qtwebkit-5.212.0-alpha4" #foxitreader
   ];
 

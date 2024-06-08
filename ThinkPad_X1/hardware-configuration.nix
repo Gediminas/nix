@@ -6,11 +6,19 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "thunderbolt"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    # "usbserial" # FIX added to test 4G/LTE
+    # "option"    # FIX added to test 4G/LTE
+    # "cdc_mbim"  # FIX added to test 4G/LTE
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "uvcvideo" ];
-  boot.blacklistedKernelModules = [ "mtk_t7xx" ];
+  boot.blacklistedKernelModules = [ "mtk_t7xx" ]; # FIX disabled to test 4G/LTE
   boot.extraModulePackages = [ ];
 
   #boot.kernelParams = [ "i915.force_probe=46a6" ]; #GL

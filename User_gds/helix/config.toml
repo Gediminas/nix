@@ -255,6 +255,7 @@ Q = ":insert-output date +'%yq'"
 c = "toggle_comments"
 n = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded"] #search_next #https://github.com/helix-editor/helix/issues/6478
 ";" = ["move_prev_word_start", "move_next_word_end", "search_selection", "global_search"]
+v = ":sh hel"
 
 [keys.select.space]
 c = "toggle_comments"

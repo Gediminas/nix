@@ -418,6 +418,11 @@ set vifminfo=dhistory,chistory,state,shistory,
 
 " Sample mappings
 
+" https://unix.stackexchange.com/questions/617722/how-to-make-the-l-key-or-right-arrow-in-vifm-move-to-preview-pane-instead-of
+" checks the type of the selected file. If it is a directory, then cd it. Otherwise, execute the normal mode command +, that is mapped to Shift -Tab, which causes the view pane to be focused
+nnoremap + <s-tab>
+nnoremap l :if filetype('.') == "dir"|cd %c|else|exe 'norm +'|endif<CR>
+
 " Start shell in current directory
 nnoremap s :shell<cr>
 
