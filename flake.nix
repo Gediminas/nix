@@ -4,12 +4,12 @@
   inputs = {
 
     # NixOS
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home-Manager
     #url = "github:nix-community/home-manager";
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hardware-quirks.url = "github:NixOS/nixos-hardware/master";
@@ -37,7 +37,7 @@
             home = {
               username = "gds";
               homeDirectory = "/home/gds";
-              stateVersion = "23.11";
+              stateVersion = "24.05";
             };
           }
         ];
@@ -53,7 +53,7 @@
             home = {
               username = "Eleonora";
               homeDirectory = "/home/eleonora";
-              stateVersion = "23.11";
+              stateVersion = "24.05";
             };
           }
         ];

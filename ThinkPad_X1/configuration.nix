@@ -40,7 +40,7 @@
 # echo  'ACTION=="add",SUBSYSTEM=="input",ATTR{name}=="TPPS/2 IBM TrackPoint",ATTR{device/drift_time}="25"'  > /etc/udev/rules.d/10-trackpoint.rules
 
 { pkgs, ... }: {
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # imports = [ (import <nix-snapd>).nixosModules.default ];  # TAG: snap
 
@@ -97,8 +97,10 @@
   services = {
     # Configure keymap in X11
     xserver = {
-      layout = "us";
-      xkbVariant = "";
+      xkb = { 
+        layout = "us";
+        variant = "";
+      };
     };
     pipewire = {
       enable = true;

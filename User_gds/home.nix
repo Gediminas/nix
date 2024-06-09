@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   home.username = "gds";
   home.homeDirectory = "/home/gds";
@@ -34,7 +34,7 @@
     # fish
     # fishPlugins.tide
     # fishPlugins.hydro
-    nixfmt
+    # nixfmt
     direnv
     xdg-utils
     vagrant
@@ -74,7 +74,7 @@
     openssl
     openvpn
     tcpdump
-    teleport_11
+    # teleport_11
     wireguard-tools
     ansible
     nmap

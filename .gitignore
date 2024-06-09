@@ -3,6 +3,10 @@
 /User_gds/tmux/plugins/
 /User_gds/nvim/plugin/
 /User_gds/vim/plugged/
+
+/User_gds/vifm/vifm-help.txt
+/User_gds/vifm/vifminfo.json
+
 #/cfg/configuration.nix
 #/cfg/hardware-configuration.nix
 
