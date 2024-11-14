@@ -7,20 +7,19 @@ theme = "a_transp_dracula"
 # ###################################################################
 [editor]
 line-number = "relative"
+color-modes = true
 cursorline = true
-# cursorcolumn = false
 true-color = true
-# color-modes = true
 auto-pairs = false
+auto-save = true
+insert-final-newline = false
+rulers = [80, 120]
+# cursorcolumn = false
+# color-modes = true
 # auto-completion = true
 # auto-format = true
 # auto-info = true
-auto-save = true
-rulers = [80, 120]
-#statusline = true
-color-modes = true
 # bufferline = "multiple" #always|multiple|never"
-insert-final-newline = false
 
 
 [editor.cursor-shape]
@@ -30,6 +29,12 @@ select = "underline"
 
 [editor.whitespace]
 render = "all"
+
+# does not work
+[editor.file-picker]
+hidden = true
+parents = true
+git-ignore = true
 
 #       # or control each character
 # [editor.whitespace.render]
@@ -46,28 +51,13 @@ tab = ">"
 # tabpad = "·" # Tabs will look like "→···" (depending on tab width)
 tabpad = "→"
 
-# [editor.whitespace.render]
-# # space = "none"
-# tab = "all"
-# # nbsp = "all"
-# # newline = "all"
-
-# # [editor.file-picker]
-# # hidden = false
-# # parents = false
-# # git-ignore = false
-
 [editor.indent-guides]
 render = true
-character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+character = "┊" # Some characters that work well: ▏╎┆┊⸽
 skip-levels = 1
 
 # # [editor.soft-wrap]
 # # enable = true
-
-# # [editor.file-picker]
-# # hidden = true
-# # git-ignore = false
 
 [editor.statusline]
 # defaults:
@@ -111,9 +101,16 @@ mode.select = "SEL"
 # ";" = "command_mode"
 # ":" = "collapse_selection"
 
-C-r = ":config-reload"
-C-e = "goto_last_accessed_file"
+# C-r = ":reload"
+# C-R = ":config-reload"
 # C-s = ":update"
+
+# C-r = ":sh ./.cmd/r.sh"
+# C-t = ":sh ./.cmd/t.sh"
+C-r = ":sh tmux send-keys -t 2 ./.cmd/r.sh Enter"
+C-t = ":sh tmux send-keys -t 2 ./.cmd/t.sh Enter"
+
+C-e = "goto_last_accessed_file"
 C-s = ":w"
 C-S-s = ":wa" # Maps the Control-s to the typable command :w which is an alias for :write (save file)
 C-n = "goto_next_diag"
@@ -177,7 +174,9 @@ D = ["collapse_selection", "select_mode", "goto_line_end", "delete_selection"]
 ##########################################################################################################
 [keys.insert]
 
-C-r = [ "normal_mode", ":config-reload" ]
+# C-r = [ "normal_mode", ":config-reload" ]
+# C-r = [ "normal_mode", ":sh ./.cmd/r.sh" ]
+# C-t = [ "normal_mode", ":sh ./.cmd/t.sh" ]
 C-e = [ "normal_mode", "goto_last_accessed_file" ]
 C-s = [ "normal_mode", ":w" ]
 C-S-s = [ "normal_mode", ":wa" ]
@@ -188,9 +187,9 @@ C-S-s = [ "normal_mode", ":wa" ]
 ##########################################################################################################
 [keys.select]
 
-C-r = [ "normal_mode", ":config-reload" ]
+# C-r = [ "normal_mode", ":sh ./.cmd/r.sh" ]
+# C-t = [ "normal_mode", ":sh ./.cmd/t.sh" ]
 C-e = [ "normal_mode", "goto_last_accessed_file" ]
-# C-s = [ "normal_mode", ":update" ]
 C-s = [ "normal_mode", ":w" ]
 C-S-s = [ "normal_mode", ":wa" ]
 
@@ -255,7 +254,7 @@ Q = ":insert-output date +'%yq'"
 c = "toggle_comments"
 n = ["move_next_word_end", "move_prev_word_start", "search_selection", "make_search_word_bounded"] #search_next #https://github.com/helix-editor/helix/issues/6478
 ";" = ["move_prev_word_start", "move_next_word_end", "search_selection", "global_search"]
-v = ":sh hel"
+v = ":sh tmux send-keys -t 2 ./.cmd/t.sh Enter"
 
 [keys.select.space]
 c = "toggle_comments"

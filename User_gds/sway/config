@@ -20,12 +20,17 @@ set $mon_img ~/Downloads/Logo/nix_black2_blur.png
 # (swaymsg -t get_outputs)
 
 set $mon_laptop eDP-1
-set $mon_asus  "Unknown ASUS MB169C+ HBLMTF011738"
+set $mon_any DP-1
+
+# set $mon_asus  "Unknown ASUS MB169C+ HBLMTF011738"
+set $mon_asus  "ASUSTek COMPUTER INC ASUS MB169C+ HBLMTF011738"
 set $mon_work "Dell Inc. DELL P2419HC F41RC53"
 set $mon_home "Lenovo Group Limited T27hv-20 V308W93L"
 
 output $mon_home   pos     0     0 res 2560x1440@75Hz scale 1.333
 output $mon_work   pos     0     0 res 1920x1080@60Hz scale 1.0
+output $mon_any    pos     0     0 res 1920x1080@60Hz scale 1.0
+output $mon_asus   pos  1440  1080 res 1280x1024@75Hz scale 1.0
 output $mon_laptop pos   200  1080 res 2880x1800@90Hz scale 2.0
 
 # this worked ok also
@@ -35,10 +40,10 @@ output $mon_laptop pos   200  1080 res 2880x1800@90Hz scale 2.0
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $mon_img  fill
-output $mon_asus   bg $mon_img  fill
-output $mon_work   bg $mon_img  fill
-output $mon_home   bg $mon_img  fill
-output $mon_laptop bg $lapt_img fill
+# output $mon_asus   bg $mon_img  fill
+# output $mon_work   bg $mon_img  fill
+# output $mon_home   bg $mon_img  fill
+# output $mon_laptop bg $lapt_img fill
 
 focus_follows_mouse yes
 # focus output $mon_home
@@ -56,16 +61,18 @@ focus_follows_mouse yes
 # set $lock 'swaylock --daemonize -c "#000000" --show-failed-attempts --clock --indicator'
 set $lock 'swaylock --daemonize -c 000000 --show-failed-attempts --clock --indicator --datestr %Y-%m-%d'
 
+
 # Lock on close lid (works with suspend)
 bindswitch --reload --locked lid:on exec $lock
 
-exec swayidle -w \
-         timeout 300  $lock \
-         timeout 600  'swaymsg "output * dpms off"' \
-         resume       'swaymsg "output * dpms on"' \
-         before-sleep $lock \
-         before-sleep 'playerctl pause' \
-         lock         $lock
+# FIXME
+# exec swayidle -w \
+#          timeout 300  $lock \
+#          timeout 600  'swaymsg "output * dpms off"' \
+#          resume       'swaymsg "output * dpms on"' \
+#          before-sleep $lock \
+#          before-sleep 'playerctl pause' \
+#          lock         $lock
 
  #If some window in fullscreen mode, stop swayidle
 for_window [class=".*"] inhibit_idle fullscreen
@@ -102,7 +109,11 @@ input "type:keyboard" {
 
     # bindsym $mod+Delete exec 'playerctl pause';\
     #                     exec 'swaylock -f -c 222222 -K -i $lock_img'
-    bindsym $mod+Delete exec $lock
+    # bindsym $mod+Delete exec $lock
+
+    bindsym $mod+Insert exec playerctl play-pause
+    bindsym $mod+End    exec playerctl --all-players pause
+    bindsym $mod+Delete exec playerctl --all-players pause; exec $lock
 
     # bindsym $mod+Shift+z exec 'playerctl pause';\
     #                      exec 'swaylock -f -c 222222 -K -i $lock_img'
@@ -172,6 +183,11 @@ input "type:keyboard" {
     bindsym $mod+Alt+Down      focus output eDP-1
     bindsym $mod+Alt+Ctrl+Up   focus output eDP-1; move workspace to output  DP-3; focus output eDP-1
     bindsym $mod+Alt+Ctrl+Down focus output  DP-3; move workspace to output eDP-1; focus output  DP-3
+    # bindsym $mod+Alt+Up        focus output DP-1
+    # bindsym $mod+Alt+Down      focus output eDP-1
+    # bindsym $mod+Alt+Ctrl+Up   focus output eDP-1; move workspace to output  DP-1; focus output eDP-1
+    # bindsym $mod+Alt+Ctrl+Down focus output  DP-1; move workspace to output eDP-1; focus output  DP-1
+
     # bindsym $mod++Up           move workspace to output DP-3
     # bindsym $mod++Down         move workspace to output eDP-1
 
@@ -198,11 +214,13 @@ input "type:keyboard" {
     bindsym $mod+s workspace S
     bindsym $mod+d workspace D
     bindsym $mod+f workspace F
+    bindsym $mod+g workspace G
 
     bindsym $mod+q workspace Q
     bindsym $mod+w workspace W
     bindsym $mod+e workspace E
     bindsym $mod+r workspace R
+    bindsym $mod+t workspace T
 
     bindsym $mod+Alt+Ctrl+t border toggle
 
@@ -222,11 +240,13 @@ input "type:keyboard" {
     bindsym $mod+Shift+s move container to workspace S
     bindsym $mod+Shift+d move container to workspace D
     bindsym $mod+Shift+f move container to workspace F
+    bindsym $mod+Shift+g move container to workspace G
 
     bindsym $mod+Shift+q move container to workspace Q
     bindsym $mod+Shift+w move container to workspace W
     bindsym $mod+Shift+e move container to workspace E
     bindsym $mod+Shift+r move container to workspace R
+    bindsym $mod+Shift+t move container to workspace T
 
 ###########################################################################
 ### Keyboard -> Layout:
@@ -392,7 +412,7 @@ for_window [app_id="ffnotes"] resize set height 25 ppt
     ###########################################
     # ## Notes tmux+nvim/hx - Disabled
     #
-    set $notes $term --title Notes --working-directory ~/Notes --command tmux -u new -A -s NOTES
+    set $notes $term --title Notes --working-directory ~/Dropbox/Notes/Daily --command tmux -u new -A -s NOTES
     for_window [title="^Notes$"] {
         move scratchpad
         resize set 1000 800
@@ -409,6 +429,18 @@ for_window [app_id="ffnotes"] resize set height 25 ppt
     # for_window [class="resophnotes.exe"] {
     # bindsym $mod+minus exec swaymsg [class="resophnotes.exe"] scratchpad show || exec $notes
 
+    ##########################################
+    # Calc
+
+    for_window [title="SpeedCrunch"] {
+        move scratchpad
+        resize set 600 600
+        border pixel 1
+        border toggle
+        scratchpad show
+    }
+    bindsym $mod+equal exec swaymsg [title="SpeedCrunch"] scratchpad show || exec speedcrunch
+    # bindsym $mod+Ctrl+equal exec swaymsg [class="Spotify"] scratchpad show || exec spotify
     ###########################################
     ## Spotify
 
@@ -449,7 +481,10 @@ exec (sleep 2s && nm-applet --indicator) &
 exec (sleep 4s && blueman-applet) &
 exec (sleep 10s && $HOME/dev/inhibit-bridge/bin/inhibit-bridge -manual_inhibit_timeout 360m) &
 
-exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
+# exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
+exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM;\
+              workspace 8; exec audacious;\
+              workspace F; exec firefox -p Home"
 
 # bindsym $mod+period exec dunstctl close #- panguin + backspace
 # bindsym $mod+comma exec dunstctl history-pop ###- penguing + dot

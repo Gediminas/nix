@@ -1,9 +1,11 @@
+# Orig on NixOS:
+# fd dracula.toml /nix/store | grep helix-
+# /nix/store/q5k6926qyz5iar08av6pn2a82r23zs9q-helix-24.07/lib/runtime/themes/dracula.toml
+
 inherits = "dracula"
-"ui.background" = {}
-# "ui.selection" = { bg = "#aa00aa" }
-#"ui.selection.primary" = { bg = "#000099" }
-# "ui.selection.primary" = { bg = "#770077" }
-"ui.selection.primary" = { bg = "#990099" }
+
+"ui.background"            = {}
+"ui.selection.primary"     = { bg = "#5500FF" }
 "ui.cursor.primary.normal" = { fg = "#000000", bg = "#ffff00"}
-# "ui.cursor.primary.select" = { fg = "#000000", bg = "#9999ff"}
-# "ui.cursor.match" = { bg = "#00ff00"}
+"ui.virtual.indent-guide"  = { fg = "#56596a" }
+"ui.virtual.whitespace"    = { fg = "#303030"}

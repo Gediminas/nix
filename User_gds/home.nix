@@ -39,9 +39,8 @@
     xdg-utils
     vagrant
     # virtualbox
-    minikube
-    kubectl
-
+    # minikube
+    # kubectl
     # Desktop env
     # mako # notifications (annoying)
     dunst # notifications (customizable; invisible)
@@ -71,12 +70,11 @@
     inetutils # telnet
     iperf
     mtr
-    openssl
     openvpn
     tcpdump
-    # teleport_11
+    teleport
     wireguard-tools
-    ansible
+    # ansible
     nmap
     netcat
     hping
@@ -126,16 +124,24 @@
     htop
     gitui
     lazygit
+    tig
+    gitg
+    smartgithg
 
     # GUI Apps
     brave
     chromium
     firefox
+    # (firefox.override { extraNativeMessagingHosts = [ firefox-profile-switcher-connector ]; })
+
+    # librewolf-unwrapped  # has sync
+    # librewolf
+    # ladybird
     # tor-browser-bundle-bin
     # transmission
     # transmission-gtk
 
-    dropbox
+    # dropbox
     # drive
     # resilio-sync
     rclone
@@ -167,11 +173,11 @@
     zathura
     mupdf
     masterpdfeditor
-    adobe-reader
     calibre
     # foxitreader     # +2GB?!
     #media
     ffmpeg_5-full
+    audacious
     mp3info
     sox
     sxiv
@@ -195,8 +201,8 @@
     # Flatpak
     #caprine-bin
     viber
-    # joplin-desktop => Joplin
-    # joplin         => not
+    # joplin-desktop #=> Joplin
+    # joplin         #=> not
 
     # unfree
     # ciscoPacketTracer8
@@ -208,9 +214,29 @@
     lf
     krusader
     krename
+    libsForQt5.dolphin
 
     zim
     cherrytree
+    mutt
+    thunderbird
+    speedcrunch
+    bpftop
+    bpftool
+    bpftrace
+    # zed-editor # FIXME
+    vlc
+
+    # non-free
+    # adobe-reader
+    openssl #for viber
+
+    # unstable.dropbox
+    dropbox
+    # dropbox-cli
+    # playonlinux
+    darktable
+    digikam
   ];
 
   programs.home-manager.enable = true;
@@ -218,11 +244,11 @@
   services.dunst.enable = false;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "adobe-reader-9.5.5"
-    "teleport-11.3.27"
+    # "adobe-reader-9.5.5"
+    # "teleport-11.3.27"
     "openssl-1.1.1w" #for viber
-    "electron-25.9.0" #obsidian
-    # "qtwebkit-5.212.0-alpha4" #foxitreader
+    # "electron-25.9.0" #obsidian
+    # # "qtwebkit-5.212.0-alpha4" #foxitreader
   ];
 
   # xdg.mime.defaultApplications = {

@@ -1,24 +1,23 @@
 # language-id: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocumentItem
 
-# [[language]]
-# name = "c"
-# # language-id = "c"
-# indent = { unit = "    ", tab-width = 4 }
-# diagnostic-severity = "Hint"
-# auto-format = false
+[[language]]
+name = "c"
+indent = { tab-width = 4, unit = "...." }
+auto-format = false
+# diagnostic-severity = "Error"
+# language-servers = [ { name = "clangd", except-features = [ "format", "diagnostics" ] }, "" ]
+#language-server.command = ""
 
+[[language]]
+name = "cpp"
+language-id = "cpp"
+indent = { tab-width = 4, unit = "...." }
+auto-format = false
+#language-server.command = ""
 
-# # [[language]]
-# # name = "cpp"
-# # language-id = "cpp"
-# # indent = { tab-width = 4, unit = "    " }
-# # auto-format = false
-# # #language-server.command = ""
-
-# [[language]]
-# name = "markdown"
-# # language-id = ""
-# indent = { tab-width = 2, unit = "    " }
+[[language]]
+name = "markdown"
+indent = { tab-width = 4, unit = "\t" }
 # soft-wrap.enable = true
 
 # [[language]]

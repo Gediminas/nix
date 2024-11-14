@@ -81,10 +81,14 @@
     pulseaudio.enable = false;
   };
 
-  #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
+  # https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
+  # CPU: 12th Gen Intel i7-1280P (20) @ 4.700GHz
+  # GPU: Intel Alder Lake-P GT2 [Iris Xe Graphics]
+  # ipu6 Tiger (this?), ipu6ep Alder/Raptor, ipu6epmtl Meteor Lake.
   # hardware.ipu6.enable = true;
-  # hardware.ipu6.platform = "ipu6ep"; # ipu6 Tiger (this?), ipu6ep Alder/Raptor, ipu6epmtl Meteor Lake.
-  ### hardware.ipu6.platform = "ipu6";
+  # hardware.ipu6.platform = "ipu6ep";
+  # # hardware.ipu6.platform = "ipu6epmtl";
+  # ### hardware.ipu6.platform = "ipu6";
 
   # Flatpak desktop extensions
   xdg.portal = {
@@ -137,13 +141,33 @@
       # };
     };
   };
-  security.pam.services.login.fprintAuth = true;
+
+  # security.pam.services.login.fprintAuth = true;
+  security.pam.services = {
+    login = {
+      u2fAuth = true;
+      fprintAuth = true;
+    };
+    sudo.u2fAuth = true;
+  };
   security.pam.services.xscreensaver.fprintAuth = true;
   security.pam.services.xlock.fprintAuth = true;
   security.pam.services.swaylock.fprintAuth = true;
   # TEMP
-  services.uvcvideo.dynctrl.enable = true;
-  services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
+  # services.uvcvideo.dynctrl.enable = true;
+  # services.uvcvideo.dynctrl.packages = [ pkgs.tiscamera ];
+
+  # Yubikey
+  # services.udev.packages = [ pkgs.yubikey-personalization ];
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+  programs.gnupg.agent.enable = true;
+  services.pcscd.enable = true;
+  services.udev.packages = with pkgs; [ yubikey-personalization libu2f-host ];
+
+
 
   # FIX added to test 4G/LTE
   # services.modemmanager.enable = true;
@@ -235,12 +259,24 @@
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true; #USB support
-  # virtualisation.virtualbox.host.package = pkgs.unstable.virtualbox;
   users.extraGroups.vboxusers.members = [ "gds" ];
+  users.extraGroups.libvirt.members = [ "gds" ];
 
-  # virtualisation.libvirtd.enable = true;
-  # with these fails vagrant up
-
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+          tpmSupport = true;
+        }).fd];
+      };
+    };
+  };
 
   #environment.etc."vbox/networks.conf".text = "* 192.168.0.0/16";
   environment.etc."vbox/networks.conf".text = "* 0.0.0.0/0 ";
@@ -266,6 +302,9 @@
     shell = pkgs.fish;
   };
 
+  environment.variables.EDITOR = "hx";
+  # programs.helix.enable = true; #to-try
+
   programs = {
     # sway.enable = true;
     # zsh.enable = true;
@@ -287,6 +326,8 @@
       package = pkgs.gitFull;
     };
     wireshark.enable = true;
+
+    bcc.enable = true;
   };
 
   programs.sway = {
@@ -311,11 +352,6 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-  documentation.dev.enable = true;
-
-  environment.variables.EDITOR = "hx";
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -331,10 +367,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
-    # ipu6-camera-bins ipu6-camera-hal libdrm.dev
+    # https://github.com/intel/icamerasrc/tree/icamerasrc_slim_api
+    # ipu6-camera-bins
+    # ipu6-camera-hal
+    # ipu6ep-camera-hal
+    # libdrm.dev
     # gst_all_1.icamerasrc-ipu6ep
-    # linuxKernel.packages.linux_5_15.rtw89
+    # linuxKernel.packages.linux_6_6.ipu6-drivers
 
     linuxHeaders
     man-pages
@@ -357,10 +396,11 @@
     # fishPlugins.hydro
     # unstable.fishPlugins.hydro
     unstable.helix
-    unstable.zed-editor
+    # unstable.zed-editor
 
     # unstable.joplin-desktop
-    unstable.bpftop
+    # unstable.bpftop
+    # bpftop
 
     # unstable.drive
     
@@ -404,7 +444,17 @@
     dig
     pciutils  #lspci
     linux-firmware 
+
+    #Temp: need 3.0.x version
+    unstable.joplin-desktop
+
+    #Temp: need newer version
+    # unstable.dropbox
+    # dropbox
   ];
+
+  nixpkgs.config.allowUnfree = true;
+  documentation.dev.enable = true;
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "UbuntuMono" ]; })
@@ -446,7 +496,7 @@
             # dot         = "overload(diacritic, dot)";
             sysrq       = "layer(diacritic)";             # AltGr
 
-            leftshift = "oneshot(shift)";
+            # leftshift = "oneshot(shift)";
 
             # meta = oneshot(meta)
             # control = oneshot(control)

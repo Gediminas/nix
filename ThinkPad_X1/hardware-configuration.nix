@@ -6,23 +6,31 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "thunderbolt"
-    "nvme"
-    "usb_storage"
-    "sd_mod"
-    # "usbserial" # FIX added to test 4G/LTE
-    # "option"    # FIX added to test 4G/LTE
-    # "cdc_mbim"  # FIX added to test 4G/LTE
-  ];
+  # boot.initrd.availableKernelModules = [
+  #   "xhci_pci"
+  #   "thunderbolt"
+  #   "nvme"
+  #   "usb_storage"
+  #   "sd_mod"
+  #   # "usbserial" # FIX added to test 4G/LTE
+  #   # "option"    # FIX added to test 4G/LTE
+  #   # "cdc_mbim"  # FIX added to test 4G/LTE
+  # ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "uvcvideo" ];
-  boot.blacklistedKernelModules = [ "mtk_t7xx" ]; # FIX disabled to test 4G/LTE
+  # boot.kernelModules = [ "kvm-intel" "uvcvideo" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.blacklistedKernelModules = [ "mtk_t7xx" ]; # FIX mtk_t7xx maybe required for 4G/LTE
   boot.extraModulePackages = [ ];
 
-  #boot.kernelParams = [ "i915.force_probe=46a6" ]; #GL
-  boot.kernelParams = [ "i915.force_probe=46a6" "i915.enable_psr=0" ]; #GL
+  # FIXME
+  # boot.kernelParams = [ "i915.force_probe=46a6" ]; #GL
+  # boot.kernelParams = [ "i915.force_probe=46a6" "i915.enable_psr=0" ]; #GL
+  # boot.kernelParams = [ "i915.force_probe=46a6" "i915.enable_psr=1" ]; #GL
+  # boot.kernelParams = [ "i915.enable_psr=0" ]; #GL
+  # boot.kernelParams = [ "i915.enable_psr=1" ]; #GL
+
+  # I tried both forcing framebuffer compression on and off (i915.enable_fbc=1 and i915.enable_fbc=0
   
 
   fileSystems."/" = {
@@ -39,6 +47,7 @@
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-label/NIX_BOOT";
     fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
   };
 
   ##############################################
@@ -70,6 +79,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

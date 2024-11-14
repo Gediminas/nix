@@ -2,8 +2,8 @@
 
 NET_INTERFACE="${1:-wlp0s20f3}"
 PROC_NET_DEV=/proc/net/dev
-TMP_NET_PREV=/tmp/.net_traffic
-TMP_NET_PING=/tmp/.net_ping
+TMP_NET_PREV=/tmp/.net_${NET_INTERFACE}_traffic
+TMP_NET_PING=/tmp/.net_${NET_INTERFACE}_ping
 
 echo_html_value () {
   level=$1
@@ -22,23 +22,23 @@ echo_html_value () {
     0|1|2)
       # .008  .080  .800 kb/s
       value=$(echo "scale=3; $kbps / 1000" | bc)
-      units="kb/s"
+      units="k"
       ;;
     3|4|5)
       # 8.0  80.0  800.0 kb/s
       value=$(echo "scale=1; $kbps / 1000" | bc)
-      units="kb/s"
+      units="k"
       ;;
     *)
       # 8.0  80.0  800  8000 ... Mb/s
       value=$(echo "scale=1; $kbps / 1000000" | bc)
-      units="Mb/s"
+      units="M"
       ;;
   esac
 
   #echo -n "<span font='8' color='#FFFFFF'>L$level </span>"
   #echo -n "<span color='$color'>${value} ${units}<span font='16'>$symbol</span></span>"
-  printf "<span color='%s'>%5.1f %s<span font='12'>%s</span></span>" $color $value $units $symbol
+  printf "<span color='%s'>%5.1f%s<span font='12'>%s</span></span>" $color $value $units $symbol
 }
 
 echo_human_value() {
@@ -54,7 +54,7 @@ echo_human_value() {
 
 
 #Workaround: > makes file empty first, and no value is read later
-(ping -c 1 1.1.1.1 | awk -F '/' 'END {print $5}' >> $TMP_NET_PING) &
+(ping -c 1 1.0.0.1 | awk -F '/' 'END {print $5}' >> $TMP_NET_PING) &
 
 # Read prev values from /tmp/net
 while read tm rx tx; do
@@ -67,27 +67,29 @@ curr_rx=$(cat $PROC_NET_DEV | grep $NET_INTERFACE | awk '{print $2}')
 curr_tx=$(cat $PROC_NET_DEV | grep $NET_INTERFACE | awk '{print $10}')
 echo $curr_tm $curr_rx $curr_tx > $TMP_NET_PREV
 
-#DEBUG
-#prev_tm=0
-#prev_rx=0
-#prev_tx=0
-#curr_tm=1000
-#curr_rx=1
-#curr_tx=1
-#END DEBUG
+##########################################
+# Print speeds (if iface has data)
+
+[ "$curr_rx" == "" ] && exit 0
+[ "$curr_tx" == "" ] && exit 0
+# [ "${NET_INTERFACE[0]:0:1}" != "w" ] && echo -n "${NET_INTERFACE[0]:0:1}:" #Print iface[0] if not wifi
 
 diff_tm_ms=$(( ($curr_tm-$prev_tm) ))
 echo_human_value ↓ $prev_rx $curr_rx $diff_tm_ms
-echo -n " "
 echo_human_value ↑ $prev_tx $curr_tx $diff_tm_ms
+
+
+##########################################
+# Print ping time (if this is default route)
+
+VIA_IFACE=$(route | grep default | head -n1 | awk '{print $8}')
+[ "$VIA_IFACE" != "$NET_INTERFACE" ] && exit 0
 
 sleep 0.5
 png=$(tail -1 $TMP_NET_PING)
 if [ "$png" = "" ]; then
-  printf " <span color='green'>-- ms</span>\n" $png
+  printf "<span color='green'> --</span>\n" $png
 else
-  printf " <span color='green'>%3.0f ms</span>\n" $png
+  printf "<span color='green'>%3.0f</span>\n" $png
   echo "" > $TMP_NET_PING
 fi
-
-
