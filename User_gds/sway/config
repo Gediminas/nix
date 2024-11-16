@@ -483,8 +483,8 @@ exec (sleep 10s && $HOME/dev/inhibit-bridge/bin/inhibit-bridge -manual_inhibit_t
 
 # exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM; workspace S; exec brave"
 exec swaymsg "workspace 7; exec alacritty --command tmux -u new -A -s SYSTEM;\
-              workspace 8; exec audacious;\
               workspace F; exec firefox -p Home"
+              # workspace 8; exec audacious;\
 
 # bindsym $mod+period exec dunstctl close #- panguin + backspace
 # bindsym $mod+comma exec dunstctl history-pop ###- penguing + dot
